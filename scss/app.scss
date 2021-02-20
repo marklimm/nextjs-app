@@ -2,6 +2,6 @@ body {
   color: #353535;
 
   .inner {
-    color: #ff0000;
+    @apply text-blue-800;
   }
 }

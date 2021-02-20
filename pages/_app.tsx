@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
+//  import tailwind
+import 'tailwindcss/tailwind.css'
+
 //  import global styles following https://nextjs.org/docs/basic-features/built-in-css-support
 import 'scss/app.scss'
 
@@ -12,6 +15,7 @@ function MyApp ({ Component, pageProps }: AppProps) {
       </Head>
       <div className='flex flex-col h-screen'>
         <div className='flex-grow p-5'>
+          <span className='text-green-400'>green?</span>
           <Component {...pageProps} />
         </div>
       </div>
