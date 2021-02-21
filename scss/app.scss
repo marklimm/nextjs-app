@@ -1,12 +1,16 @@
 body {
   color: #353535;
 
-  .inner {
-    @apply text-blue-800;
-  }
-
   a {
     @apply hover:underline text-gray-700 hover:text-red-600;
+  }
+
+  ul {
+    @apply list-disc ml-5;
+
+    li {
+      @apply mt-0;
+    }
   }
 
   //  a typical search result card

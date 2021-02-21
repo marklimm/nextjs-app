@@ -1,13 +1,20 @@
+import styles from './index.module.scss'
+
 const HomePage = () => {
   return (
-    <div>
-      This is a NextJS app with typescript setup
-      <div className=''>
-        <span className='inner'>
-          this text is colored by the global app.scss file
-        </span>
+    <>
+      <div className={styles.homePage}>
+        <div>
+          This is a NextJS app that retrieves data from various data sources
+          <ul>
+            <li>
+              The /events and /devblog routes pull their data from local
+              markdown (.md) files
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
