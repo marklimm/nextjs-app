@@ -12,6 +12,7 @@ function MyApp ({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Star Wars data website</title>
+        <link rel='icon' href='/stormtrooper.ico' />
       </Head>
       <div className='flex flex-col h-screen'>
         <div className='flex-grow p-5'>
