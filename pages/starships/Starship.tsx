@@ -16,7 +16,7 @@ export const Starship: FunctionComponent<StarshipProps> = ({ starship }) => {
 
       <br />
       <span>Manufacturer: {starship.manufacturer}</span>
-      <div className='grid grid-cols-3 mt-4'>
+      <div className='grid grid-cols-3 mt-4 text-sm'>
         <div>
           <span className={styles.label}>Cost:</span> {starship.cost_in_credits}
         </div>

@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { GetServerSideProps } from 'next'
 
-import { PulseCircle } from 'components/PulseCircle/PulseCircle'
+import { getStarships } from 'dataProviders/SWAPIData'
 
+import { PulseCircle } from 'components/PulseCircle/PulseCircle'
 import { Starship } from './Starship'
 
 import styles from './index.module.scss'
@@ -35,15 +35,11 @@ const Starships = ({ starships }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const fetch1 = await fetch('https://swapi.dev/api/starships/')
-  const page1Response = await fetch1.json()
-
-  const fetch2 = await fetch(page1Response.next)
-  const page2Response = await fetch2.json()
+  const starships = await getStarships()
 
   return {
     props: {
-      starships: [...page1Response.results, ...page2Response.results]
+      starships
     }
   }
 }

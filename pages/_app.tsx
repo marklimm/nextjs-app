@@ -13,7 +13,7 @@ import 'scss/app.scss'
 //  import global markdown styles
 import 'scss/markdownContent.scss'
 
-function MyApp ({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
