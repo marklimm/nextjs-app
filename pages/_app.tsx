@@ -21,7 +21,6 @@ function MyApp ({ Component, pageProps }: AppProps) {
         <Header />
         <NavBar />
         <div className='flex-grow p-5'>
-          <span className='text-green-400'>green?</span>
           <Component {...pageProps} />
         </div>
         <NavBar />

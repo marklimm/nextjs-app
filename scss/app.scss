@@ -4,4 +4,9 @@ body {
   .inner {
     @apply text-blue-800;
   }
+
+  //  a typical search result card
+  div.searchResultCard {
+    @apply mb-8 bg-gray-100 p-4 rounded-md border;
+  }
 }
