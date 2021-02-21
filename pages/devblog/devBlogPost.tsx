@@ -19,7 +19,7 @@ export const DevBlogPost: FunctionComponent<DevBlogPostProps> = ({
         </Link>
       </h1>
 
-      <div className='text-sm text-blue-500'>
+      <div className='text-sm text-red-600'>
         <DisplayDate dateString={devBlogPost.date} />
       </div>
 

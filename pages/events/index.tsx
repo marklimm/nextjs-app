@@ -44,7 +44,7 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }) => {
               return (
                 <div key={event.id} className='searchResultCard'>
                   <div className='text-lg'>{event.title}</div>
-                  <div className='text-sm text-blue-500'>
+                  <div className='text-sm text-red-600'>
                     <DisplayDate dateString={event.date} />
                   </div>
                   Tags: {event.emotionTags.join(', ')}

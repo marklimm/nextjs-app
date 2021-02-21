@@ -9,6 +9,7 @@ Technology stack:
 - typescript (typing for javascript)
 - sass (CSS extension)
 - tailwind (CSS library)
+- the Star Wars API (https://swapi.dev/)
 
 Other libraries used:
 

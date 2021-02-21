@@ -2,7 +2,6 @@
 //  disabling typescript for this file since I didn't bother typing the starships data that comes back from the Star Wars API
 
 import { FunctionComponent } from 'react'
-import Link from 'next/link'
 
 import styles from './index.module.scss'
 
@@ -13,9 +12,7 @@ interface StarshipProps {
 export const Starship: FunctionComponent<StarshipProps> = ({ starship }) => {
   return (
     <div className='searchResultCard'>
-      <Link href={`/starships/${starship.name.toLowerCase()}`}>
-        <a className='text-lg font-semibold'>{starship.name}</a>
-      </Link>
+      <span className='text-lg font-semibold'>{starship.name}</span>
 
       <br />
       <span>Manufacturer: {starship.manufacturer}</span>
