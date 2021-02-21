@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
+import { Header } from 'components/Header/Header'
+import { NavBar } from 'components/NavBar/NavBar'
+
 //  import tailwind
 import 'tailwindcss/tailwind.css'
 
@@ -15,10 +18,13 @@ function MyApp ({ Component, pageProps }: AppProps) {
         <link rel='icon' href='/stormtrooper.ico' />
       </Head>
       <div className='flex flex-col h-screen'>
+        <Header />
+        <NavBar />
         <div className='flex-grow p-5'>
           <span className='text-green-400'>green?</span>
           <Component {...pageProps} />
         </div>
+        <NavBar />
       </div>
     </>
   )
