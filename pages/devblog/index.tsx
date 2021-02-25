@@ -23,7 +23,7 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
       <div className='mt-8'>
         {devBlogPosts.length > 0 &&
           devBlogPosts.map(post => (
-            <div key={post.id} className='mb-12'>
+            <div key={post.id} className='mb-8'>
               <DevBlogPost devBlogPost={post} />
             </div>
           ))}
