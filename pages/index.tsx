@@ -29,7 +29,7 @@ const HomePage = () => {
               <Link href='/starships'>
                 <a className={(styles.link, styles.route)}>Starships</a>
               </Link>{' '}
-              pages pulls their data from the Star Wars API (
+              pages pull their data from the Star Wars API (
               <Link href='https://swapi.dev/'>
                 <a className={styles.link}>https://swapi.dev/</a>
               </Link>

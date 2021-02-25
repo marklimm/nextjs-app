@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useRef, useState } from 'react'
 import Select from 'react-select'
 import { SelectOption } from 'lib/types/SelectOption'
 
-// import { StartAndEndTimePicker } from 'components/StartAndEndTimePicker/StartAndEndTimePicker'
+import { StartAndEndDatePicker } from 'components/StartAndEndDatePicker/StartAndEndDatePicker'
 import { EmotionTag, Event } from 'lib/types/Event'
 
 interface EventsFilterBarProps {
@@ -22,11 +22,11 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
 }) => {
   const allEventsRef = useRef(allEvents)
 
-  // const initialStartDate = ''
-  // const initialEndDate = ''
+  const initialStartDate = ''
+  const initialEndDate = ''
 
-  // const [startDate, setStartDate] = useState(initialStartDate)
-  // const [endDate, setEndDate] = useState(initialEndDate)
+  const [startDate, setStartDate] = useState(initialStartDate)
+  const [endDate, setEndDate] = useState(initialEndDate)
 
   //  I could try converting these filter fields to a reducer
 
@@ -37,13 +37,13 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
   useEffect(() => {
     let filteredEvents = allEventsRef.current
 
-    // if (startDate) {
-    //   filteredEvents = filteredEvents.filter(e => e.date > startDate)
-    // }
+    if (startDate) {
+      filteredEvents = filteredEvents.filter(e => e.date > startDate)
+    }
 
-    // if (endDate) {
-    //   filteredEvents = filteredEvents.filter(e => e.date < endDate)
-    // }
+    if (endDate) {
+      filteredEvents = filteredEvents.filter(e => e.date < endDate)
+    }
 
     if (selectedEmotionTags.length > 0) {
       filteredEvents = filteredEvents.filter(event => {
@@ -58,23 +58,23 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
     }
 
     onFilterUpdated(filteredEvents)
-  }, [/*startDate, endDate,*/ selectedEmotionTags])
+  }, [startDate, endDate, selectedEmotionTags])
 
-  // const startDateSelected = startDate => {
-  //   setStartDate(startDate)
-  // }
+  const startDateSelected = startDate => {
+    setStartDate(startDate)
+  }
 
-  // const endDateSelected = endDate => {
-  //   setEndDate(endDate)
-  // }
+  const endDateSelected = endDate => {
+    setEndDate(endDate)
+  }
 
-  // const clearStartDate = () => {
-  //   setStartDate('')
-  // }
+  const clearStartDate = () => {
+    setStartDate('')
+  }
 
-  // const clearEndDate = () => {
-  //   setEndDate('')
-  // }
+  const clearEndDate = () => {
+    setEndDate('')
+  }
 
   const emotionTagSelected = selectedOption => {
     setSelectedEmotionTags(selectedOption)
@@ -82,36 +82,27 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
 
   return (
     <div>
-      <h1 className='text-lg mb-3'>Filters</h1>
-      {/* <StartAndEndTimePicker
+      <h1 className=' text-base mb-3'>Filter events by:</h1>
+      <StartAndEndDatePicker
         clearEndDate={clearEndDate}
         clearStartDate={clearStartDate}
         initialEndDate={initialEndDate}
-        endDateSelected={endDateSelected}
         initialStartDate={initialStartDate}
+        endDateSelected={endDateSelected}
         startDateSelected={startDateSelected}
-      /> */}
+      />
 
-      {/* <div>
-        <h3>You have selected:</h3>
-        Start Date: {startDate}
-        <br />
-        End Date: {endDate}
-      </div> */}
-
-      <div>
-        <h1 className=''>Emotion:</h1>
-        <Select
-          className='mt-1'
-          // styles={customStyles}
-          value={selectedEmotionTags}
-          isMulti
-          onChange={emotionTagSelected}
-          options={emotionTagOptions}
-          placeholder='Emotions to search on ...'
-          instanceId='random-id-to-resolve-error-https://stackoverflow.com/questions/61290173/react-select-how-do-i-resolve-warning-prop-id-did-not-match'
-        />
-      </div>
+      <h1 className='mt-3'>Emotion:</h1>
+      <Select
+        className='mt-1'
+        // styles={customStyles}
+        value={selectedEmotionTags}
+        isMulti
+        onChange={emotionTagSelected}
+        options={emotionTagOptions}
+        placeholder='Emotions to search on ...'
+        instanceId='random-id-to-resolve-error-https://stackoverflow.com/questions/61290173/react-select-how-do-i-resolve-warning-prop-id-did-not-match'
+      />
     </div>
   )
 }
