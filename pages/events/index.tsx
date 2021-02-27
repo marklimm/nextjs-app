@@ -9,6 +9,8 @@ import { EventsFilterBar } from 'components/FilterBar/EventsFilterBar'
 import { EmotionTagLabels, Event } from 'lib/types/Event'
 import { SelectOption } from 'lib/types/SelectOption'
 
+import { useEventsFilterer } from './useEventsFilterer'
+
 interface EventsProps {
   allEvents: Event[]
   emotionTagOptions: SelectOption[]
@@ -22,11 +24,16 @@ const Events: FunctionComponent<EventsProps> = ({
   allEvents,
   emotionTagOptions
 }) => {
-  const [events, setEvents] = useState(allEvents)
+  const {
+    filteredEvents,
+    selectedEmotionTags,
 
-  const onFilterUpdated = (filteredEvents: Event[]) => {
-    setEvents(filteredEvents)
-  }
+    startDateSelected,
+    endDateSelected,
+    clearStartDate,
+    clearEndDate,
+    emotionTagSelected
+  } = useEventsFilterer(allEvents)
 
   return (
     <>
@@ -34,23 +41,33 @@ const Events: FunctionComponent<EventsProps> = ({
         <title>Star Wars Events</title>
       </Head>
       <h1 className='text-3xl'>Star Wars Events</h1>
-      <div>
+      <div className='mt-2'>
         Please use the left hand sidebar to search for various events in Star
         Wars history
+      </div>
+
+      <div className='mt-2'>
+        The list of filtered events and the selected filters are stored in a
+        dedicated Events reducer state, which is accessed via the useReducer()
+        hook
       </div>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
           <EventsFilterBar
-            allEvents={allEvents}
             emotionTagOptions={emotionTagOptions}
-            onFilterUpdated={onFilterUpdated}
+            selectedEmotionTags={selectedEmotionTags}
+            startDateSelected={startDateSelected}
+            endDateSelected={endDateSelected}
+            clearStartDate={clearStartDate}
+            clearEndDate={clearEndDate}
+            emotionTagSelected={emotionTagSelected}
           />
         </div>
 
         <div className='col-span-3 ml-8'>
-          {events.length > 0 &&
-            events.map(event => {
+          {filteredEvents.length > 0 &&
+            filteredEvents.map(event => {
               return (
                 <div key={event.id} className='searchResultCard'>
                   <div className='text-lg'>{event.title}</div>
