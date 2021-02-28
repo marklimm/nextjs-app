@@ -1,19 +1,25 @@
-## nextJS app
+This is a statically-generated NextJS website that displays various types of "Star Wars" data!
 
-This is a statically-generated nextJS website that displays various types of "Star Wars" data
+The data is retrieved from various data sources:
 
-Technology stack:
+- The **[Events](/events)** and **[Developer Blog](/devblog)** pages pull their data from local markdown (.md) files
+- The **[Characters](/characters)** page pulls data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
+- The **[Planets](/planets)** and **[Starships](/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/))
 
-- nextjs (static site generation framework)
-- react (javascript HTML rendering library :)
-- typescript (typing for javascript)
-- sass (CSS extension)
-- tailwind (CSS library)
-- the Star Wars API (https://swapi.dev/)
-- prisma (typescript ORM)
+**Technology stack:**
+
+- NextJs (static site generation framework)
+- React (javascript HTML rendering library :)
+- Typescript (typing for javascript)
+- Sass (CSS extension)
+- Tailwind (CSS library)
+- the Star Wars API (a public API returning Star Wars relational data)
+- Prisma (typescript ORM)
 - sqlite (embedded relational DB)
 
-Other libraries used:
+**Additional packages used:**
 
+- date-fns (JS date formatting)
 - gray-matter (parsing markdown front matter)
 - remark (rendering markdown files as HTML)
+- vaadin-date-picker (date picker web component)
