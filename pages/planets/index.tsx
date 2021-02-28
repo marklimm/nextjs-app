@@ -17,9 +17,9 @@ const Planets = ({ planets }) => {
       <Head>
         <title>NextJS demo - Planets</title>
       </Head>
-      <h2>Star Wars Planets</h2>
+      <h1>Planets</h1>
 
-      <div className='mt-5'>
+      <div className=''>
         {planets &&
           planets.map(p => (
             <div key={p.url}>

@@ -2,7 +2,18 @@
   div {
     @apply mb-6;
 
-    .route {
+    //  override the h1 margin bottom that is set in app.scss
+    h1 {
+      @apply text-2xl;
+    }
+
+    //  put extra space above for the markdown content being displayed on the Home page
+    p {
+      @apply mt-5;
+    }
+
+    //  Home page links are in red instead of blue
+    a {
       @apply font-semibold text-red-600 hover:text-yellow-400;
     }
   }

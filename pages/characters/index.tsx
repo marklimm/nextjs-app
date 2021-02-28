@@ -28,11 +28,11 @@ const People: FunctionComponent<PeopleProps> = ({ allPeople }) => {
   return (
     <>
       <Head>
-      <title>NextJS demo - Characters</title>
+        <title>NextJS demo - Characters</title>
       </Head>
-      <h1>Star Wars Characters</h1>
+      <h1>Characters</h1>
 
-      <div className='mt-2'>
+      <div>
         The characters data on this page is retrieved from a local sqlite DB
         file using the Prisma ORM. In addition, the following relational data
         gets pulled in for each character

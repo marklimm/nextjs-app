@@ -5,6 +5,10 @@ body {
     @apply text-indigo-800 hover:text-yellow-400;
   }
 
+  h1 {
+    @apply text-2xl mb-2;
+  }
+
   ul {
     @apply list-disc ml-5;
 

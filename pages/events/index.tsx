@@ -38,9 +38,9 @@ const Events: FunctionComponent<EventsProps> = ({
   return (
     <>
       <Head>
-      <title>NextJS demo - Events</title>
+        <title>NextJS demo - Events</title>
       </Head>
-      <h1 className='text-3xl'>Star Wars Events</h1>
+      <h1>Events</h1>
       <div className='mt-2'>
         Please use the left hand sidebar to search for various events in Star
         Wars history

@@ -13,9 +13,9 @@ The data is retrieved from various data sources:
 - Typescript (typing for javascript)
 - Sass (CSS extension)
 - Tailwind (CSS library)
-- the Star Wars API (a public API returning Star Wars relational data)
 - Prisma (typescript ORM)
 - sqlite (embedded relational DB)
+- the Star Wars API (a public API returning Star Wars relational data)
 
 **Additional packages used:**
 

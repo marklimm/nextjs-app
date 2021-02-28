@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import { GetStaticProps } from 'next'
 import { FunctionComponent } from 'react'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
 
 import { Post } from 'lib/types/Post'
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
@@ -15,12 +15,12 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
   return (
     <>
       <Head>
-      <title>NextJS demo - Developer blog</title>
+        <title>NextJS demo - Developer blog</title>
       </Head>
 
-      <h1 className='text-3xl font-semibold'>Developer Blog</h1>
+      <h1>Developer Blog</h1>
 
-      <div className='mt-8 w-2/3'>
+      <div className='w-2/3'>
         {devBlogPosts.length > 0 &&
           devBlogPosts.map(post => (
             <div key={post.id} className='mb-8'>

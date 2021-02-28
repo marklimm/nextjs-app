@@ -14,7 +14,7 @@ const Starships = ({ starships }) => {
       <Head>
         <title>Star Wars Starships</title>
       </Head>
-      <h2>Star Wars Starships</h2>
+      <h1>Starships</h1>
       <div className='flex items-center'>
         <PulseCircle />
         <span>
@@ -22,7 +22,7 @@ const Starships = ({ starships }) => {
           each server request
         </span>
       </div>
-      <div className='mt-5'>
+      <div className='mt-2'>
         {starships &&
           starships.map(s => (
             <div key={s.url}>
