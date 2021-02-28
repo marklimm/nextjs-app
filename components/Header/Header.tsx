@@ -6,6 +6,7 @@ export const Header: FunctionComponent = () => {
       <img
         src='/stormtrooper-logo.png'
         alt='Stormtrooper logo'
+        title='Stormtrooper logo'
         className='h-24'
       />
       <span className='self-center pl-6 text-lg'>

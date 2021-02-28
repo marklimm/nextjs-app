@@ -18,6 +18,7 @@ const Custom404 = () => {
         <img
           src='/technical-difficulties.jpg'
           alt='Star Wars technical difficulties image'
+          title='Star Wars technical difficulties image'
           className='w-2/3'
         />
       </div>

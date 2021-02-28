@@ -6,6 +6,7 @@ import { Post } from 'lib/types/Post'
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
 
 import { DevBlogPost } from './devBlogPost'
+import { DetentionBlock } from 'components/DetentionBlock/DetentionBlock'
 
 interface DevBlogProps {
   devBlogPosts: Post[]
@@ -18,15 +19,20 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
         <title>NextJS demo - Developer blog</title>
       </Head>
 
-      <h1>Developer Blog</h1>
+      <div className='grid grid-cols-3 gap-4 items-start'>
+        <div className='col-span-2'>
+          <h1>Developer Blog</h1>
 
-      <div className='w-2/3'>
-        {devBlogPosts.length > 0 &&
-          devBlogPosts.map(post => (
-            <div key={post.id} className='mb-8'>
-              <DevBlogPost devBlogPost={post} />
-            </div>
-          ))}
+          {devBlogPosts.length > 0 &&
+            devBlogPosts.map(post => (
+              <div key={post.id} className='mb-8'>
+                <DevBlogPost devBlogPost={post} />
+              </div>
+            ))}
+        </div>
+        <div className='col-span-1'>
+          <DetentionBlock />
+        </div>
       </div>
     </>
   )

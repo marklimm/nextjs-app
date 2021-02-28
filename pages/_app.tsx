@@ -1,8 +1,15 @@
+import { useCallback, useState } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
 import { Header } from 'components/Header/Header'
 import { NavBar } from 'components/NavBar/NavBar'
+
+import {
+  DetentionBlockContext,
+  getRandomSituation,
+  initialDetentionBlockState
+} from 'state/DetentionBlockContext'
 
 //  import tailwind
 import 'tailwindcss/tailwind.css'
@@ -14,6 +21,24 @@ import 'scss/app.scss'
 import 'scss/markdownContent.scss'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  //  app-wide shared state that will be stored in React Context
+  const [detentionBlockState, setDetentionBlockState] = useState(
+    initialDetentionBlockState
+  )
+
+  /**
+   * This function randomly changes the detention block state
+   */
+  const changeSituation = useCallback(() => {
+    setDetentionBlockState(state => ({
+      ...state,
+      detentionBlocks: state.detentionBlocks.map(b => ({
+        ...b,
+        situation: getRandomSituation()
+      }))
+    }))
+  }, [])
+
   return (
     <>
       <Head>
@@ -24,7 +49,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <Header />
         <NavBar />
         <div className='flex-grow p-5'>
-          <Component {...pageProps} />
+          {/* wrap every route with our react context */}
+          <DetentionBlockContext.Provider
+            value={{
+              ...detentionBlockState,
+              changeSituation
+            }}
+          >
+            <Component {...pageProps} />
+          </DetentionBlockContext.Provider>
         </div>
         <NavBar />
       </div>
