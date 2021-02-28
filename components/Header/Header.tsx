@@ -9,7 +9,7 @@ export const Header: FunctionComponent = () => {
         className='h-24'
       />
       <span className='self-center pl-6 text-lg'>
-        This is a static website generated with NextJS
+        Welcome to my static website generated with NextJS!
       </span>
     </div>
   )

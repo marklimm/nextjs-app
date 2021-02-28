@@ -28,7 +28,7 @@ const People: FunctionComponent<PeopleProps> = ({ allPeople }) => {
   return (
     <>
       <Head>
-        <title>Star Wars Characters</title>
+      <title>NextJS demo - Characters</title>
       </Head>
       <h1>Star Wars Characters</h1>
 

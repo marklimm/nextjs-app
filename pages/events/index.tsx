@@ -38,7 +38,7 @@ const Events: FunctionComponent<EventsProps> = ({
   return (
     <>
       <Head>
-        <title>Star Wars Events</title>
+      <title>NextJS demo - Events</title>
       </Head>
       <h1 className='text-3xl'>Star Wars Events</h1>
       <div className='mt-2'>

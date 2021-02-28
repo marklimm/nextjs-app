@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Star Wars data website</title>
+        <title>NextJS demo website</title>
         <link rel='icon' href='/stormtrooper.ico' />
       </Head>
       <div className='flex flex-col h-screen'>

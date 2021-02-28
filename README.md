@@ -10,6 +10,8 @@ Technology stack:
 - sass (CSS extension)
 - tailwind (CSS library)
 - the Star Wars API (https://swapi.dev/)
+- prisma (typescript ORM)
+- sqlite (embedded relational DB)
 
 Other libraries used:
 

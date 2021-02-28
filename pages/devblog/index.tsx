@@ -15,7 +15,7 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
   return (
     <>
       <Head>
-        <title>Star Wars API site - developer blog</title>
+      <title>NextJS demo - Developer blog</title>
       </Head>
 
       <h1 className='text-3xl font-semibold'>Developer Blog</h1>

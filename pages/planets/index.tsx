@@ -15,7 +15,7 @@ const Planets = ({ planets }) => {
   return (
     <>
       <Head>
-        <title>Star Wars Planets</title>
+        <title>NextJS demo - Planets</title>
       </Head>
       <h2>Star Wars Planets</h2>
 
