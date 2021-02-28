@@ -12,7 +12,7 @@ export const NavBar: FunctionComponent = () => {
       <Link href='/planets'>
         <a className={styles.link}>Planets</a>
       </Link>{' '}
-      <Link href='/people'>
+      <Link href='/characters'>
         <a className={styles.link}>Characters</a>
       </Link>
       <Link href='/starships'>
