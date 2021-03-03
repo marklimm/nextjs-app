@@ -1,11 +1,7 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
-import {
-  getFilmsCache,
-  getPeopleCache,
-  getPlanets
-} from 'dataProviders/SWAPIData'
+import { getDenormalizedPlanets } from 'dataProviders/SWAPI/Planets'
 
 import { Planet } from './Planet'
 
@@ -32,20 +28,7 @@ const Planets = ({ planets }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  //  retrieve all of the planets as an array
-  const planets = await getPlanets()
-
-  //  retrieve all of the people and all of the films, so that we can hydrate each of the planets.  This is what I have to do to display the related data in the search results.  This is in contrast to graphql where this would be easier
-  const peopleCache = await getPeopleCache()
-  const filmsCache = await getFilmsCache()
-
-  const denormalizedPlanets = planets.map(planet => {
-    return {
-      ...planet,
-      films: planet.films.map(filmUrl => filmsCache[filmUrl]),
-      people: planet.residents.map(personUrl => peopleCache[personUrl])
-    }
-  })
+  const denormalizedPlanets = getDenormalizedPlanets()
 
   return {
     props: {

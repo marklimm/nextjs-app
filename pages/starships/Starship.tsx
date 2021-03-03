@@ -3,6 +3,8 @@
 
 import { FunctionComponent } from 'react'
 
+import DisplayDate from 'components/DisplayDate/DisplayDate'
+
 import styles from './index.module.scss'
 
 interface StarshipProps {
@@ -50,6 +52,23 @@ export const Starship: FunctionComponent<StarshipProps> = ({ starship }) => {
         <div>
           <span className={styles.label}>Starship class:</span>{' '}
           {starship.starship_class}
+        </div>
+      </div>
+
+      <div className='grid grid-cols-2 mt-4 text-sm'>
+        <div></div>
+        <div>
+          {starship.films.length > 0 && (
+            <>
+              <span className={styles.label}>Appeared in:</span>
+              <br />
+              {starship.films.map(f => (
+                <div key={f.url}>
+                  {f.title} - <DisplayDate dateString={f.release_date} />
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -12,6 +12,11 @@
       @apply mt-5;
     }
 
+    //  I tried doing this but it has no effect
+    // ul {
+    //   @apply mb-5;
+    // }
+
     //  Home page links are in red instead of blue
     a {
       @apply font-semibold text-red-600 hover:text-yellow-400;

@@ -62,7 +62,7 @@ const getSWAPIDataAndWriteToFiles = () => {
     //  the 3rd parameter is used to insert white space to make the resulting string easier to read
     const output = JSON.stringify(data, null, 2)
 
-    fs.writeFileSync(`swapi-${key}.json`, output)
+    fs.writeFileSync(`pre-build/swapi-${key}.json`, output)
   })
 }
 

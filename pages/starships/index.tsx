@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 
-import { getStarships } from 'dataProviders/SWAPIData'
+import { getDenormalizedStarships } from 'dataProviders/SWAPI/Starships'
 
 import { PulseCircle } from 'components/PulseCircle/PulseCircle'
 import { Starship } from './Starship'
@@ -35,7 +35,7 @@ const Starships = ({ starships }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const starships = await getStarships()
+  const starships = getDenormalizedStarships()
 
   return {
     props: {
