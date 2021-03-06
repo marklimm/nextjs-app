@@ -3,27 +3,31 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
-// import { Tag } from 'node_modules/.prisma/client/index'
-import { Person } from 'lib/types/Person'
-
 import { getPeople } from 'dataProviders/PeopleData'
-// import { getTags } from 'dataProviders/TagData'
+import { getCharacterTags } from 'dataProviders/CharacterTagData'
+import { SelectOption } from 'lib/types/SelectOption'
+import { Character } from 'lib/types/Character'
 
-// import { PeopleFilterBar } from 'components/FilterBar/PeopleFilterBar'
+import { useCharactersFilterer } from './useCharactersFilterer'
+import { CharacterFilterBar } from 'components/FilterBar/CharacterFilterBar'
 
 import styles from './index.module.scss'
 
 export interface PeopleProps {
-  allPeople: Person[]
-  // tags: Tag[]
+  allPeople: Character[]
+  characterTagOptions: SelectOption[]
 }
 
-const People: FunctionComponent<PeopleProps> = ({ allPeople }) => {
-  const [people, setPeople] = useState(allPeople)
+const Characters: FunctionComponent<PeopleProps> = ({
+  allPeople,
+  characterTagOptions
+}) => {
+  const {
+    filteredCharacters,
+    selectedCharacterTags,
 
-  const onFilterUpdated = (filteredPeople: Person[]) => {
-    setPeople(filteredPeople)
-  }
+    characterTagSelected
+  } = useCharactersFilterer(allPeople)
 
   return (
     <>
@@ -45,16 +49,16 @@ const People: FunctionComponent<PeopleProps> = ({ allPeople }) => {
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          {/* <PeopleFilterBar
-            allPeople={allPeople}
-            tags={tags}
-            onFilterUpdated={onFilterUpdated}
-          /> */}
+          <CharacterFilterBar
+            characterTagOptions={characterTagOptions}
+            selectedCharacterTags={selectedCharacterTags}
+            characterTagSelected={characterTagSelected}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>
-          {people &&
-            people.map(person => (
+          {filteredCharacters &&
+            filteredCharacters.map(person => (
               <div key={person.id} className='searchResultCard'>
                 <Link href={`/people/${person.id}`}>
                   <a target='_blank'>
@@ -108,14 +112,19 @@ const People: FunctionComponent<PeopleProps> = ({ allPeople }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const people = await getPeople()
-  // const tags = await getTags()
+  const characterTags = await getCharacterTags()
+
+  const characterTagOptions = characterTags.map(tag => ({
+    label: tag.name,
+    value: tag.id.toString()
+  }))
 
   return {
     props: {
-      allPeople: people
-      // tags
+      allPeople: people,
+      characterTagOptions
     }
   }
 }
 
-export default People
+export default Characters
