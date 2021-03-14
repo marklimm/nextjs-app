@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "./node_modules/.bin/eslint \"*/**/*.{js,ts,tsx}\" --fix",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "fetch-swapi-data": "node ./pre-build/fetchSWAPI.mjs"
@@ -41,8 +42,11 @@
   "devDependencies": {
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
     "autoprefixer": "^10.2.4",
     "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.22.0",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.6",
     "prisma": "^2.17.0",
@@ -52,8 +56,11 @@
   "devDependenciesComments": {
     "@types/node": "typescript types for node",
     "@types/react": "typescript types for react",
+    "@typescript-eslint/eslint-plugin": "added by `eslint --init` when I said my project uses typescript",
+    "@typescript-eslint/parser": "added by `eslint --init` when I said my project uses typescript",
     "autoprefixer": "",
     "eslint": "code linting",
+    "eslint-plugin-react": "added by `eslint --init` when I said my project uses react",
     "node-fetch": "fetch() for a node-js script that I'm using for pre-fetching the SWAPI data before this project is built",
     "postcss": "^8.2.6",
     "prisma": "relational DB ORM",
