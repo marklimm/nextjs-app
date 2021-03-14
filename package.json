@@ -8,7 +8,6 @@
     "build": "next build",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
-
     "fetch-swapi-data": "node ./pre-build/fetchSWAPI.mjs"
   },
   "author": "",
@@ -26,14 +25,39 @@
     "remark-html": "^13.0.1",
     "sass": "^1.32.8"
   },
+  "dependenciesComments": {
+    "@prisma/client": "prisma access point",
+    "@vaadin/vaadin-date-picker": "a date picker web component that's used for filtering",
+    "date-fns": "JS date library",
+    "gray-matter": "used for reading markdown file front matter",
+    "next": "static site generation",
+    "react": "javascript HTML component library?  Is this a good description?",
+    "react-dom": "",
+    "react-select": "Rich dropdown UI, including autocomplete",
+    "remark": "reading markdown files?",
+    "remark-html": "outputting markdown files as HTML",
+    "sass": "CSS pre-processor"
+  },
   "devDependencies": {
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "autoprefixer": "^10.2.4",
+    "eslint": "^7.22.0",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.6",
     "prisma": "^2.17.0",
     "tailwindcss": "^2.0.3",
     "typescript": "^4.1.5"
+  },
+  "devDependenciesComments": {
+    "@types/node": "typescript types for node",
+    "@types/react": "typescript types for react",
+    "autoprefixer": "",
+    "eslint": "code linting",
+    "node-fetch": "fetch() for a node-js script that I'm using for pre-fetching the SWAPI data before this project is built",
+    "postcss": "^8.2.6",
+    "prisma": "relational DB ORM",
+    "tailwindcss": "tailwind CSS",
+    "typescript": "typed superset of javascript"
   }
 }
