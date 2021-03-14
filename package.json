@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
+    "fetch-swapi-data": "node ./pre-build/fetchSWAPI.mjs",
     "lint": "./node_modules/.bin/eslint \"*/**/*.{js,ts,tsx}\" --fix",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetch-swapi-data": "node ./pre-build/fetchSWAPI.mjs"
+    "tsc": "./node_modules/.bin/tsc --noEmit"
   },
   "author": "",
   "license": "ISC",
@@ -46,9 +47,12 @@
     "@typescript-eslint/parser": "^4.17.0",
     "autoprefixer": "^10.2.4",
     "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.6",
+    "prettier": "^2.2.1",
     "prisma": "^2.17.0",
     "tailwindcss": "^2.0.3",
     "typescript": "^4.1.5"
@@ -60,9 +64,12 @@
     "@typescript-eslint/parser": "added by `eslint --init` when I said my project uses typescript",
     "autoprefixer": "",
     "eslint": "code linting",
+    "eslint-config-prettier": "disable the rules that interfere with prettier",
+    "eslint-plugin-prettier": "run prettier as an eslint rule.  See https://github.com/prettier/eslint-plugin-prettier#recommended-configuration for reference",
     "eslint-plugin-react": "added by `eslint --init` when I said my project uses react",
     "node-fetch": "fetch() for a node-js script that I'm using for pre-fetching the SWAPI data before this project is built",
     "postcss": "^8.2.6",
+    "prettier": "opinionated code formatting",
     "prisma": "relational DB ORM",
     "tailwindcss": "tailwind CSS",
     "typescript": "typed superset of javascript"
