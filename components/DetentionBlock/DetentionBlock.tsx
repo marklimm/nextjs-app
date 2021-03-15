@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useContext } from 'react'
-import { DetentionBlockContext } from 'state/DetentionBlockContext'
+import React, { FunctionComponent } from 'react'
+import { useDetentionBlockContext } from 'state/DetentionBlockContext'
 
 import styles from './DetentionBlock.module.scss'
 
@@ -7,7 +7,7 @@ import styles from './DetentionBlock.module.scss'
  * This component displays the shared "detention block" data that is stored in a React Context
  */
 export const DetentionBlock: FunctionComponent = () => {
-  const detentionBlockContext = useContext(DetentionBlockContext)
+  const detentionBlockContext = useDetentionBlockContext()
 
   return (
     <div className='max-w-md'>
