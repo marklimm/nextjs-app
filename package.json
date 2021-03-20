@@ -12,6 +12,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "./node_modules/.bin/tsc --noEmit"
   },
+  "scriptsComments": {
+    "build": "build this nextJS app to be started on a production server",
+    "dev": "run this nextJS in development mode",
+    "fetch-swapi-data": "run the script that fetches Star Wars data from the SWAPI API",
+    "lint": "run linting rules as defined in eslintrc.js",
+    "start": "start the nextJS app on a production server",
+    "test": "run unit tests which I don't have any yet",
+    "tsc": "check for typescript errors"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
