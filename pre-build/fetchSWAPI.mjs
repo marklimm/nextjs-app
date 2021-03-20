@@ -15,12 +15,12 @@ const SWAPIDdataTypes = ['films', 'people', 'planets', 'starships']
  * This function returns an array of the complete set of one of the SWAPI data types
  * @param {string} swapiDataType The string type of SWAPI data (films, planets, starships, etc.)
  */
-const getSWAPIDataType = async swapiDataType => {
+const getSWAPIDataType = async (swapiDataType) => {
   let items = []
 
   let swapiData = {
     next: `https://swapi.dev/api/${swapiDataType}/`,
-    results: []
+    results: [],
   }
 
   do {
@@ -28,7 +28,7 @@ const getSWAPIDataType = async swapiDataType => {
     const fetchResponse = await fetch(swapiData.next)
     swapiData = await fetchResponse.json()
     items = [...items, ...swapiData.results]
-  } while (!!swapiData.next)
+  } while (swapiData.next)
 
   return items
 }
@@ -56,7 +56,7 @@ const getDataTypeCache = async (dataType = 'films') => {
  * This function queries the SWAPI API and writes out the results in individual JSON files
  */
 const getSWAPIDataAndWriteToFiles = () => {
-  SWAPIDdataTypes.forEach(async key => {
+  SWAPIDdataTypes.forEach(async (key) => {
     const data = await getDataTypeCache(key)
 
     //  the 3rd parameter is used to insert white space to make the resulting string easier to read
