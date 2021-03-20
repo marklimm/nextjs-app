@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
@@ -11,8 +11,6 @@ import { Character } from 'lib/types/Character'
 import { useCharactersFilterer } from './useCharactersFilterer'
 import { CharacterFilterBar } from 'components/FilterBar/CharacterFilterBar'
 
-import styles from './index.module.scss'
-
 export interface PeopleProps {
   allPeople: Character[]
   characterTagOptions: SelectOption[]
@@ -20,13 +18,13 @@ export interface PeopleProps {
 
 const Characters: FunctionComponent<PeopleProps> = ({
   allPeople,
-  characterTagOptions
-}) => {
+  characterTagOptions,
+}: PeopleProps) => {
   const {
     filteredCharacters,
     selectedCharacterTags,
 
-    characterTagSelected
+    characterTagSelected,
   } = useCharactersFilterer(allPeople)
 
   return (
@@ -58,7 +56,7 @@ const Characters: FunctionComponent<PeopleProps> = ({
 
         <div className='col-span-3 ml-8'>
           {filteredCharacters &&
-            filteredCharacters.map(person => (
+            filteredCharacters.map((person) => (
               <div key={person.id} className='searchResultCard'>
                 <Link href={`/people/${person.id}`}>
                   <a target='_blank'>
@@ -68,7 +66,7 @@ const Characters: FunctionComponent<PeopleProps> = ({
 
                 {person.tags.length > 0 && (
                   <div className='mb-1'>
-                    {person.tags.map(t => (
+                    {person.tags.map((t) => (
                       <span
                         key={t.id}
                         className='text-xs rounded-xl py-1 px-2 mr-2 bg-white border border-gray-300'
@@ -85,7 +83,7 @@ const Characters: FunctionComponent<PeopleProps> = ({
                     {person.posts.length > 0 && (
                       <div className='my-4 mx-5 text-sm rounded-md p-3 bg-white'>
                         <span className='font-bold'>
-                          {person.firstName}'s latest post:{' '}
+                          {person.firstName}&apos;s latest post:{' '}
                         </span>
                         <span>{person.posts[0].body}</span>
                       </div>
@@ -97,7 +95,8 @@ const Characters: FunctionComponent<PeopleProps> = ({
                     Friends:{' '}
                     {person.friends
                       .map(
-                        t => t.firstName + (t.lastName ? ' ' + t.lastName : '')
+                        (t) =>
+                          t.firstName + (t.lastName ? ' ' + t.lastName : '')
                       )
                       .join(', ')}
                   </span>
@@ -114,16 +113,16 @@ export const getStaticProps: GetStaticProps = async () => {
   const people = await getPeople()
   const characterTags = await getCharacterTags()
 
-  const characterTagOptions = characterTags.map(tag => ({
+  const characterTagOptions = characterTags.map((tag) => ({
     label: tag.name,
-    value: tag.id.toString()
+    value: tag.id.toString(),
   }))
 
   return {
     props: {
       allPeople: people,
-      characterTagOptions
-    }
+      characterTagOptions,
+    },
   }
 }
 

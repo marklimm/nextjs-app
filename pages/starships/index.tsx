@@ -1,3 +1,4 @@
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 
@@ -5,10 +6,15 @@ import { getDenormalizedStarships } from 'dataProviders/SWAPI/Starships'
 
 import { PulseCircle } from 'components/PulseCircle/PulseCircle'
 import { Starship } from './Starship'
+import { SWAPIStarship } from 'lib/types/SWAPI'
 
-import styles from './index.module.scss'
+interface StarShipsProps {
+  starships: SWAPIStarship[]
+}
 
-const Starships = ({ starships }) => {
+const Starships: FunctionComponent<StarShipsProps> = ({
+  starships,
+}: StarShipsProps) => {
   return (
     <>
       <Head>
@@ -24,7 +30,7 @@ const Starships = ({ starships }) => {
       </div>
       <div className='mt-2'>
         {starships &&
-          starships.map(s => (
+          starships.map((s) => (
             <div key={s.url}>
               <Starship starship={s} />
             </div>
@@ -34,13 +40,13 @@ const Starships = ({ starships }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const starships = getDenormalizedStarships()
 
   return {
     props: {
-      starships
-    }
+      starships,
+    },
   }
 }
 

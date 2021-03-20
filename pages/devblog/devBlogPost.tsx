@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
 
 import DisplayDate from 'components/DisplayDate/DisplayDate'
@@ -9,8 +9,8 @@ interface DevBlogPostProps {
 }
 
 export const DevBlogPost: FunctionComponent<DevBlogPostProps> = ({
-  devBlogPost
-}) => {
+  devBlogPost,
+}: DevBlogPostProps) => {
   return (
     <div className='searchResultCard'>
       <h1 className='text-xl'>

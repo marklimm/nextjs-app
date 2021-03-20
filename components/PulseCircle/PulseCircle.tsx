@@ -1,9 +1,7 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 import styles from './PulseCircle.module.scss'
 
-interface PulseCircleProps {}
-
-export const PulseCircle: FunctionComponent<PulseCircleProps> = () => {
+export const PulseCircle: FunctionComponent = () => {
   return <div className={styles.pulseIndicator}></div>
 }

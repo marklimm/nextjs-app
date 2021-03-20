@@ -1,6 +1,13 @@
+import React, { FunctionComponent } from 'react'
 import { parseISO, format } from 'date-fns'
 
-const DisplayDate = ({ dateString }) => {
+interface DisplayDateProps {
+  dateString: string
+}
+
+const DisplayDate: FunctionComponent<DisplayDateProps> = ({
+  dateString,
+}: DisplayDateProps) => {
   const date = parseISO(dateString)
   const formattedDate = format(date, 'LLLL d, yyyy')
 

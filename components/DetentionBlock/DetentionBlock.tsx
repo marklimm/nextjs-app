@@ -12,9 +12,10 @@ export const DetentionBlock: FunctionComponent = () => {
   return (
     <div className='max-w-md'>
       <div className='text-sm'>
-        The below table shows "detention block situation" data that is shared
-        between multiple page routes by using React Context. Clicking on the
-        "Change Situation" button will randomly change the shared state
+        The below table shows &quot;detention block situation&quot; data that is
+        shared between multiple page routes by using React Context. Clicking on
+        the &quot;Change Situation&quot; button will randomly change the shared
+        state
       </div>
       <table className='mt-2 table-fixed'>
         <thead>
@@ -25,7 +26,7 @@ export const DetentionBlock: FunctionComponent = () => {
         </thead>
         <tbody>
           {detentionBlockContext.detentionBlocks.length > 0 &&
-            detentionBlockContext.detentionBlocks.map(b => (
+            detentionBlockContext.detentionBlocks.map((b) => (
               <tr key={b.id}>
                 <td className={styles.cell}>{b.id}</td>
                 <td className={styles.cell}>{b.situation}</td>

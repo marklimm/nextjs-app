@@ -7,29 +7,41 @@ import {
   initialEventsFilterState,
   setStartDate,
   setEndDate,
-  setEmotionTags
+  setEmotionTags,
 } from './EventsReducer'
+
+interface UseEventsFiltererResult {
+  filteredEvents: Event[]
+  selectedEmotionTags: SelectOption[]
+  startDateSelected: (startDate?: string) => void
+  endDateSelected: (startDate?: string) => void
+  clearStartDate: () => void
+  clearEndDate: () => void
+  emotionTagSelected: (selectedOptions: SelectOption[]) => void
+}
 
 /**
  * A custom hook that defines the Event filtering event handlers and provides access to the current list of filtered events and the currently selected emotion tags
  * @param allEvents An array of all of the events
  */
-export const useEventsFilterer = (allEvents: Event[]) => {
+export const useEventsFilterer = (
+  allEvents: Event[]
+): UseEventsFiltererResult => {
   const [state, dispatch] = useReducer(
     EventsFilterReducer,
     initialEventsFilterState,
     () => ({
       ...initialEventsFilterState,
       allEvents,
-      filteredEvents: allEvents
+      filteredEvents: allEvents,
     })
   )
 
-  const startDateSelected = startDate => {
+  const startDateSelected = (startDate = '') => {
     dispatch(setStartDate(startDate))
   }
 
-  const endDateSelected = endDate => {
+  const endDateSelected = (endDate = '') => {
     dispatch(setEndDate(endDate))
   }
 
@@ -54,6 +66,6 @@ export const useEventsFilterer = (allEvents: Event[]) => {
     endDateSelected,
     clearStartDate,
     clearEndDate,
-    emotionTagSelected
+    emotionTagSelected,
   }
 }

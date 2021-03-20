@@ -1,17 +1,17 @@
-// @ts-nocheck
-//  disabling typescript for this file since I didn't bother typing the starships data that comes back from the Star Wars API
-
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 import DisplayDate from 'components/DisplayDate/DisplayDate'
 
 import styles from './index.module.scss'
+import { SWAPIStarship } from 'lib/types/SWAPI'
 
 interface StarshipProps {
-  starship: {}
+  starship: SWAPIStarship
 }
 
-export const Starship: FunctionComponent<StarshipProps> = ({ starship }) => {
+export const Starship: FunctionComponent<StarshipProps> = ({
+  starship,
+}: StarshipProps) => {
   return (
     <div className='searchResultCard'>
       <span className='text-lg font-semibold'>{starship.name}</span>
@@ -62,7 +62,7 @@ export const Starship: FunctionComponent<StarshipProps> = ({ starship }) => {
             <>
               <span className={styles.label}>Appeared in:</span>
               <br />
-              {starship.films.map(f => (
+              {starship.filmsObjects.map((f) => (
                 <div key={f.url}>
                   {f.title} - <DisplayDate dateString={f.release_date} />
                 </div>

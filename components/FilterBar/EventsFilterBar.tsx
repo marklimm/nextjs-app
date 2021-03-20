@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import Select from 'react-select'
 import { SelectOption } from 'lib/types/SelectOption'
 
@@ -28,8 +28,8 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
   endDateSelected,
   clearStartDate,
   clearEndDate,
-  emotionTagSelected
-}) => {
+  emotionTagSelected,
+}: EventsFilterBarProps) => {
   return (
     <div>
       <h1 className='text-base mb-3'>Filter events by:</h1>

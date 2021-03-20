@@ -1,6 +1,6 @@
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { FunctionComponent, useEffect, useState } from 'react'
 
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
 import DisplayDate from 'components/DisplayDate/DisplayDate'
@@ -22,8 +22,8 @@ interface EventsProps {
  */
 const Events: FunctionComponent<EventsProps> = ({
   allEvents,
-  emotionTagOptions
-}) => {
+  emotionTagOptions,
+}: EventsProps) => {
   const {
     filteredEvents,
     selectedEmotionTags,
@@ -32,7 +32,7 @@ const Events: FunctionComponent<EventsProps> = ({
     endDateSelected,
     clearStartDate,
     clearEndDate,
-    emotionTagSelected
+    emotionTagSelected,
   } = useEventsFilterer(allEvents)
 
   return (
@@ -67,7 +67,7 @@ const Events: FunctionComponent<EventsProps> = ({
 
         <div className='col-span-3 ml-8'>
           {filteredEvents.length > 0 &&
-            filteredEvents.map(event => {
+            filteredEvents.map((event) => {
               return (
                 <div key={event.id} className='searchResultCard'>
                   <div className='text-lg'>{event.title}</div>
@@ -91,17 +91,17 @@ const Events: FunctionComponent<EventsProps> = ({
 export const getStaticProps: GetStaticProps = async () => {
   const allEvents = await getSortedMarkdownFiles('data/events')
 
-  const emotionTagOptions = EmotionTagLabels.map(tag => ({
+  const emotionTagOptions = EmotionTagLabels.map((tag) => ({
     //  capitalize the first letter and lowercase the rest of the tag
     label: tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase(),
-    value: tag
+    value: tag,
   }))
 
   return {
     props: {
       allEvents,
-      emotionTagOptions
-    }
+      emotionTagOptions,
+    },
   }
 }
 

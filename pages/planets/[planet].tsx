@@ -1,13 +1,21 @@
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 
 import {
   getDenormalizedPlanet,
-  getPlanetPaths
+  getPlanetPaths,
 } from 'dataProviders/SWAPI/Planets'
 import { Planet } from './Planet'
+import { SWAPIPlanet } from 'lib/types/SWAPI'
 
-const RenderPlanet = ({ planet }) => {
+interface RenderPlanetProps {
+  planet: SWAPIPlanet
+}
+
+const RenderPlanet: FunctionComponent<RenderPlanetProps> = ({
+  planet,
+}: RenderPlanetProps) => {
   return (
     <>
       <Head>
@@ -23,16 +31,18 @@ const RenderPlanet = ({ planet }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: getPlanetPaths(),
-    fallback: false
+    fallback: false,
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const denormalizedPlanet = getDenormalizedPlanet(params.planet)
+  const denormalizedPlanet = getDenormalizedPlanet(
+    typeof params.planet === 'string' ? params.planet : params.planet[0]
+  )
   return {
     props: {
-      planet: denormalizedPlanet
-    }
+      planet: denormalizedPlanet,
+    },
   }
 }
 

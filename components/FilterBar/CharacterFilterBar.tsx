@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import Select from 'react-select'
 import { SelectOption } from 'lib/types/SelectOption'
 
@@ -15,8 +15,8 @@ export const CharacterFilterBar: FunctionComponent<CharacterFilterBarProps> = ({
   characterTagOptions,
   selectedCharacterTags,
 
-  characterTagSelected
-}) => {
+  characterTagSelected,
+}: CharacterFilterBarProps) => {
   return (
     <div>
       {/* <div className='mb-1 text-sm'>Search by Text:</div>

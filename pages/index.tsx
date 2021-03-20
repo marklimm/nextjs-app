@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
@@ -10,7 +10,9 @@ interface HomePageProps {
   readmeContent: string
 }
 
-const HomePage: FunctionComponent<HomePageProps> = ({ readmeContent }) => {
+const HomePage: FunctionComponent<HomePageProps> = ({
+  readmeContent,
+}: HomePageProps) => {
   return (
     <>
       <Head>
@@ -31,8 +33,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      readmeContent: readmeData.contentHtml
-    }
+      readmeContent: readmeData.contentHtml,
+    },
   }
 }
 

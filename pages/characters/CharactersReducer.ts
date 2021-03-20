@@ -23,15 +23,15 @@ export const initialCharactersFilterState: CharactersState = {
   filteredCharacters: [],
 
   filters: {
-    characterTags: []
-  }
+    characterTags: [],
+  },
 }
 
 /**
  * A type of Character filter action
  */
 enum CharactersFilterActionType {
-  SetCharacterTags = 'set-character-tags'
+  SetCharacterTags = 'set-character-tags',
 }
 
 interface SetCharacterTagsAction {
@@ -50,11 +50,13 @@ type CharactersFilterAction = SetCharacterTagsAction
  * The action creator for the setCharacterTagsAction
  * @param characterTags
  */
-export const setCharacterTags = (characterTags): SetCharacterTagsAction => ({
+export const setCharacterTags = (
+  characterTags: SelectOption[]
+): SetCharacterTagsAction => ({
   type: CharactersFilterActionType.SetCharacterTags,
   payload: {
-    characterTags
-  }
+    characterTags,
+  },
 })
 
 /**
@@ -68,12 +70,12 @@ const getUpdatedCharactersState = (
   let filteredCharacters = state.allCharacters
 
   if (filterState.characterTags.length > 0) {
-    filteredCharacters = filteredCharacters.filter(character => {
+    filteredCharacters = filteredCharacters.filter((character) => {
       //  search for a match between the array of selected characterTags and the array of characterTags on the current Character
       const matchingcharacterTags = filterState.characterTags.filter(
-        selectedTag => {
+        (selectedTag) => {
           return character.tags
-            .map(t => t.id.toString())
+            .map((t) => t.id.toString())
             .includes(selectedTag.value)
         }
       )
@@ -86,7 +88,7 @@ const getUpdatedCharactersState = (
     ...state,
     filteredCharacters,
 
-    filters: filterState
+    filters: filterState,
   }
 }
 
@@ -98,7 +100,7 @@ export const CharactersFilterReducer = (
     case CharactersFilterActionType.SetCharacterTags:
       return getUpdatedCharactersState(state, {
         ...state.filters,
-        characterTags: (action as SetCharacterTagsAction).payload.characterTags
+        characterTags: (action as SetCharacterTagsAction).payload.characterTags,
       })
   }
 }

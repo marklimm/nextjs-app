@@ -7,19 +7,21 @@ import html from 'remark-html'
 import { Post } from 'lib/types/Post'
 
 //  this function removes the `.md` extension from the end of a markdown file name
-const removeMdExtension = mdFileName => mdFileName.replace(/\.md$/, '')
+const removeMdExtension = (mdFileName) => mdFileName.replace(/\.md$/, '')
 
 /* 
 This function returns the file names for all of the posts (to be used by getStaticPaths()).  It excludes the `.md` extension
 */
-export const getAllMarkdownFileIds = (directory = '') => {
+export const getAllMarkdownFileIds = (
+  directory = ''
+): { params: { id: string } }[] => {
   const fileNames = fs.readdirSync(directory)
 
-  return fileNames.map(fileName => {
+  return fileNames.map((fileName) => {
     return {
       params: {
-        id: removeMdExtension(fileName)
-      }
+        id: removeMdExtension(fileName),
+      },
     }
   })
 }
@@ -37,9 +39,7 @@ const getFrontMatterFromMarkdownFile = (directory = '', mdFileName = '') => {
 //  this function returns the content of an individual post, converted from markdown into html
 const getMarkdownContent = async (frontMatterContent = '') => {
   // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(frontMatterContent)
+  const processedContent = await remark().use(html).process(frontMatterContent)
   return processedContent.toString()
 }
 
@@ -60,14 +60,16 @@ export const getMarkdownFileData = async (
     date: '',
     title: '',
     ...frontMatter.data,
-    contentHtml
+    contentHtml,
   }
 }
 
 /* 
 This function returns the data from all of the markdown files in the specified directory, sorted by timestamp
  */
-export const getSortedMarkdownFiles = async (directory = '') => {
+export const getSortedMarkdownFiles = async (
+  directory = ''
+): Promise<Post[]> => {
   const directoryFullPath = path.join(process.cwd(), directory)
 
   // Get file names under /posts
@@ -80,7 +82,7 @@ export const getSortedMarkdownFiles = async (directory = '') => {
       // Combine the data with the id
       return {
         id: removeMdExtension(mdFileName),
-        ...fileData
+        ...fileData,
       }
     }
   )

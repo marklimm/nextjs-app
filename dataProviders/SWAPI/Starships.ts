@@ -6,30 +6,30 @@ import { SWAPIObject, SWAPIStarship } from 'lib/types/SWAPI'
  */
 const getStarshipsData = () => {
   //  read the Star Wars API data from the JSON files that were built prior to the build.  The file path I need to pass in is relative to the root of this website, not this particular page
-  let starshipsRaw = fs.readFileSync('pre-build/swapi-starships.json')
-  let filmsRaw = fs.readFileSync('pre-build/swapi-films.json')
+  const starshipsRaw = fs.readFileSync('pre-build/swapi-starships.json')
+  const filmsRaw = fs.readFileSync('pre-build/swapi-films.json')
 
   const starshipsObj = JSON.parse(starshipsRaw.toString()) as SWAPIObject
   const filmsObj = JSON.parse(filmsRaw.toString())
 
   return {
     starshipsObj,
-    filmsObj
+    filmsObj,
   }
 }
 
 /**
  * This function returns all of the SWAPI starships
  */
-export const getDenormalizedStarships = () => {
+export const getDenormalizedStarships = (): SWAPIStarship[] => {
   const { starshipsObj, filmsObj } = getStarshipsData()
 
-  const starships = Object.keys(starshipsObj).map(key => {
+  const starships = Object.keys(starshipsObj).map((key) => {
     const starship = starshipsObj[key] as SWAPIStarship
 
     return {
       ...starship,
-      films: starship.films.map(starshipUrl => filmsObj[starshipUrl])
+      filmsObjects: starship.films.map((starshipUrl) => filmsObj[starshipUrl]),
     }
   })
 

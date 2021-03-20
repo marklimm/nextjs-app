@@ -1,14 +1,11 @@
-import { useCallback, useState } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
 import { Header } from 'components/Header/Header'
 import { NavBar } from 'components/NavBar/NavBar'
 
-import {
-  DetentionBlockContext,
-  DetentionBlockWrapper
-} from 'state/DetentionBlockContext'
+import { DetentionBlockWrapper } from 'state/DetentionBlockContext'
 
 //  import tailwind
 import 'tailwindcss/tailwind.css'

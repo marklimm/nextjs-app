@@ -1,13 +1,19 @@
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
 import { getDenormalizedPlanets } from 'dataProviders/SWAPI/Planets'
 
 import { Planet } from './Planet'
+import { SWAPIPlanet } from 'lib/types/SWAPI'
 
-import styles from './index.module.scss'
+interface PlanetsProps {
+  planets: SWAPIPlanet[]
+}
 
-const Planets = ({ planets }) => {
+const Planets: FunctionComponent<PlanetsProps> = ({
+  planets,
+}: PlanetsProps) => {
   return (
     <>
       <Head>
@@ -17,7 +23,7 @@ const Planets = ({ planets }) => {
 
       <div className=''>
         {planets &&
-          planets.map(p => (
+          planets.map((p) => (
             <div key={p.url}>
               <Planet planet={p} />
             </div>
@@ -32,8 +38,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      planets: denormalizedPlanets
-    }
+      planets: denormalizedPlanets,
+    },
   }
 }
 

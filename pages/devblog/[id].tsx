@@ -1,10 +1,16 @@
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { getAllMarkdownFileIds, getMarkdownFileData } from 'lib/markdownParser'
 
 import { DevBlogPost } from './devBlogPost'
+import { Post } from 'lib/types/Post'
 
-const Post = ({ postData }) => {
+interface PostProps {
+  postData: Post
+}
+
+const Post: FunctionComponent<PostProps> = ({ postData }: PostProps) => {
   return (
     <>
       <Head>
@@ -22,7 +28,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //  /posts/[id].tsx and /planets/[planet].tsx are using 2 different formats for getStaticPaths() and they both work!
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
@@ -31,8 +37,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      postData
-    }
+      postData,
+    },
   }
 }
 

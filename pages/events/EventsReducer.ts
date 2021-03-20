@@ -29,8 +29,8 @@ export const initialEventsFilterState: EventsState = {
     startDate: null,
     endDate: null,
 
-    emotionTags: []
-  }
+    emotionTags: [],
+  },
 }
 
 /**
@@ -39,7 +39,7 @@ export const initialEventsFilterState: EventsState = {
 enum EventsFilterActionType {
   SetStartDate = 'set-start-date',
   SetEndDate = 'set-end-date',
-  SetEmotionTags = 'set-emotion-tags'
+  SetEmotionTags = 'set-emotion-tags',
 }
 
 interface SetStartDateAction {
@@ -75,33 +75,35 @@ type EventsFilterAction =
  * The action creator for the SetStartDateAction
  * @param startDate
  */
-export const setStartDate = (startDate): SetStartDateAction => ({
+export const setStartDate = (startDate = ''): SetStartDateAction => ({
   type: EventsFilterActionType.SetStartDate,
   payload: {
-    startDate
-  }
+    startDate,
+  },
 })
 
 /**
  * The action creator for the SetEndDateAction
  * @param endDate
  */
-export const setEndDate = (endDate): SetEndDateAction => ({
+export const setEndDate = (endDate = ''): SetEndDateAction => ({
   type: EventsFilterActionType.SetEndDate,
   payload: {
-    endDate
-  }
+    endDate,
+  },
 })
 
 /**
  * The action creator for the SetEmotionTagsAction
  * @param emotionTags
  */
-export const setEmotionTags = (emotionTags): SetEmotionTagsAction => ({
+export const setEmotionTags = (
+  emotionTags: SelectOption[]
+): SetEmotionTagsAction => ({
   type: EventsFilterActionType.SetEmotionTags,
   payload: {
-    emotionTags
-  }
+    emotionTags,
+  },
 })
 
 /**
@@ -115,18 +117,20 @@ const getUpdatedEventsState = (
   let filteredEvents = state.allEvents
 
   if (filterState.startDate) {
-    filteredEvents = filteredEvents.filter(e => e.date > filterState.startDate)
+    filteredEvents = filteredEvents.filter(
+      (e) => e.date > filterState.startDate
+    )
   }
 
   if (filterState.endDate) {
-    filteredEvents = filteredEvents.filter(e => e.date < filterState.endDate)
+    filteredEvents = filteredEvents.filter((e) => e.date < filterState.endDate)
   }
 
   if (filterState.emotionTags.length > 0) {
-    filteredEvents = filteredEvents.filter(event => {
+    filteredEvents = filteredEvents.filter((event) => {
       //  search for a match between the array of selected emotion tags and the array of tags on the current event
       const matchesWithSelectedTags = filterState.emotionTags.filter(
-        selectedEmotionTag =>
+        (selectedEmotionTag) =>
           event.emotionTags.includes(EmotionTag[selectedEmotionTag.value])
       )
 
@@ -138,7 +142,7 @@ const getUpdatedEventsState = (
     ...state,
     filteredEvents,
 
-    filters: filterState
+    filters: filterState,
   }
 }
 
@@ -150,19 +154,19 @@ export const EventsFilterReducer = (
     case EventsFilterActionType.SetStartDate:
       return getUpdatedEventsState(state, {
         ...state.filters,
-        startDate: (action as SetStartDateAction).payload.startDate
+        startDate: (action as SetStartDateAction).payload.startDate,
       })
 
     case EventsFilterActionType.SetEndDate:
       return getUpdatedEventsState(state, {
         ...state.filters,
-        endDate: (action as SetEndDateAction).payload.endDate
+        endDate: (action as SetEndDateAction).payload.endDate,
       })
 
     case EventsFilterActionType.SetEmotionTags:
       return getUpdatedEventsState(state, {
         ...state.filters,
-        emotionTags: (action as SetEmotionTagsAction).payload.emotionTags
+        emotionTags: (action as SetEmotionTagsAction).payload.emotionTags,
       })
   }
 }

@@ -11,7 +11,7 @@ export enum EmotionTag {
   MAD = 'mad',
   NOSTALGIC = 'nostalgic',
   SAD = 'sad',
-  SKEPTICAL = 'skeptical'
+  SKEPTICAL = 'skeptical',
 }
 
 /**

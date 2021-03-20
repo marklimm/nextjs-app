@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
@@ -12,7 +12,9 @@ interface DevBlogProps {
   devBlogPosts: Post[]
 }
 
-const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
+const DevBlog: FunctionComponent<DevBlogProps> = ({
+  devBlogPosts,
+}: DevBlogProps) => {
   return (
     <>
       <Head>
@@ -24,7 +26,7 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({ devBlogPosts }) => {
           <h1>Developer Blog</h1>
 
           {devBlogPosts.length > 0 &&
-            devBlogPosts.map(post => (
+            devBlogPosts.map((post) => (
               <div key={post.id} className='mb-8'>
                 <DevBlogPost devBlogPost={post} />
               </div>
@@ -44,8 +46,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      devBlogPosts: lastTenPosts
-    }
+      devBlogPosts: lastTenPosts,
+    },
   }
 }
 

@@ -1,116 +1,117 @@
 import { PrismaClient } from '@prisma/client'
+import { Character } from 'lib/types/Character'
 
 const prisma = new PrismaClient()
 
-export const getPeople = async () => {
+export const getPeople = async (): Promise<Character[]> => {
   const peopleResults = await prisma.person.findMany({
     orderBy: [
       {
-        firstName: 'asc'
+        firstName: 'asc',
       },
       {
-        lastName: 'asc'
-      }
+        lastName: 'asc',
+      },
     ],
     include: {
       posts: {
         orderBy: {
-          updatedAt: 'desc'
-        }
+          updatedAt: 'desc',
+        },
       },
       tags: {
         orderBy: {
-          name: 'asc'
-        }
+          name: 'asc',
+        },
       },
       friends: {
         orderBy: [
           {
-            firstName: 'asc'
+            firstName: 'asc',
           },
           {
-            lastName: 'asc'
-          }
+            lastName: 'asc',
+          },
         ],
         select: {
           id: true,
           firstName: true,
-          lastName: true
-        }
-      }
-    }
+          lastName: true,
+        },
+      },
+    },
   })
 
   //  format the prisma-generated createdAt/updatedAt fields.  This prevents an error from being thrown
-  const people = peopleResults.map(p => {
+  const people = peopleResults.map((p) => {
     return {
       ...p,
-      posts: p.posts.map(t => {
+      posts: p.posts.map((t) => {
         return {
           ...t,
           createdAt: JSON.parse(JSON.stringify(t.createdAt)),
-          updatedAt: JSON.parse(JSON.stringify(t.updatedAt))
+          updatedAt: JSON.parse(JSON.stringify(t.updatedAt)),
         }
       }),
-      tags: p.tags.map(t => {
+      tags: p.tags.map((t) => {
         return {
           ...t,
           createdAt: JSON.parse(JSON.stringify(t.createdAt)),
-          updatedAt: JSON.parse(JSON.stringify(t.updatedAt))
+          updatedAt: JSON.parse(JSON.stringify(t.updatedAt)),
         }
-      })
+      }),
     }
   })
 
   return people
 }
 
-export const getPerson = async (personId = '') => {
+export const getPerson = async (personId = ''): Promise<Character> => {
   const personData = await prisma.person.findUnique({
     where: {
-      id: Number(personId)
+      id: Number(personId),
     },
     include: {
       posts: true,
       tags: {
         orderBy: {
-          name: 'asc'
-        }
+          name: 'asc',
+        },
       },
       friends: {
         orderBy: [
           {
-            firstName: 'asc'
+            firstName: 'asc',
           },
           {
-            lastName: 'asc'
-          }
+            lastName: 'asc',
+          },
         ],
         select: {
           id: true,
           firstName: true,
-          lastName: true
-        }
-      }
-    }
+          lastName: true,
+        },
+      },
+    },
   })
 
   //  format the prisma-generated createdAt/updatedAt fields.  This prevents an error from being thrown
   return {
     ...personData,
-    posts: personData.posts.map(t => {
+    posts: personData.posts.map((t) => {
       return {
         ...t,
         createdAt: JSON.parse(JSON.stringify(t.createdAt)),
-        updatedAt: JSON.parse(JSON.stringify(t.updatedAt))
+        updatedAt: JSON.parse(JSON.stringify(t.updatedAt)),
       }
     }),
-    tags: personData.tags.map(t => {
+    tags: personData.tags.map((t) => {
       return {
         ...t,
         createdAt: JSON.parse(JSON.stringify(t.createdAt)),
-        updatedAt: JSON.parse(JSON.stringify(t.updatedAt))
+        updatedAt: JSON.parse(JSON.stringify(t.updatedAt)),
       }
-    })
+    }),
   }
 }

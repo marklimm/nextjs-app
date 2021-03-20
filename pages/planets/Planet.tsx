@@ -1,17 +1,17 @@
-// @ts-nocheck
-//  disabling typescript for this file since I didn't bother typing the planets data that comes back from the Star Wars API
-
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
 import DisplayDate from 'components/DisplayDate/DisplayDate'
 
 import styles from './index.module.scss'
+import { SWAPIPlanet } from 'lib/types/SWAPI'
 
-interface PlanetsProps {
-  planet: {}
+interface PlanetProps {
+  planet: SWAPIPlanet
 }
 
-export const Planet: FunctionComponent<PlanetsProps> = ({ planet }) => {
+export const Planet: FunctionComponent<PlanetProps> = ({
+  planet,
+}: PlanetProps) => {
   return (
     <div className='searchResultCard text-sm'>
       <Link href={`/planets/${planet.name.toLowerCase()}`}>
@@ -55,7 +55,7 @@ export const Planet: FunctionComponent<PlanetsProps> = ({ planet }) => {
             <>
               <span className={styles.label}>Residents:</span>
               <br />
-              {planet.people.map(person => (
+              {planet.people.map((person) => (
                 <div key={person.url}>{person.name}</div>
               ))}
             </>
@@ -66,7 +66,7 @@ export const Planet: FunctionComponent<PlanetsProps> = ({ planet }) => {
             <>
               <span className={styles.label}>Appeared in:</span>
               <br />
-              {planet.films.map(f => (
+              {planet.filmsObjects.map((f) => (
                 <div key={f.url}>
                   {f.title} - <DisplayDate dateString={f.release_date} />
                 </div>

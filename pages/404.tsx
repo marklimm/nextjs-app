@@ -1,6 +1,7 @@
+import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
 
-const Custom404 = () => {
+const Custom404: FunctionComponent = () => {
   return (
     <>
       <div className='flex flex-col items-center'>
