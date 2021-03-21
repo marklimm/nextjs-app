@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
@@ -16,7 +16,10 @@ import 'scss/app.scss'
 //  import global markdown styles
 import 'scss/markdownContent.scss'
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp: FunctionComponent<AppProps> = ({
+  Component,
+  pageProps,
+}: AppProps) => {
   return (
     <>
       <Head>

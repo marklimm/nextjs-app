@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from 'react'
+import React, {
+  createContext,
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react'
 
 /**
  * The current situation in the detention block
@@ -14,7 +20,7 @@ export enum Situation {
 
   TRANSPORT = 'Prisoner Transport',
   ELEVATED = 'Elevated',
-  DANGER = 'Danger'
+  DANGER = 'Danger',
 }
 
 interface DetentionBlock {
@@ -31,22 +37,24 @@ const initialDetentionBlockState: DetentionBlockState = {
   detentionBlocks: [
     {
       id: 'A',
-      situation: Situation.NORMAL
+      situation: Situation.NORMAL,
     },
     {
       id: 'B',
-      situation: Situation.NORMAL
+      situation: Situation.NORMAL,
     },
     {
       id: 'C',
-      situation: Situation.NORMAL
+      situation: Situation.NORMAL,
     },
     {
       id: 'D',
-      situation: Situation.NORMAL
-    }
+      situation: Situation.NORMAL,
+    },
   ],
-  changeSituation: () => {}
+  changeSituation: () => {
+    return
+  },
 }
 
 const situationKeys = Object.keys(Situation)
@@ -63,7 +71,13 @@ const getRandomSituation = (): Situation => {
 
 const DetentionBlockContext = createContext(initialDetentionBlockState)
 
-export const DetentionBlockWrapper = props => {
+interface DetentionBlockWrapperProps {
+  children: React.ReactNode
+}
+
+export const DetentionBlockWrapper: FunctionComponent<DetentionBlockWrapperProps> = (
+  props: DetentionBlockWrapperProps
+) => {
   //  app-wide shared state that will be stored in React Context
   const [detentionBlockState, setDetentionBlockState] = useState(
     initialDetentionBlockState
@@ -73,12 +87,12 @@ export const DetentionBlockWrapper = props => {
    * This function randomly changes the detention block state
    */
   const changeSituation = useCallback(() => {
-    setDetentionBlockState(state => ({
+    setDetentionBlockState((state) => ({
       ...state,
-      detentionBlocks: state.detentionBlocks.map(b => ({
+      detentionBlocks: state.detentionBlocks.map((b) => ({
         ...b,
-        situation: getRandomSituation()
-      }))
+        situation: getRandomSituation(),
+      })),
     }))
   }, [])
 
@@ -86,7 +100,7 @@ export const DetentionBlockWrapper = props => {
     <DetentionBlockContext.Provider
       value={{
         ...detentionBlockState,
-        changeSituation
+        changeSituation,
       }}
     >
       {props.children}
@@ -98,6 +112,6 @@ export const DetentionBlockWrapper = props => {
  * This function returns the DetentionBlockContext
  * @returns
  */
-export const useDetentionBlockContext = () => {
+export const useDetentionBlockContext = (): DetentionBlockState => {
   return useContext(DetentionBlockContext)
 }
