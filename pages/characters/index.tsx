@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useReducer } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
@@ -8,24 +8,48 @@ import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
 
-import { useCharactersFilterer } from './useCharactersFilterer'
-import { CharacterFilterBar } from 'components/FilterBar/CharacterFilterBar'
+import { FilterPanel } from 'components/FilterPanel/FilterPanel'
+
+import {
+  FilterActions,
+  FilterReducerFactory,
+} from 'components/FilterPanel/FilterReducer'
 
 export interface PeopleProps {
   allPeople: Character[]
   characterTagOptions: SelectOption[]
 }
 
+const characterFilterReducerFactory = new FilterReducerFactory<Character>()
+
 const Characters: FunctionComponent<PeopleProps> = ({
   allPeople,
   characterTagOptions,
 }: PeopleProps) => {
-  const {
-    filteredCharacters,
-    selectedCharacterTags,
+  const [
+    { filteredResults: filteredCharacters },
+    dispatch,
+  ] = useReducer(characterFilterReducerFactory.getFilterReducer(), null, () =>
+    characterFilterReducerFactory.getInitialFilterState(allPeople)
+  )
 
-    characterTagSelected,
-  } = useCharactersFilterer(allPeople)
+  const characterTagSelected = (selectedOptions: SelectOption[]) => {
+    const itemMatchesTheSelectedOption = (
+      character: Character,
+      selectedOption: SelectOption
+    ): boolean => {
+      return character.tags
+        .map((t) => t.id.toString())
+        .includes(selectedOption.value)
+    }
+
+    dispatch(
+      FilterActions.createOptionSelectedAction<Character>(
+        selectedOptions,
+        itemMatchesTheSelectedOption
+      )
+    )
+  }
 
   return (
     <>
@@ -47,10 +71,15 @@ const Characters: FunctionComponent<PeopleProps> = ({
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          <CharacterFilterBar
+          {/* <CharacterFilterBar
             characterTagOptions={characterTagOptions}
             selectedCharacterTags={selectedCharacterTags}
             characterTagSelected={characterTagSelected}
+          /> */}
+
+          <FilterPanel
+            optionSelected={characterTagSelected}
+            selectOptions={characterTagOptions}
           />
         </div>
 
