@@ -8,7 +8,10 @@ import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
 
-import { FilterPanel } from 'components/FilterPanel/FilterPanel'
+import {
+  FilterControlType,
+  FilterPanel,
+} from 'components/FilterPanel/FilterPanel'
 
 import {
   FilterActions,
@@ -78,8 +81,13 @@ const Characters: FunctionComponent<PeopleProps> = ({
           /> */}
 
           <FilterPanel
-            optionSelected={characterTagSelected}
-            selectOptions={characterTagOptions}
+            filterControls={[
+              {
+                type: FilterControlType.Dropdown,
+                optionSelected: characterTagSelected,
+                selectOptions: characterTagOptions,
+              },
+            ]}
           />
         </div>
 

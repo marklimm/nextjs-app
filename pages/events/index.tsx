@@ -8,7 +8,10 @@ import DisplayDate from 'components/DisplayDate/DisplayDate'
 import { EmotionTag, EmotionTagLabels, Event } from 'lib/types/Event'
 import { SelectOption } from 'lib/types/SelectOption'
 
-import { FilterPanel } from 'components/FilterPanel/FilterPanel'
+import {
+  FilterControlType,
+  FilterPanel,
+} from 'components/FilterPanel/FilterPanel'
 
 import {
   FilterActions,
@@ -85,8 +88,13 @@ const Events: FunctionComponent<EventsProps> = ({
 
           {/* trying to create a <FilterPanel /> that can be used for all the different search types */}
           <FilterPanel
-            optionSelected={emotionTagSelected}
-            selectOptions={emotionTagOptions}
+            filterControls={[
+              {
+                type: FilterControlType.Dropdown,
+                optionSelected: emotionTagSelected,
+                selectOptions: emotionTagOptions,
+              },
+            ]}
           />
         </div>
 
