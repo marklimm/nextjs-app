@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer } from 'react'
+import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
@@ -8,51 +8,23 @@ import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
 
-import {
-  FilterControlType,
-  FilterPanel,
-} from 'components/FilterPanel/FilterPanel'
+import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 
-import {
-  FilterActions,
-  FilterReducerFactory,
-} from 'components/FilterPanel/FilterReducer'
+import { useCharactersFilterer } from './useCharactersFilterer'
 
 export interface PeopleProps {
   allPeople: Character[]
   characterTagOptions: SelectOption[]
 }
 
-const characterFilterReducerFactory = new FilterReducerFactory<Character>()
-
 const Characters: FunctionComponent<PeopleProps> = ({
   allPeople,
   characterTagOptions,
 }: PeopleProps) => {
-  const [
-    { filteredResults: filteredCharacters },
-    dispatch,
-  ] = useReducer(characterFilterReducerFactory.getFilterReducer(), null, () =>
-    characterFilterReducerFactory.getInitialFilterState(allPeople)
+  const { filterControls, filteredCharacters } = useCharactersFilterer(
+    allPeople,
+    characterTagOptions
   )
-
-  const characterTagSelected = (selectedOptions: SelectOption[]) => {
-    const itemMatchesTheSelectedOption = (
-      character: Character,
-      selectedOption: SelectOption
-    ): boolean => {
-      return character.tags
-        .map((t) => t.id.toString())
-        .includes(selectedOption.value)
-    }
-
-    dispatch(
-      FilterActions.createOptionSelectedAction<Character>(
-        selectedOptions,
-        itemMatchesTheSelectedOption
-      )
-    )
-  }
 
   return (
     <>
@@ -74,21 +46,7 @@ const Characters: FunctionComponent<PeopleProps> = ({
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          {/* <CharacterFilterBar
-            characterTagOptions={characterTagOptions}
-            selectedCharacterTags={selectedCharacterTags}
-            characterTagSelected={characterTagSelected}
-          /> */}
-
-          <FilterPanel
-            filterControls={[
-              {
-                type: FilterControlType.Dropdown,
-                optionSelected: characterTagSelected,
-                selectOptions: characterTagOptions,
-              },
-            ]}
-          />
+          <FilterPanel filterControls={filterControls} />
         </div>
 
         <div className='col-span-3 ml-8'>

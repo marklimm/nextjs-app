@@ -3,43 +3,76 @@ import { Character } from 'lib/types/Character'
 import { SelectOption } from 'lib/types/SelectOption'
 
 import {
-  CharactersFilterReducer,
-  initialCharactersFilterState,
-  setCharacterTags,
-} from './CharactersReducer'
+  DropdownFilter,
+  FilterControl,
+  FilterControlType,
+} from 'components/FilterPanel/FilterTypes'
+
+import {
+  FilterActions,
+  FilterReducerFactory,
+} from 'components/FilterPanel/FilterReducer'
 
 export interface UseCharactersFiltererResult {
   filteredCharacters: Character[]
-  selectedCharacterTags: SelectOption[]
-  characterTagSelected: (selectedOptions: SelectOption[]) => void
+  filterControls: FilterControl[]
 }
+
+enum FilteringOn {
+  CharacterTags = 'character-tags',
+}
+
+const characterFilterReducerFactory = new FilterReducerFactory<Character>()
 
 /**
  * A custom hook that defines the Character filtering event handlers and provides access to the current list of filtered Characters and the currently selected emotion tags
  * @param allCharacters An array of all of the Characters
  */
 export const useCharactersFilterer = (
-  allCharacters: Character[]
+  allCharacters: Character[],
+  characterTagOptions: SelectOption[]
 ): UseCharactersFiltererResult => {
-  const [state, dispatch] = useReducer(
-    CharactersFilterReducer,
-    initialCharactersFilterState,
-    () => ({
-      ...initialCharactersFilterState,
-      allCharacters,
-      filteredCharacters: allCharacters,
-    })
+  const filterControls: FilterControl[] = [
+    {
+      type: FilterControlType.Dropdown,
+      id: FilteringOn.CharacterTags,
+
+      selectOptions: characterTagOptions,
+    },
+  ]
+
+  const [
+    { filteredResults: filteredCharacters },
+    dispatch,
+  ] = useReducer(characterFilterReducerFactory.filterReducer, null, () =>
+    characterFilterReducerFactory.getInitialState(allCharacters, filterControls)
   )
 
   const characterTagSelected = (selectedOptions: SelectOption[]) => {
-    dispatch(setCharacterTags(selectedOptions))
+    const itemMatchesTheSelectedOption = (
+      character: Character,
+      selectedOption: SelectOption
+    ): boolean => {
+      return character.tags
+        .map((t) => t.id.toString())
+        .includes(selectedOption.value)
+    }
+
+    dispatch(
+      FilterActions.optionSelected<Character>(
+        FilteringOn.CharacterTags,
+        selectedOptions,
+        itemMatchesTheSelectedOption
+      )
+    )
   }
 
+  //  add on the event handler now that it's defined
+  const characterTagFilter = filterControls[0] as DropdownFilter
+  characterTagFilter.optionSelected = characterTagSelected
+
   return {
-    filteredCharacters: state.filteredCharacters,
-
-    selectedCharacterTags: state.filters.characterTags,
-
-    characterTagSelected,
+    filteredCharacters,
+    filterControls,
   }
 }

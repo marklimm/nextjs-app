@@ -19,6 +19,7 @@ The data is retrieved from various data sources:
 - eslint (javascript code linting)
 - Prettier (opinionated code style formatting)
 - the Star Wars API (a public API returning Star Wars relational data)
+- redux (state management library)
 
 **Additional packages used:**
 

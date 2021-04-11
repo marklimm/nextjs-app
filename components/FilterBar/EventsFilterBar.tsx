@@ -4,6 +4,8 @@ import { SelectOption } from 'lib/types/SelectOption'
 
 import { StartAndEndDatePicker } from 'components/StartAndEndDatePicker/StartAndEndDatePicker'
 
+//  this is a non-generic version of what <FilterPanel /> is now doing.  This file isn't being used but I'm keeping it in the project for reference
+
 interface EventsFilterBarProps {
   emotionTagOptions: SelectOption[]
 

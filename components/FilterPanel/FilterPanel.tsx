@@ -1,32 +1,16 @@
 import React, { FunctionComponent } from 'react'
 
-import { SelectOption } from 'lib/types/SelectOption'
+import { FilterControl, FilterControlType } from './FilterTypes'
+
 import { Dropdown } from 'components/FilterPanel/Dropdown'
-
-export enum FilterControlType {
-  DateSearch = 'date-search',
-  Dropdown = 'dropdown',
-}
-
-interface DateSearch {
-  type: FilterControlType.DateSearch
-  something: string
-}
-
-interface Dropdown {
-  type: FilterControlType.Dropdown
-  optionSelected: (selectedOptions: SelectOption[]) => void
-  selectOptions: SelectOption[]
-}
-
-type FilterControl = Dropdown | DateSearch
+import { StartAndEndDatePicker } from 'components/StartAndEndDatePicker/StartAndEndDatePicker'
 
 interface FilterPanelProps {
   filterControls: FilterControl[]
 }
 
 /**
- * A component intended to be used by different search types that renders various filter input controls based on the given parameters
+ * A component intended to be used by different search types that renders a filter panel containing the given filterControls
  * @param param0
  * @returns
  */
@@ -37,15 +21,27 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
     <div>
       FilterPanel.tsx
       {filterControls.map((filterControl, index) => {
-        console.log('filterControl', filterControl)
-        if (filterControl.type === FilterControlType.Dropdown) {
-          return (
-            <Dropdown
-              key={index}
-              selectOptions={filterControl.selectOptions}
-              optionSelected={filterControl.optionSelected}
-            />
-          )
+        switch (filterControl.type) {
+          case FilterControlType.Dropdown:
+            return (
+              <Dropdown
+                key={index}
+                selectOptions={filterControl.selectOptions}
+                optionSelected={filterControl.optionSelected}
+              />
+            )
+          case FilterControlType.DateSearch:
+            return (
+              <StartAndEndDatePicker
+                key={index}
+                clearEndDate={filterControl.clearEndDate}
+                clearStartDate={filterControl.clearStartDate}
+                initialEndDate={''}
+                initialStartDate={''}
+                endDateSelected={filterControl.endDateSelected}
+                startDateSelected={filterControl.startDateSelected}
+              />
+            )
         }
       })}
     </div>

@@ -1,24 +1,51 @@
 import { useReducer } from 'react'
-import { Event } from 'lib/types/Event'
+
+import { EmotionTag, EmotionTagLabels, Event } from 'lib/types/Event'
+
 import { SelectOption } from 'lib/types/SelectOption'
 
 import {
-  EventsFilterReducer,
-  initialEventsFilterState,
-  setStartDate,
-  setEndDate,
-  setEmotionTags,
-} from './EventsReducer'
+  FilterActions,
+  FilterReducerFactory,
+} from 'components/FilterPanel/FilterReducer'
+
+import {
+  DateSearchFilter,
+  DropdownFilter,
+  FilterControl,
+  FilterControlType,
+} from 'components/FilterPanel/FilterTypes'
 
 interface UseEventsFiltererResult {
   filteredEvents: Event[]
-  selectedEmotionTags: SelectOption[]
-  startDateSelected: (startDate?: string) => void
-  endDateSelected: (startDate?: string) => void
-  clearStartDate: () => void
-  clearEndDate: () => void
-  emotionTagSelected: (selectedOptions: SelectOption[]) => void
+  filterControls: FilterControl[]
 }
+
+const emotionTagOptions = EmotionTagLabels.map((tag) => ({
+  //  capitalize the first letter and lowercase the rest of the tag
+  label: tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase(),
+  value: tag,
+}))
+
+enum FilteringOn {
+  EmotionTags = 'emotion-tags',
+  Timestamp = 'timestamp',
+}
+
+const filterControls: FilterControl[] = [
+  {
+    type: FilterControlType.Dropdown,
+    id: FilteringOn.EmotionTags,
+
+    selectOptions: emotionTagOptions,
+  },
+  {
+    type: FilterControlType.DateSearch,
+    id: FilteringOn.Timestamp,
+  },
+]
+
+const eventFilterReducerFactory = new FilterReducerFactory<Event>()
 
 /**
  * A custom hook that defines the Event filtering event handlers and provides access to the current list of filtered events and the currently selected emotion tags
@@ -27,45 +54,58 @@ interface UseEventsFiltererResult {
 export const useEventsFilterer = (
   allEvents: Event[]
 ): UseEventsFiltererResult => {
-  const [state, dispatch] = useReducer(
-    EventsFilterReducer,
-    initialEventsFilterState,
-    () => ({
-      ...initialEventsFilterState,
-      allEvents,
-      filteredEvents: allEvents,
-    })
+  const [
+    { filteredResults: filteredEvents },
+    dispatch,
+  ] = useReducer(eventFilterReducerFactory.filterReducer, null, () =>
+    eventFilterReducerFactory.getInitialState(allEvents, filterControls)
   )
 
+  const emotionTagSelected = (selectedOptions: SelectOption[]) => {
+    const itemMatchesTheSelectedOption = (
+      event: Event,
+      selectedOption: SelectOption
+    ): boolean => {
+      return event.emotionTags.includes(EmotionTag[selectedOption.value])
+    }
+
+    dispatch(
+      FilterActions.optionSelected(
+        FilteringOn.EmotionTags,
+        selectedOptions,
+        itemMatchesTheSelectedOption
+      )
+    )
+  }
+
   const startDateSelected = (startDate = '') => {
-    dispatch(setStartDate(startDate))
+    dispatch(FilterActions.setStartDate(FilteringOn.Timestamp, startDate))
   }
 
   const endDateSelected = (endDate = '') => {
-    dispatch(setEndDate(endDate))
+    dispatch(FilterActions.setEndDate(FilteringOn.Timestamp, endDate))
   }
 
   const clearStartDate = () => {
-    dispatch(setStartDate(null))
+    dispatch(FilterActions.setStartDate(FilteringOn.Timestamp, null))
   }
 
   const clearEndDate = () => {
-    dispatch(setEndDate(null))
+    dispatch(FilterActions.setEndDate(FilteringOn.Timestamp, null))
   }
 
-  const emotionTagSelected = (selectedOptions: SelectOption[]) => {
-    dispatch(setEmotionTags(selectedOptions))
-  }
+  //  I'm not sure if there is a better way of handling this.  Below I'm specifying the filter controls to pass into <FilterPanel /> because I don't have the event handlers themselves until this point.  There probably is a better way of handling this.  This is because I have to define useReducer() (a react hook) at the top of the function, and I don't get the dispatch object until after that useReducer() returns, and the dispatch is needed to define the event handlers
+  const emotionTagFilter = filterControls[0] as DropdownFilter
+  emotionTagFilter.optionSelected = emotionTagSelected
+
+  const timestampFilter = filterControls[1] as DateSearchFilter
+  timestampFilter.startDateSelected = startDateSelected
+  timestampFilter.endDateSelected = endDateSelected
+  timestampFilter.clearStartDate = clearStartDate
+  timestampFilter.clearEndDate = clearEndDate
 
   return {
-    filteredEvents: state.filteredEvents,
-
-    selectedEmotionTags: state.filters.emotionTags,
-
-    startDateSelected,
-    endDateSelected,
-    clearStartDate,
-    clearEndDate,
-    emotionTagSelected,
+    filteredEvents,
+    filterControls,
   }
 }
