@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
-import { getPeople } from 'dataProviders/PeopleData'
+import { getCharacters } from 'dataProviders/PeopleData'
 import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
@@ -12,17 +12,23 @@ import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 
 import { useCharactersFilterer } from './useCharactersFilterer'
 
-export interface PeopleProps {
-  allPeople: Character[]
+export interface CharactersProps {
+  allCharacters: Character[]
   characterTagOptions: SelectOption[]
 }
 
-const Characters: FunctionComponent<PeopleProps> = ({
-  allPeople,
+/**
+ * This component defines the UI for the /characters route, which includes a filters panel and the Characters search results
+ * @param param0
+ * @returns
+ */
+const Characters: FunctionComponent<CharactersProps> = ({
+  allCharacters,
   characterTagOptions,
-}: PeopleProps) => {
+}: CharactersProps) => {
+  //  we use the useCharactersFilterer custom hook to get the filters and filtered search results
   const { filterControls, filteredCharacters } = useCharactersFilterer(
-    allPeople,
+    allCharacters,
     characterTagOptions
   )
 
@@ -51,17 +57,17 @@ const Characters: FunctionComponent<PeopleProps> = ({
 
         <div className='col-span-3 ml-8'>
           {filteredCharacters &&
-            filteredCharacters.map((person) => (
-              <div key={person.id} className='searchResultCard'>
-                <Link href={`/people/${person.id}`}>
+            filteredCharacters.map((character) => (
+              <div key={character.id} className='searchResultCard'>
+                <Link href={`/people/${character.id}`}>
                   <a target='_blank'>
-                    {person.firstName} {person.lastName}
+                    {character.firstName} {character.lastName}
                   </a>
                 </Link>
 
-                {person.tags.length > 0 && (
+                {character.tags.length > 0 && (
                   <div className='mb-1'>
-                    {person.tags.map((t) => (
+                    {character.tags.map((t) => (
                       <span
                         key={t.id}
                         className='text-xs rounded-xl py-1 px-2 mr-2 bg-white border border-gray-300'
@@ -72,23 +78,21 @@ const Characters: FunctionComponent<PeopleProps> = ({
                     ))}
                   </div>
                 )}
-                <div className='text-sm mt-2'>{person.bio}</div>
-                {person.posts.length > 0 && (
-                  <div>
-                    {person.posts.length > 0 && (
-                      <div className='my-4 mx-5 text-sm rounded-md p-3 bg-white'>
-                        <span className='font-bold'>
-                          {person.firstName}&apos;s latest post:{' '}
-                        </span>
-                        <span>{person.posts[0].body}</span>
-                      </div>
-                    )}
+                <div className='text-sm mt-2'>{character.bio}</div>
+
+                {character.posts.length > 0 && (
+                  <div className='my-4 mx-5 text-sm rounded-md p-3 bg-white'>
+                    <span className='font-bold'>
+                      {character.firstName}&apos;s latest post:{' '}
+                    </span>
+                    <span>{character.posts[0].body}</span>
                   </div>
                 )}
-                {person.friends.length > 0 && (
+
+                {character.friends.length > 0 && (
                   <span className='text-sm'>
                     Friends:{' '}
-                    {person.friends
+                    {character.friends
                       .map(
                         (t) =>
                           t.firstName + (t.lastName ? ' ' + t.lastName : '')
@@ -105,7 +109,7 @@ const Characters: FunctionComponent<PeopleProps> = ({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const people = await getPeople()
+  const characters = await getCharacters()
   const characterTags = await getCharacterTags()
 
   const characterTagOptions = characterTags.map((tag) => ({
@@ -115,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      allPeople: people,
+      allCharacters: characters,
       characterTagOptions,
     },
   }

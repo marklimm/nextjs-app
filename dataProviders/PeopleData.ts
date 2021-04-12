@@ -3,8 +3,8 @@ import { Character } from 'lib/types/Character'
 
 const prisma = new PrismaClient()
 
-export const getPeople = async (): Promise<Character[]> => {
-  const peopleResults = await prisma.person.findMany({
+export const getCharacters = async (): Promise<Character[]> => {
+  const characterResults = await prisma.person.findMany({
     orderBy: [
       {
         firstName: 'asc',
@@ -43,7 +43,7 @@ export const getPeople = async (): Promise<Character[]> => {
   })
 
   //  format the prisma-generated createdAt/updatedAt fields.  This prevents an error from being thrown
-  const people = peopleResults.map((p) => {
+  const characters = characterResults.map((p) => {
     return {
       ...p,
       posts: p.posts.map((t) => {
@@ -63,11 +63,11 @@ export const getPeople = async (): Promise<Character[]> => {
     }
   })
 
-  return people
+  return characters
 }
 
-export const getPerson = async (personId = ''): Promise<Character> => {
-  const personData = await prisma.person.findUnique({
+export const getCharacter = async (personId = ''): Promise<Character> => {
+  const characterData = await prisma.person.findUnique({
     where: {
       id: Number(personId),
     },
@@ -98,15 +98,15 @@ export const getPerson = async (personId = ''): Promise<Character> => {
 
   //  format the prisma-generated createdAt/updatedAt fields.  This prevents an error from being thrown
   return {
-    ...personData,
-    posts: personData.posts.map((t) => {
+    ...characterData,
+    posts: characterData.posts.map((t) => {
       return {
         ...t,
         createdAt: JSON.parse(JSON.stringify(t.createdAt)),
         updatedAt: JSON.parse(JSON.stringify(t.updatedAt)),
       }
     }),
-    tags: personData.tags.map((t) => {
+    tags: characterData.tags.map((t) => {
       return {
         ...t,
         createdAt: JSON.parse(JSON.stringify(t.createdAt)),
