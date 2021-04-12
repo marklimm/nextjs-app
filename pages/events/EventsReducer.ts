@@ -1,6 +1,8 @@
 import { SelectOption } from 'lib/types/SelectOption'
 import { EmotionTag, Event } from 'lib/types/Event'
 
+//  This non-generic implementation of EventsReducer is no longer being used, this has been replaced with FilterReducer.  I'm keeping this file for reference though
+
 /**
  * The part of EventsState that stores the currently selected filters
  */

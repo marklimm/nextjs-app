@@ -200,7 +200,7 @@ export class FilterReducerFactory<SearchType extends Character | Event> {
   }
 
   /**
-   * This function filters all of the possible results against the currently selected filters
+   * This function is the heart of the FilterReducer.  It filters all of the possible results against the currently selected filters
    * @param state
    * @param filterControlStates
    * @returns
@@ -263,6 +263,7 @@ export class FilterReducerFactory<SearchType extends Character | Event> {
     state: FilterState<SearchType>,
     action: FilterAction<SearchType>
   ): FilterState<SearchType> => {
+    //  update the filter that changed
     const updatedFilterControls = state.filterControlStates.map((fc) => {
       if (action.payload.id !== fc.id) {
         return fc
@@ -274,6 +275,7 @@ export class FilterReducerFactory<SearchType extends Character | Event> {
       }
     })
 
+    //  apply the updated filters to the search results
     return this.getUpdatedEventsState(state, updatedFilterControls)
   }
 }

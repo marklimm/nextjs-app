@@ -9,9 +9,11 @@ import { Post } from 'lib/types/Post'
 //  this function removes the `.md` extension from the end of a markdown file name
 const removeMdExtension = (mdFileName) => mdFileName.replace(/\.md$/, '')
 
-/* 
-This function returns the file names for all of the posts (to be used by getStaticPaths()).  It excludes the `.md` extension
-*/
+/**
+ * This function returns the file names for all of the posts (to be used by getStaticPaths()).  It excludes the `.md` extension
+ * @param directory
+ * @returns
+ */
 export const getAllMarkdownFileIds = (
   directory = ''
 ): { params: { id: string } }[] => {
@@ -26,7 +28,12 @@ export const getAllMarkdownFileIds = (
   })
 }
 
-//  this function returns the "front matter" for an individual post
+/**
+ * This function returns the "front matter" for an individual post
+ * @param directory The directory containing the markdown file
+ * @param mdFileName The markdown file that we want to retrieve the front-matter from
+ * @returns
+ */
 const getFrontMatterFromMarkdownFile = (directory = '', mdFileName = '') => {
   // Read markdown file as string
   const fullPath = path.join(directory, mdFileName)
@@ -36,7 +43,11 @@ const getFrontMatterFromMarkdownFile = (directory = '', mdFileName = '') => {
   return matter(fileContents)
 }
 
-//  this function returns the content of an individual post, converted from markdown into html
+/**
+ * This function returns the content of an individual post, converted from markdown into html
+ * @param frontMatterContent
+ * @returns
+ */
 const getMarkdownContent = async (frontMatterContent = '') => {
   // Use remark to convert markdown into HTML string
   const processedContent = await remark().use(html).process(frontMatterContent)
@@ -72,7 +83,7 @@ export const getSortedMarkdownFiles = async (
 ): Promise<Post[]> => {
   const directoryFullPath = path.join(process.cwd(), directory)
 
-  // Get file names under /posts
+  // Get the markdown file names within `directoryFullPath`
   const mdFileNames = fs.readdirSync(directoryFullPath)
 
   const parsedMDFilesPromises = mdFileNames.map(

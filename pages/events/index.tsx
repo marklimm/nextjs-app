@@ -41,7 +41,6 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          {/* trying to create a <FilterPanel /> that can be used for all the different search types */}
           <FilterPanel filterControls={filterControls} />
         </div>
 
