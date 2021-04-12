@@ -6,14 +6,14 @@ import {
   getDenormalizedPlanet,
   getPlanetPaths,
 } from 'dataProviders/SWAPI/Planets'
-import { Planet } from './Planet'
+import { PlanetCard } from './PlanetCard'
 import { SWAPIPlanet } from 'lib/types/SWAPI'
 
 interface RenderPlanetProps {
   planet: SWAPIPlanet
 }
 
-const RenderPlanet: FunctionComponent<RenderPlanetProps> = ({
+const PlanetUI: FunctionComponent<RenderPlanetProps> = ({
   planet,
 }: RenderPlanetProps) => {
   return (
@@ -23,7 +23,7 @@ const RenderPlanet: FunctionComponent<RenderPlanetProps> = ({
       </Head>
       {!planet && <div>No planet data was returned</div>}
 
-      {planet && <Planet planet={planet} />}
+      {planet && <PlanetCard planet={planet} />}
     </>
   )
 }
@@ -46,4 +46,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export default RenderPlanet
+export default PlanetUI

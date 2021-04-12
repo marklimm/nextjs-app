@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { DetentionBlock } from 'components/DetentionBlock/DetentionBlock'
 
-const DevBlog: FunctionComponent = () => {
+const DetentionBlockUI: FunctionComponent = () => {
   return (
     <>
       <Head>
@@ -29,4 +29,4 @@ const DevBlog: FunctionComponent = () => {
   )
 }
 
-export default DevBlog
+export default DetentionBlockUI

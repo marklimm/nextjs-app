@@ -5,13 +5,13 @@ import DisplayDate from 'components/DisplayDate/DisplayDate'
 import styles from './index.module.scss'
 import { SWAPIStarship } from 'lib/types/SWAPI'
 
-interface StarshipProps {
+interface StarshipCardProps {
   starship: SWAPIStarship
 }
 
-export const Starship: FunctionComponent<StarshipProps> = ({
+export const StarshipCard: FunctionComponent<StarshipCardProps> = ({
   starship,
-}: StarshipProps) => {
+}: StarshipCardProps) => {
   return (
     <div className='searchResultCard'>
       <span className='text-lg font-semibold'>{starship.name}</span>

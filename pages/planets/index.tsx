@@ -4,14 +4,14 @@ import { GetStaticProps } from 'next'
 
 import { getDenormalizedPlanets } from 'dataProviders/SWAPI/Planets'
 
-import { Planet } from './Planet'
+import { PlanetCard } from './PlanetCard'
 import { SWAPIPlanet } from 'lib/types/SWAPI'
 
 interface PlanetsProps {
   planets: SWAPIPlanet[]
 }
 
-const Planets: FunctionComponent<PlanetsProps> = ({
+const PlanetsUI: FunctionComponent<PlanetsProps> = ({
   planets,
 }: PlanetsProps) => {
   return (
@@ -25,7 +25,7 @@ const Planets: FunctionComponent<PlanetsProps> = ({
         {planets &&
           planets.map((p) => (
             <div key={p.url}>
-              <Planet planet={p} />
+              <PlanetCard planet={p} />
             </div>
           ))}
       </div>
@@ -43,4 +43,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Planets
+export default PlanetsUI

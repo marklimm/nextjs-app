@@ -6,11 +6,11 @@ import { getAllMarkdownFileIds, getMarkdownFileData } from 'lib/markdownParser'
 import { DevBlogPost } from './devBlogPost'
 import { Post } from 'lib/types/Post'
 
-interface PostProps {
+interface PostUIProps {
   postData: Post
 }
 
-const Post: FunctionComponent<PostProps> = ({ postData }: PostProps) => {
+const PostUI: FunctionComponent<PostUIProps> = ({ postData }: PostUIProps) => {
   return (
     <>
       <Head>
@@ -42,4 +42,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-export default Post
+export default PostUI

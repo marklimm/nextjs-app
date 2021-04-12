@@ -5,13 +5,13 @@ import DisplayDate from 'components/DisplayDate/DisplayDate'
 import styles from './index.module.scss'
 import { SWAPIPlanet } from 'lib/types/SWAPI'
 
-interface PlanetProps {
+interface PlanetCardProps {
   planet: SWAPIPlanet
 }
 
-export const Planet: FunctionComponent<PlanetProps> = ({
+export const PlanetCard: FunctionComponent<PlanetCardProps> = ({
   planet,
-}: PlanetProps) => {
+}: PlanetCardProps) => {
   return (
     <div className='searchResultCard text-sm'>
       <Link href={`/planets/${planet.name.toLowerCase()}`}>
