@@ -53,7 +53,7 @@ const getDataTypeCache = async (dataType = 'films') => {
 }
 
 /**
- * This function queries the SWAPI API and writes out the results in individual JSON files
+ * This function queries the SWAPI API and writes out the results to individual JSON files
  */
 const getSWAPIDataAndWriteToFiles = () => {
   SWAPIDdataTypes.forEach(async (key) => {
