@@ -10,46 +10,57 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Person {
+model Character {
   id Int @id @default(autoincrement())
   firstName String
   lastName String
   bio String
   imageUrl String?
 
-  //  Person has a one-to-many relationship with Post
-  //  does not exist in the DB, is used for prisma client
-  posts Post[]
+  // //  Character has a one-to-many relationship with CharacterPost
+  // //  does not exist in the DB, is used for prisma client
+  posts CharacterPost[]
 
-  //  Person has a many-to-many relationship with Tag
-  tags Tag[]
+  //  Character has a many-to-many relationship with CharacterTag
+  tags CharacterTag[]
 
-  //  many-to-many self-relation - https://stackoverflow.com/questions/65162657/one-to-many-self-relation-in-prisma-schema and https://www.prisma.io/docs/concepts/components/prisma-schema/relations#many-to-many-self-relations
-  friends Person[] @relation("friends")
-  friendsRelation Person[] @relation("friends")
+  // //  many-to-many self-relation - https://stackoverflow.com/questions/65162657/one-to-many-self-relation-in-prisma-schema and https://www.prisma.io/docs/concepts/components/prisma-schema/relations#many-to-many-self-relations
+  friends Character[] @relation("friends")
+  friendsRelation Character[] @relation("friends")
 }
 
-model Post {
+model CharacterPost {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   body String
 
   //  this field does NOT exist in the DB, is used for prisma client
-  person Person @relation(fields: [personId], references: [id])
+  character Character @relation(fields: [characterId], references: [id])
 
   //  this field DOES exist in the DB, this is the foreign key that connects Post with Person
-  personId Int
+  characterId Int
 }
 
-model Tag {
+model CharacterTag {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String
   description String
 
-  //  Tag has a many-to-many relationship with Person
-  people Person[]
+  //  CharacterTag has a many-to-many relationship with Character
+  character Character[]
 
 }
+
+
+
+///  This is the writing prompt prisma model
+// model WritingPrompt {
+//   id Int @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   text String
+// }
+
