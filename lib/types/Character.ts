@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client'
 
-//  define the Person type using the Prisma-generated Person type
-export type Character = Prisma.PersonGetPayload<{
+//  define the Character type using the Prisma-generated Character type
+export type Character = Prisma.CharacterGetPayload<{
   include: {
     posts: true
     tags: true

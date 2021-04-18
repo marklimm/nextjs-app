@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client'
-import { CharacterTag } from 'lib/types/CharacterTag'
+import { CharacterTag, PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export const getCharacterTags = async (): Promise<CharacterTag[]> => {
-  const tagResults = await prisma.tag.findMany({
+  const tagResults = await prisma.characterTag.findMany({
     orderBy: [
       {
         name: 'asc',

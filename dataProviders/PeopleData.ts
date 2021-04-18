@@ -4,7 +4,7 @@ import { Character } from 'lib/types/Character'
 const prisma = new PrismaClient()
 
 export const getCharacters = async (): Promise<Character[]> => {
-  const characterResults = await prisma.person.findMany({
+  const characterResults = await prisma.character.findMany({
     orderBy: [
       {
         firstName: 'asc',
@@ -67,7 +67,7 @@ export const getCharacters = async (): Promise<Character[]> => {
 }
 
 export const getCharacter = async (personId = ''): Promise<Character> => {
-  const characterData = await prisma.person.findUnique({
+  const characterData = await prisma.character.findUnique({
     where: {
       id: Number(personId),
     },
