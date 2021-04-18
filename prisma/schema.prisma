@@ -38,7 +38,7 @@ model CharacterPost {
   //  this field does NOT exist in the DB, is used for prisma client
   character Character @relation(fields: [characterId], references: [id])
 
-  //  this field DOES exist in the DB, this is the foreign key that connects Post with Person
+  //  this field DOES exist in the DB, this is the foreign key that connects Post with Character
   characterId Int
 }
 

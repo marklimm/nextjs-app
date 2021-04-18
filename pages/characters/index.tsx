@@ -41,13 +41,20 @@ const Characters: FunctionComponent<CharactersProps> = ({
 
       <div>
         The characters data on this page is retrieved from a local sqlite DB
-        file using the Prisma ORM. In addition, the following relational data
-        gets pulled in for each character
+        file using the Prisma ORM.
+      </div>
+      <div className='mt-4'>
+        The following relational data gets pulled in for each character
         <ul>
-          <li>Tags - many Persons to many Tags relationship</li>
-          <li>Posts - one Person to many Posts relationship</li>
-          <li>Friends - many Persons to many Persons self-relation</li>
+          <li>Tags - many Characters to many Tags relationship</li>
+          <li>Posts - one Character to many Posts relationship</li>
+          <li>Friends - many Characters to many Characters self-relation</li>
         </ul>
+      </div>
+      <div className='mt-4'>
+        The schema for the three supporting prisma models (Character,
+        CharacterPost and CharacterTag) are defined in a schema.prisma text
+        file.
       </div>
 
       <div className='grid grid-cols-4 mt-4 items-start'>

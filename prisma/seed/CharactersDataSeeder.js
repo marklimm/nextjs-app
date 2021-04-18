@@ -14,28 +14,28 @@ class CharactersDataSeeder {
 
   #getTagId = (tagName) => this.characterTags.find((t) => t.name === tagName).id
 
-  #createFriendshipRelation = async (personA, personB) => {
+  #createFriendshipRelation = async (characterA, characterB) => {
     //  we define the friendship links.  Friends is a self-relation on the Characters table, this can't be mapped like how the CharacterTags many-to-many relationship was done
     //  we have to map both sides of the friendship
 
     await this.prisma.character.update({
       where: {
-        id: personA.id,
+        id: characterA.id,
       },
       data: {
         friends: {
-          connect: [{ id: personB.id }],
+          connect: [{ id: characterB.id }],
         },
       },
     })
 
     await this.prisma.character.update({
       where: {
-        id: personB.id,
+        id: characterB.id,
       },
       data: {
         friends: {
-          connect: [{ id: personA.id }],
+          connect: [{ id: characterA.id }],
         },
       },
     })
