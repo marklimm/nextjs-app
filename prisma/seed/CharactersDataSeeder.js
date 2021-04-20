@@ -1,18 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { PrismaClient } = require('@prisma/client')
-
 /**
  * This class contains the scripts for populating the Character, CharacterTag and CharacterPost prisma DB tables with Star Wars data!
  */
 class CharactersDataSeeder {
-  constructor() {
-    this.prisma = new PrismaClient()
-
-    this.characters = []
-    this.characterTags = []
+  constructor(prismaClient) {
+    this.prisma = prismaClient
   }
-
-  #getTagId = (tagName) => this.characterTags.find((t) => t.name === tagName).id
 
   #createFriendshipRelation = async (characterA, characterB) => {
     //  we define the friendship links.  Friends is a self-relation on the Characters table, this can't be mapped like how the CharacterTags many-to-many relationship was done
@@ -48,7 +40,7 @@ class CharactersDataSeeder {
   /**
    * Populate the database with the Star Wars characters
    */
-  seedCharacters = async () => {
+  seedCharacters = async (characterTags) => {
     //  this didn't work for me, conflict with the where: { name: 'Jedi' } and the `name` field not being available
     // const jedi = await this.prisma.characterTag.upsert({
     //   where: { name: 'Jedi' },
@@ -67,7 +59,7 @@ class CharactersDataSeeder {
         bio:
           'Luke Skywalker, a Force-sensitive human male, was a legendary Jedi Master who fought in the Galactic Civil War during the reign of the Galactic Empire. Along with his companions, Princess Leia Organa and General Han Solo, Skywalker served on the side of the Alliance to Restore the Republic—an organization committed to the downfall of the Galactic Empire and the restoration of democracy. Following the war, Skywalker became a living legend, and was remembered as one of the greatest Jedi in galactic history.',
         tags: {
-          connect: [{ id: this.#getTagId('Jedi') }],
+          connect: [{ id: characterTags['Jedi'].id }],
         },
         posts: {
           create: [
@@ -93,7 +85,7 @@ class CharactersDataSeeder {
         bio:
           'Han Solo, known only as Han until being given the surname Solo by an Imperial recruitment officer, and formerly known as Cadet 124-329 while serving as an Imperial cadet, was a human male smuggler. He became a leader in the Alliance to Restore the Republic and an instrumental figure in the defeat of the Galactic Empire during the Galactic Civil War. He hailed from Corellia and became a smuggler, even completing the Kessel Run in just twelve parsecs with his prized ship, the Millennium Falcon, and coming under the employ of Jabba the Hutt. He was the son-in-law of fallen Jedi Knight Anakin Skywalker and Senator Padmé Amidala, husband of Princess Leia Organa, brother-in-law of Jedi Master Luke Skywalker, father of Ben Solo, rivals and close friends with fellow smuggler Lando Calrissian, and best friends with the Wookiee Chewbacca, his trusted copilot who swore a life debt to the Corellian smuggler.',
         tags: {
-          connect: [{ id: this.#getTagId('Scoundrel') }],
+          connect: [{ id: characterTags['Scoundrel'].id }],
         },
         posts: {
           create: [
@@ -117,7 +109,7 @@ class CharactersDataSeeder {
         bio:
           'Leia Skywalker Organa Solo was a Force-sensitive human female political and military leader who served in the Alliance to Restore the Republic during the Imperial Era and the New Republic and Resistance in the subsequent New Republic Era. Adopted into the House of Organa, the Alderaanian royal family, she was Princess Leia Organa of Alderaan, a planet in the Core Worlds known for its dedication to pacifism. The princess was raised as the daughter of Senator Bail Organa and his wife, Queen Breha Organa, making her the heir to the Alderaanian monarchy. Instilled with the values of her adopted homeworld, Organa devoted her life to the restoration of democracy by opposing authoritarian regimes such as the Galactic Empire and the First Order.',
         tags: {
-          connect: [{ id: this.#getTagId('Rebel Alliance') }],
+          connect: [{ id: characterTags['Rebel Alliance'].id }],
         },
         posts: {
           create: [
@@ -137,7 +129,7 @@ class CharactersDataSeeder {
         bio:
           "Chewbacca, known affectionately to his friends as Chewie, was a Wookiee male warrior, smuggler, mechanic, pilot, and resistance fighter who fought in the Clone Wars, the Galactic Civil War, and the conflict and subsequent war between the First Order and the Resistance. He hailed from the planet Kashyyyk and became a Wookiee military leader. During the Clone Wars, he was captured by Trandoshan slavers and held captive on Wasskah, but he worked with a fellow captive, Jedi Commander Ahsoka Tano, to escape. He later commanded Wookiee forces during the Battle of Kashyyyk alongside the Grand Army of the Republic, led by Jedi Master Yoda. During the battle, one of the last ones of the war, Yoda's clone troopers received Order 66 from Supreme Chancellor Palpatine and, with the help of Chewbacca and his fellow Wookiee Tarfful, Yoda escaped Kashyyyk and the destruction of the Jedi Order.",
         tags: {
-          connect: [{ id: this.#getTagId('Wookie') }],
+          connect: [{ id: characterTags['Wookie'].id }],
         },
         posts: {
           create: [
@@ -156,7 +148,7 @@ class CharactersDataSeeder {
         bio:
           'Lando Calrissian was a Human male professional gambler, entrepreneur, smuggler, and general throughout various points in his life. Born on Socorro, he became a gambler and con man early in his life and acquired his own ship, the Millennium Falcon, in a game of sabacc with a man named Cix Trouvee. He went on to have numerous adventures with the Falcon and its piloting droid, Vuffi Raa, during which he ran afoul of a Sorcerer of Tund named Rokur Gepta, whom Calrissian eventually killed. After a series of events led to him losing the Millennium Falcon to a Corellian named Han Solo on Bespin, Calrissian eventually became the Baron Administrator of Cloud City for a time—a position he once again gained through sabacc.',
         tags: {
-          connect: [{ id: this.#getTagId('Scoundrel') }],
+          connect: [{ id: characterTags['Scoundrel'].id }],
         },
         posts: {
           create: [
@@ -169,14 +161,14 @@ class CharactersDataSeeder {
       },
     })
 
-    await this.prisma.character.create({
+    const boba = await this.prisma.character.create({
       data: {
         firstName: 'Boba',
         lastName: 'Fett',
         bio:
           'Boba Fett, an unaltered clone of the famous Mandalorian bounty hunter Jango Fett, was a human male bounty hunter whose career spanned decades, from the fall of the Galactic Republic to the rise of the Galactic Empire. Fett emulated his genetic donor, whom he regarded as his father, by wearing a customized suit of Mandalorian armor. His personal starship was the Slave I, a Firespray-31-class patrol and attack craft that once belonged to Jango. Trained in combat and martial skills from a young age, Fett was one of the most feared bounty hunters in the galaxy during the reign of Emperor Palpatine. He became a legend over the course of his career, which included contracts for both the Empire and the extensive criminal underworld',
         tags: {
-          connect: [{ id: this.#getTagId('Mandalorian') }],
+          connect: [{ id: characterTags['Mandalorian'].id }],
         },
         posts: {
           create: [
@@ -197,8 +189,8 @@ class CharactersDataSeeder {
           'Anakin Skywalker was a human male Jedi Knight of the Galactic Republic and the prophesied Chosen One of the Jedi Order, destined to bring balance to the Force. Also known as "Ani" during his childhood, Skywalker earned the moniker "Hero With No Fear" from his accomplishments in the Clone Wars. His alter ego, Darth Vader, the Dark Lord of the Sith, was created when Skywalker turned to the dark side of the Force, pledging his allegiance to the Sith Lord Darth Sidious at the end of the Republic Era. ',
         tags: {
           connect: [
-            { id: this.#getTagId('Jedi') },
-            { id: this.#getTagId('Clone Wars') },
+            { id: characterTags['Jedi'].id },
+            { id: characterTags['Clone Wars'].id },
           ],
         },
         posts: {
@@ -220,8 +212,8 @@ class CharactersDataSeeder {
           'Obi-Wan Kenobi was a Force-sensitive legendary human male Jedi Master who served on the Jedi High Council during the last years of the Republic Era. During the Imperial Era, he adopted the alias Ben Kenobi in order to hide from the regime that drove the Jedi to near extinction. A noble man known for his skills with the Force, Kenobi trained Anakin Skywalker, served as a Jedi General in the Grand Army of the Republic, and became a mentor to Luke Skywalker prior to his death in 0 BBY.',
         tags: {
           connect: [
-            { id: this.#getTagId('Jedi') },
-            { id: this.#getTagId('Clone Wars') },
+            { id: characterTags['Jedi'].id },
+            { id: characterTags['Clone Wars'].id },
           ],
         },
         posts: {
@@ -235,14 +227,14 @@ class CharactersDataSeeder {
       },
     })
 
-    await this.prisma.character.create({
+    const darth = await this.prisma.character.create({
       data: {
         firstName: 'Darth',
         lastName: 'Vader',
         bio:
           'Darth Vader is a fictional character in the Star Wars franchise. The character is a primary antagonist in the original trilogy and a primary protagonist in the prequel trilogy. Star Wars creator George Lucas has collectively referred to the first six episodic films of the franchise as "the tragedy of Darth Vader".[3]  Originally a slave on Tatooine, Anakin Skywalker is a Jedi prophesied to bring balance to the Force. He is lured to the dark side of the Force by Palpatine and becomes a Sith lord. After a lightsaber battle with his former mentor Obi-Wan Kenobi, in which he is severely injured, Vader is transformed into a cyborg. He then serves the Galactic Empire as its chief enforcer until he ultimately redeems himself by saving his son, Luke Skywalker, and killing Palpatine, sacrificing his own life in the process.[4] He is also the secret husband of Padmé Amidala, father of Princess Leia, and grandfather of Kylo Ren.',
         tags: {
-          connect: [{ id: this.#getTagId('Sith') }],
+          connect: [{ id: characterTags['Sith'].id }],
         },
         posts: {
           create: [
@@ -272,6 +264,18 @@ class CharactersDataSeeder {
     await this.#createFriendshipRelation(luke, obiWan)
 
     console.log('Character friendships have been seeded')
+
+    return {
+      luke,
+      han,
+      leia,
+      chewbecca,
+      lando,
+      boba,
+      anakin,
+      obiWan,
+      darth,
+    }
   }
 
   /**
@@ -353,12 +357,19 @@ class CharactersDataSeeder {
     ]
 
     //  set the characterTags on this class so that it can be referenced from seedCharacters()
-    this.characterTags = await Promise.all(characterTagInsertPromises)
+    const characterTagsArr = await Promise.all(characterTagInsertPromises)
+
+    const characterTags = characterTagsArr.reduce((acc, tag) => {
+      acc[tag.name] = tag
+      return acc
+    }, {})
+
+    return characterTags
   }
 
   seedAllCharacterData = async () => {
-    await this.seedCharacterTags()
-    await this.seedCharacters()
+    const characterTags = await this.seedCharacterTags()
+    await this.seedCharacters(characterTags)
   }
 }
 

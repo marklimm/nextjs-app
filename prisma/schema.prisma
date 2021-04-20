@@ -27,6 +27,9 @@ model Character {
   // //  many-to-many self-relation - https://stackoverflow.com/questions/65162657/one-to-many-self-relation-in-prisma-schema and https://www.prisma.io/docs/concepts/components/prisma-schema/relations#many-to-many-self-relations
   friends Character[] @relation("friends")
   friendsRelation Character[] @relation("friends")
+
+  // //  Character has a one-to-many relationship with Task
+  // tasks Task[]
 }
 
 model CharacterPost {
@@ -55,12 +58,19 @@ model CharacterTag {
 }
 
 
-
-///  This is the writing prompt prisma model
-// model WritingPrompt {
+// model Task {
 //   id Int @id @default(autoincrement())
 //   createdAt DateTime @default(now())
 //   updatedAt DateTime @updatedAt
-//   text String
-// }
 
+//   title String
+//   description String
+
+//   tShirtSize Int
+
+//   //  this field does NOT exist in the DB, is used for prisma client
+//   assignedTo Character @relation(fields: [characterId], references: [id])
+
+//   //  this field DOES exist in the DB, this is the foreign key that connects Post with Character
+//   characterId Int
+// }
