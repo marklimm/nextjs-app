@@ -247,6 +247,66 @@ class CharactersDataSeeder {
       },
     })
 
+    const tarkin = await this.prisma.character.create({
+      data: {
+        firstName: 'Wilhuff',
+        lastName: 'Tarkin',
+        bio:
+          "Wilhuff Tarkin was a human male politician, bureaucrat, and military officer whose career spanned the Fall of the Republic and the Age of the Empire. Born on the planet Eriadu in 64 BBY, he was a member of the Tarkin family and the great-nephew of Jova Tarkin. During the Republic Era, Tarkin served in the Galactic Republic's Judicial Department for a time before returning to his homeworld as the Governor of Eriadu. When the Clone Wars began, he renewed his military service, becoming a commissioned officer in the Republic Navy. ",
+        tags: {
+          connect: [{ id: characterTags['Imperial Officer'].id }],
+        },
+        posts: {
+          create: [
+            {
+              body:
+                "So there I was, at my wit's end trying to discover the hidden Rebel base ...",
+            },
+          ],
+        },
+      },
+    })
+
+    const krennic = await this.prisma.character.create({
+      data: {
+        firstName: 'Orson',
+        lastName: 'Krennic',
+        bio:
+          "Orson Callan Krennic was a human male who served as Director of the Imperial Military Department of Advanced Weapons Research, which belonged to Imperial Intelligence and the Imperial Security Bureau during the Imperial Era. Additionally, he was the commander of the DS-1 Death Star Mobile Battle Station up to the beginning of the Galactic Civil War. Born on Lexrul during the Republic Era, fifty-one years before the Battle of Yavin, Krennic began his career as a Lieutenant Commander in the Galactic Republic. Following the Clone Wars he was promoted to commander and later the fleet equivalent of admiral upon the formation of the Galactic Empire. Persistent and ambitious, Krennic was responsible for the development and construction of the Empire's enormous Death Star superweapon. An old friend of crystallographer Galen Erso, Krennic manipulated the brilliant scientist into researching synthetic kyber crystals under the pretext of researching sustainable energy. In reality, Krennic weaponized Erso's crystal research for the battle station's planet-killing superlaser, hoping this would place him above his long-time rival Grand Moff Wilhuff Tarkin and win the favor of Emperor Palpatine. Krennic was also held accountable for security of the project, quelling rumors of the Empire's secret enterprise for the two decades of its assembly. For these many purposes he commanded a squad of death troopers, serving as both a sword and shield when the Director found himself in battle. ",
+        tags: {
+          connect: [{ id: characterTags['Imperial Officer'].id }],
+        },
+        posts: {
+          create: [
+            {
+              body:
+                'So there I was, somehow having been forced to explain myself to Tarkin ...',
+            },
+          ],
+        },
+      },
+    })
+
+    const quiGon = await this.prisma.character.create({
+      data: {
+        firstName: 'Qui-Gon',
+        lastName: 'Jinn',
+        bio:
+          'Qui-Gon Jinn, a Force-sensitive human male, was a venerable if maverick Jedi Master who lived during the last years of the Republic Era. He was a wise and well-respected member of the Jedi Order, and was offered a seat on the Jedi Council, but chose to reject and follow his own path. Adhering to a philosophy centered around the Living Force, Jinn strove to follow the will of the Force even when his actions conflicted with the wishes of the High Council. After encountering Anakin Skywalker, Jinn brought him to the Jedi Temple on Coruscant, convinced he had found the Chosen One. His dying wish was for Skywalker to become a Jedi and ultimately restore balance to the Force. ',
+        tags: {
+          connect: [{ id: characterTags['Jedi'].id }],
+        },
+        posts: {
+          create: [
+            {
+              body:
+                'So there I was, getting frustrated with the needless bureaucracy of the Jedi Council ...',
+            },
+          ],
+        },
+      },
+    })
+
     console.log('Characters have been seeded')
 
     await this.#createFriendshipRelation(luke, han)
@@ -261,7 +321,13 @@ class CharactersDataSeeder {
     await this.#createFriendshipRelation(chewbecca, lando)
 
     await this.#createFriendshipRelation(anakin, obiWan)
+    await this.#createFriendshipRelation(anakin, quiGon)
+    await this.#createFriendshipRelation(obiWan, quiGon)
+
     await this.#createFriendshipRelation(luke, obiWan)
+
+    await this.#createFriendshipRelation(darth, tarkin)
+    await this.#createFriendshipRelation(tarkin, krennic)
 
     console.log('Character friendships have been seeded')
 
@@ -275,6 +341,9 @@ class CharactersDataSeeder {
       anakin,
       obiWan,
       darth,
+      tarkin,
+      krennic,
+      quiGon,
     }
   }
 
