@@ -28,8 +28,8 @@ model Character {
   friends Character[] @relation("friends")
   friendsRelation Character[] @relation("friends")
 
-  // //  Character has a one-to-many relationship with Task
-  // tasks Task[]
+  // Character has a one-to-many relationship with Task
+  tasks Task[]
 }
 
 model CharacterPost {
@@ -58,19 +58,19 @@ model CharacterTag {
 }
 
 
-// model Task {
-//   id Int @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+model Task {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   title String
-//   description String
+  title String
+  description String
 
-//   tShirtSize Int
+  tShirtSize Int
 
-//   //  this field does NOT exist in the DB, is used for prisma client
-//   assignedTo Character @relation(fields: [characterId], references: [id])
+  //  this field does NOT exist in the DB, is used for prisma client
+  assignedTo Character @relation(fields: [characterId], references: [id])
 
-//   //  this field DOES exist in the DB, this is the foreign key that connects Post with Character
-//   characterId Int
-// }
+  //  this field DOES exist in the DB, this is the foreign key that connects Task with Character
+  characterId Int
+}

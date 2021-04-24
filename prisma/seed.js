@@ -1,21 +1,26 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { CharactersDataSeeder } = require('./seed/CharactersDataSeeder.js')
+/* eslint @typescript-eslint/no-var-requires: 0 */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { CharactersDataSeeder } = require('./seed/CharactersDataSeeder.js')
+const { TasksDataSeeder } = require('./seed/TasksDataSeeder.js')
+
 const { PrismaClient } = require('@prisma/client')
 
 //  immediately execute this main() function
 ;(async function main() {
   const prismaClient = new PrismaClient()
 
-  const characterDataSeeder = new CharactersDataSeeder(prismaClient)
+  const charactersDataSeeder = new CharactersDataSeeder(prismaClient)
+  const tasksDataSeeder = new TasksDataSeeder(prismaClient)
 
   try {
-    await characterDataSeeder.seedAllCharacterData()
+    const { characters } = await charactersDataSeeder.seedAllCharacterData()
+
+    await tasksDataSeeder.seedAllTaskData(characters)
   } catch (e) {
     console.error(e)
     process.exit(1)
   } finally {
-    await characterDataSeeder.disconnect()
+    await charactersDataSeeder.disconnect()
+    await tasksDataSeeder.disconnect()
   }
 })()

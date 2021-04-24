@@ -438,7 +438,12 @@ class CharactersDataSeeder {
 
   seedAllCharacterData = async () => {
     const characterTags = await this.seedCharacterTags()
-    await this.seedCharacters(characterTags)
+    const characters = await this.seedCharacters(characterTags)
+
+    return {
+      characters,
+      characterTags,
+    }
   }
 }
 
