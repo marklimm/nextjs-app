@@ -15,6 +15,9 @@ export const NavBar: FunctionComponent = () => {
       <Link href='/characters'>
         <a className={styles.link}>Characters</a>
       </Link>
+      <Link href='/tasks'>
+        <a className={styles.link}>Tasks</a>
+      </Link>
       <Link href='/starships'>
         <a className={styles.link}>Starships</a>
       </Link>
