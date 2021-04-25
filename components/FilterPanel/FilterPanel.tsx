@@ -19,13 +19,13 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
 }: FilterPanelProps) => {
   return (
     <div>
-      FilterPanel.tsx
       {filterControls.map((filterControl, index) => {
         switch (filterControl.type) {
           case FilterControlType.Dropdown:
             return (
               <Dropdown
                 key={index}
+                label={filterControl.label}
                 selectOptions={filterControl.selectOptions}
                 optionSelected={filterControl.optionSelected}
               />

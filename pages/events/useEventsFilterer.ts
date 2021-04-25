@@ -36,6 +36,7 @@ const filterControls: FilterControl[] = [
   {
     type: FilterControlType.Dropdown,
     id: FilteringOn.EmotionTags,
+    label: 'Emotions',
 
     selectOptions: emotionTagOptions,
   },

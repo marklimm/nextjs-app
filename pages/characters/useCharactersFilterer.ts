@@ -36,6 +36,7 @@ export const useCharactersFilterer = (
     {
       type: FilterControlType.Dropdown,
       id: FilteringOn.CharacterTags,
+      label: 'Tags',
 
       selectOptions: characterTagOptions,
     },
