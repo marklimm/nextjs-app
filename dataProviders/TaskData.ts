@@ -5,6 +5,8 @@ const prisma = new PrismaClient()
 
 interface GetTasksQueryParam {
   assigneeIds?: string
+  title?: string
+  tShirtSizeIds?: string
 }
 
 /**
@@ -14,7 +16,10 @@ interface GetTasksQueryParam {
  */
 export const getTasks = async ({
   assigneeIds,
+  title,
+  tShirtSizeIds,
 }: GetTasksQueryParam): Promise<Task[]> => {
+  console.log('in getTasks', assigneeIds, title, tShirtSizeIds)
   //  this is the filter criteria if there are no filter conditions (this returns all tasks)
   let taskFilterCriteria = {
     orderBy: [
@@ -33,24 +38,57 @@ export const getTasks = async ({
     },
   }
 
+  const whereClauses = []
+
   if (assigneeIds) {
     //  user has chosen to filter by at least one assignee
 
-    const assigneeORClause = {
-      where: {
-        OR: assigneeIds.split(',').map((aId) => {
-          return {
-            characterId: Number(aId),
-          }
-        }),
+    whereClauses.push({
+      characterId: { in: assigneeIds.split(',').map((aId) => Number(aId)) },
+    })
+  }
+
+  if (tShirtSizeIds) {
+    //  user has chosen to filter by at least one t-shirt size
+
+    whereClauses.push({
+      tShirtSize: { in: tShirtSizeIds.split(',').map((tId) => Number(tId)) },
+    })
+  }
+
+  if (title) {
+    //  user has chosen to filter by title
+
+    const titleClause = {
+      title: {
+        contains: title,
+        mode: 'insensitive',
       },
     }
 
+    whereClauses.push(titleClause)
+  }
+
+  console.log('whereClauses', whereClauses)
+
+  if (whereClauses.length > 0) {
+    const whereClause = whereClauses.reduce(
+      (tempWhereClause, whereClause) => ({
+        ...tempWhereClause,
+        ...whereClause,
+      }),
+      {}
+    )
+
     taskFilterCriteria = {
       ...taskFilterCriteria,
-      ...assigneeORClause,
+      ...{
+        where: whereClause,
+      },
     }
   }
+
+  console.log('taskFilterCriteria', taskFilterCriteria)
 
   const taskResults = await prisma.task.findMany(taskFilterCriteria)
 

@@ -22,12 +22,36 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     LoadingState.LOADING
   )
   const [tasks, setTasks] = useState<Task[]>([])
+
   const [assigneeOptions, setAssigneeOptions] = useState<SelectOption[]>([])
+  const [tShirtSizes] = useState<SelectOption[]>([
+    {
+      label: TShirtSize[TShirtSize.SMALL],
+      value: TShirtSize.SMALL,
+    },
+    {
+      label: TShirtSize[TShirtSize.MEDIUM],
+      value: TShirtSize.MEDIUM,
+    },
+    {
+      label: TShirtSize[TShirtSize.LARGE],
+      value: TShirtSize.LARGE,
+    },
+  ])
 
-  const getTasks = async (selectedAssignees: SelectOption[] = []) => {
-    const assigneeIdsStr = selectedAssignees.map((a) => a.value).join(',') || ''
+  const [selectedAssigneeIds, setSelectedAssigneeIds] = useState<
+    SelectOption[]
+  >([])
 
-    const response = await fetch(`/api/tasks?assigneeIds=${assigneeIdsStr}`, {})
+  const [selectedTShirtSizes, setSelectedTShirtSizes] = useState<
+    SelectOption[]
+  >([])
+
+  const getTasks = async () => {
+    const response = await fetch(
+      `/api/tasks?assigneeIds=${selectedAssigneeIds}&tShirtSizeIds=${selectedTShirtSizes}`,
+      {}
+    )
 
     if (response.status >= 400) {
       console.error('there was some error', response.statusText)
@@ -61,20 +85,29 @@ const Tasks: FunctionComponent = (): JSX.Element => {
   }
 
   useEffect(() => {
-    const loadTasksAndCharacters = async () => {
-      await getTasks()
+    const loadCharacters = async () => {
       await getCharactersTerse()
 
       setLoadingState(LoadingState.DONE_LOADING)
     }
 
-    loadTasksAndCharacters()
+    loadCharacters()
   }, [])
 
-  const assigneeSelected = (selectedAssignees) => {
-    console.log('assignee selected', selectedAssignees)
+  useEffect(() => {
+    getTasks()
+  }, [selectedAssigneeIds, selectedTShirtSizes])
 
-    getTasks(selectedAssignees)
+  const assigneeSelected = (selectedAssignees) => {
+    const assigneeIds = selectedAssignees.map((a) => a.value).join(',') || ''
+    setSelectedAssigneeIds(assigneeIds)
+  }
+
+  const tShirtSizeSelected = (selectedTShirtSizes) => {
+    const tShirtSizeIds =
+      selectedTShirtSizes.map((a) => a.value).join(',') || ''
+
+    setSelectedTShirtSizes(tShirtSizeIds)
   }
 
   return (
@@ -97,12 +130,18 @@ const Tasks: FunctionComponent = (): JSX.Element => {
             selectOptions={assigneeOptions}
             optionSelected={assigneeSelected}
           />
+
+          <Dropdown
+            label={'T-shirt size'}
+            selectOptions={tShirtSizes}
+            optionSelected={tShirtSizeSelected}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>
           {loadingState === LoadingState.LOADING && <div>Loading ...</div>}
           {loadingState === LoadingState.DONE_LOADING && tasks.length === 0 && (
-            <div>There are currently no tasks.</div>
+            <div>There are no tasks that match the current search criteria</div>
           )}
           {loadingState === LoadingState.DONE_LOADING &&
             tasks.map((t) => {
