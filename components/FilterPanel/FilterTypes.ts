@@ -20,6 +20,7 @@ export interface DateSearchFilter {
 export interface DropdownFilter {
   type: FilterControlType.Dropdown
   id: string
+  label: string
 
   optionSelected?: (selectedOptions: SelectOption[]) => void
   selectOptions?: SelectOption[]

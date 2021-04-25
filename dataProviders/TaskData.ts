@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import { Task } from 'lib/types/Task'
 
 const prisma = new PrismaClient()
@@ -21,7 +21,7 @@ export const getTasks = async ({
 }: GetTasksQueryParam): Promise<Task[]> => {
   console.log('in getTasks', assigneeIds, title, tShirtSizeIds)
   //  this is the filter criteria if there are no filter conditions (this returns all tasks)
-  let taskFilterCriteria = {
+  let taskFilterCriteria: Prisma.TaskFindManyArgs = {
     orderBy: [
       {
         updatedAt: 'desc',
@@ -92,5 +92,5 @@ export const getTasks = async ({
 
   const taskResults = await prisma.task.findMany(taskFilterCriteria)
 
-  return taskResults
+  return taskResults as Task[]
 }

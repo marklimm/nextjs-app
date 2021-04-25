@@ -27,15 +27,15 @@ const Tasks: FunctionComponent = (): JSX.Element => {
   const [tShirtSizes] = useState<SelectOption[]>([
     {
       label: TShirtSize[TShirtSize.SMALL],
-      value: TShirtSize.SMALL,
+      value: TShirtSize.SMALL.toString(),
     },
     {
       label: TShirtSize[TShirtSize.MEDIUM],
-      value: TShirtSize.MEDIUM,
+      value: TShirtSize.MEDIUM.toString(),
     },
     {
       label: TShirtSize[TShirtSize.LARGE],
-      value: TShirtSize.LARGE,
+      value: TShirtSize.LARGE.toString(),
     },
   ])
 

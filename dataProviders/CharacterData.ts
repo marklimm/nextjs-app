@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { Character } from 'lib/types/Character'
+import { Character, CharacterTerse } from 'lib/types/Character'
 
 const prisma = new PrismaClient()
 
@@ -70,7 +70,7 @@ export const getCharacters = async (): Promise<Character[]> => {
  * Retrieves the characters but only their id, first and last names
  * @returns
  */
-export const getCharactersTerse = async (): Promise<Character[]> => {
+export const getCharactersTerse = async (): Promise<CharacterTerse[]> => {
   const characters = await prisma.character.findMany({
     orderBy: [
       {

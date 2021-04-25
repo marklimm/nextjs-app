@@ -1,4 +1,6 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, Character as PrismaCharacter } from '@prisma/client'
+
+export type CharacterTerse = PrismaCharacter
 
 //  define the Character type using the Prisma-generated Character type
 export type Character = Prisma.CharacterGetPayload<{
