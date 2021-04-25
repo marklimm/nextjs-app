@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
-import { getCharacters } from 'dataProviders/PeopleData'
+import { getCharacters } from 'dataProviders/CharacterData'
 import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'

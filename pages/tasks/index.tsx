@@ -2,6 +2,9 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import { Task, TShirtSize } from 'lib/types/Task'
+import { SelectOption } from 'lib/types/SelectOption'
+
+import { Dropdown } from 'components/FilterPanel/Dropdown'
 
 enum LoadingState {
   LOADING,
@@ -19,43 +22,60 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     LoadingState.LOADING
   )
   const [tasks, setTasks] = useState<Task[]>([])
+  const [assigneeOptions, setAssigneeOptions] = useState<SelectOption[]>([])
 
-  useEffect(() => {
-    const getTasks = async () => {
-      const response = await fetch('/api/tasks', {})
+  const getTasks = async (selectedAssignees: SelectOption[] = []) => {
+    const assigneeIdsStr = selectedAssignees.map((a) => a.value).join(',') || ''
 
-      if (response.status >= 400) {
-        console.error('there was some error', response.statusText)
+    const response = await fetch(`/api/tasks?assigneeIds=${assigneeIdsStr}`, {})
 
-        setLoadingState(LoadingState.ERROR)
-        return
-      }
+    if (response.status >= 400) {
+      console.error('there was some error', response.statusText)
 
-      setLoadingState(LoadingState.DONE_LOADING)
-
-      const data = await response.json()
-      setTasks(data.tasks)
+      setLoadingState(LoadingState.ERROR)
+      return
     }
 
-    getTasks()
+    const data = await response.json()
+    setTasks(data.tasks)
+  }
+
+  const getCharactersTerse = async () => {
+    const response = await fetch('/api/charactersTerse', {})
+
+    if (response.status >= 400) {
+      console.error('there was some error', response.statusText)
+
+      setLoadingState(LoadingState.ERROR)
+      return
+    }
+
+    const data = await response.json()
+
+    const assigneeOptions = data.characters.map((character) => ({
+      label: `${character.firstName} ${character.lastName}`,
+      value: character.id.toString(),
+    }))
+
+    setAssigneeOptions(assigneeOptions)
+  }
+
+  useEffect(() => {
+    const loadTasksAndCharacters = async () => {
+      await getTasks()
+      await getCharactersTerse()
+
+      setLoadingState(LoadingState.DONE_LOADING)
+    }
+
+    loadTasksAndCharacters()
   }, [])
 
-  // const makePostRequest = async () => {
-  //   const postResponse = await fetch('/api/tasks', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       stolen: 'data tapes',
-  //     }),
-  //   })
+  const assigneeSelected = (selectedAssignees) => {
+    console.log('assignee selected', selectedAssignees)
 
-  //   if (postResponse.status >= 400) {
-  //     console.log('there was some error', postResponse.statusText)
-  //     return
-  //   }
-
-  //   const data = await postResponse.json()
-  //   console.log('data', data)
-  // }
+    getTasks(selectedAssignees)
+  }
 
   return (
     <>
@@ -72,7 +92,11 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          {/* <FilterPanel filterControls={filterControls} /> */}
+          <Dropdown
+            label={'Assignee'}
+            selectOptions={assigneeOptions}
+            optionSelected={assigneeSelected}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>

@@ -66,6 +66,25 @@ export const getCharacters = async (): Promise<Character[]> => {
   return characters
 }
 
+/**
+ * Retrieves the characters but only their id, first and last names
+ * @returns
+ */
+export const getCharactersTerse = async (): Promise<Character[]> => {
+  const characters = await prisma.character.findMany({
+    orderBy: [
+      {
+        firstName: 'asc',
+      },
+      {
+        lastName: 'asc',
+      },
+    ],
+  })
+
+  return characters
+}
+
 export const getCharacter = async (personId = ''): Promise<Character> => {
   const characterData = await prisma.character.findUnique({
     where: {

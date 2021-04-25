@@ -8,7 +8,7 @@ const handler = async (
 ): Promise<Task[]> => {
   if (req.method === 'GET') {
     //  when this route receives a GET request, retrieve the tasks from prisma and return them
-    const tasks = await getTasks()
+    const tasks = await getTasks(req.query)
     res.status(200).json({ tasks })
 
     return tasks
