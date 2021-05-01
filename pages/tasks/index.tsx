@@ -5,6 +5,7 @@ import { Task, TShirtSize } from 'lib/types/Task'
 import { SelectOption } from 'lib/types/SelectOption'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
+import { Textbox, useDebounce } from 'components/FilterPanel/Textbox'
 
 enum LoadingState {
   LOADING,
@@ -47,22 +48,11 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     SelectOption[]
   >([])
 
-  const getTasks = async () => {
-    const response = await fetch(
-      `/api/tasks?assigneeIds=${selectedAssigneeIds}&tShirtSizeIds=${selectedTShirtSizes}`,
-      {}
-    )
+  //  the actual title search string that the user is currently seeing on screen
+  const [titleSearchString, setTitleSearchString] = useState<string>('')
 
-    if (response.status >= 400) {
-      console.error('there was some error', response.statusText)
-
-      setLoadingState(LoadingState.ERROR)
-      return
-    }
-
-    const data = await response.json()
-    setTasks(data.tasks)
-  }
+  //  the debounced title search string that will actually trigger an API call after a specified delay
+  const debouncedTitleSearchString = useDebounce(titleSearchString, 300)
 
   const getCharactersTerse = async () => {
     const response = await fetch('/api/charactersTerse', {})
@@ -95,19 +85,48 @@ const Tasks: FunctionComponent = (): JSX.Element => {
   }, [])
 
   useEffect(() => {
-    getTasks()
-  }, [selectedAssigneeIds, selectedTShirtSizes])
+    const getTasks = async () => {
+      const assigneeIds =
+        selectedAssigneeIds.map((a) => a.value).join(',') || ''
 
-  const assigneeSelected = (selectedAssignees) => {
-    const assigneeIds = selectedAssignees.map((a) => a.value).join(',') || ''
-    setSelectedAssigneeIds(assigneeIds)
+      const tShirtSizeIds =
+        selectedTShirtSizes.map((a) => a.value).join(',') || ''
+
+      const response = await fetch(
+        `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}`,
+        {}
+      )
+
+      if (response.status >= 400) {
+        console.error('there was some error', response.statusText)
+
+        setLoadingState(LoadingState.ERROR)
+        return
+      }
+
+      const data = await response.json()
+      setTasks(data.tasks)
+    }
+
+    getTasks()
+  }, [selectedAssigneeIds, debouncedTitleSearchString, selectedTShirtSizes])
+
+  const assigneeSelected = (selectedAssignees: SelectOption[]) => {
+    setSelectedAssigneeIds(selectedAssignees)
   }
 
-  const tShirtSizeSelected = (selectedTShirtSizes) => {
-    const tShirtSizeIds =
-      selectedTShirtSizes.map((a) => a.value).join(',') || ''
+  const tShirtSizeSelected = (selectedTShirtSizes: SelectOption[]) => {
+    setSelectedTShirtSizes(selectedTShirtSizes)
+  }
 
-    setSelectedTShirtSizes(tShirtSizeIds)
+  const titleSearchStringChanged = (event) => {
+    setTitleSearchString(event.target.value)
+  }
+
+  const resetFilters = () => {
+    setSelectedAssigneeIds([])
+    setSelectedTShirtSizes([])
+    setTitleSearchString('')
   }
 
   return (
@@ -125,16 +144,31 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
+          <a href='#' className='text-blue-800' onClick={resetFilters}>
+            Reset filters
+          </a>
+
+          <Textbox
+            label={'Title search'}
+            onChange={titleSearchStringChanged}
+            placeholder={'Title search'}
+            value={titleSearchString}
+          />
+
           <Dropdown
             label={'Assignee'}
             selectOptions={assigneeOptions}
             optionSelected={assigneeSelected}
+            placeholder={'Assigned to'}
+            value={selectedAssigneeIds}
           />
 
           <Dropdown
             label={'T-shirt size'}
             selectOptions={tShirtSizes}
             optionSelected={tShirtSizeSelected}
+            placeholder={'T-shirt size'}
+            value={selectedTShirtSizes}
           />
         </div>
 

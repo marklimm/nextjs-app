@@ -56,13 +56,13 @@ export const getTasks = async ({
     })
   }
 
-  if (title) {
+  if (title && title.length > 3) {
     //  user has chosen to filter by title
+    //  don't start searching by title until the user has provided at least 4 characters to search on
 
     const titleClause = {
       title: {
         contains: title,
-        mode: 'insensitive',
       },
     }
 
