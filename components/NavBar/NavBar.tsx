@@ -5,7 +5,7 @@ import styles from './NavBar.module.scss'
 
 export const NavBar: FunctionComponent = () => {
   return (
-    <div className='p-4 flex justify-between bg-gray-200 border-t border-b border-gray-700'>
+    <div className='p-4 flex justify-between bg-gray-200 border-t-2 border-b-2 border-gray-400'>
       <Link href='/'>
         <a className={`${styles.link}`}>Home</a>
       </Link>{' '}
