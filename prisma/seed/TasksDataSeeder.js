@@ -82,6 +82,120 @@ class TasksDataSeeder {
       },
     })
 
+    await this.prisma.task.create({
+      data: {
+        title: 'Win this pod race!',
+        description: 'I need to win this pod race to win my freedom!',
+
+        tShirtSize: 2,
+        assignedTo: {
+          connect: { id: characters.anakin.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: 'Track the Millennium Falcon',
+        description:
+          'Track the Falcon to find information leading to retrieving Skywalker',
+
+        tShirtSize: 1,
+        assignedTo: {
+          connect: { id: characters.boba.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: 'Recover the stolen data tapes',
+        description:
+          'The rebels have infiltrated the data installation at Scarif and escaped with the Death Star plans.  Recover them immediately',
+
+        tShirtSize: 3,
+        assignedTo: {
+          connect: { id: characters.darth.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title:
+          'Escort Han and his friends to a dinner where Vader and a garrison of storm troopers are waiting',
+        description: 'Try to be as nonchalant and relaxed as possible',
+
+        tShirtSize: 1,
+        assignedTo: {
+          connect: { id: characters.lando.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: 'Find a way out of this cell',
+        description: "There's gotta be a way out of here ...",
+
+        tShirtSize: 3,
+        assignedTo: {
+          connect: { id: characters.leia.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title:
+          'Recruit my old friend Galen Erso to complete work on the Death Star',
+        description: "He'll agree, one way or another ...",
+
+        tShirtSize: 2,
+        assignedTo: {
+          connect: { id: characters.krennic.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: 'Find the parts needed for our ship',
+        description:
+          'The Naboo ship was disable in the battle, find replacement parts',
+
+        tShirtSize: 3,
+        assignedTo: {
+          connect: { id: characters.quiGon.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: "Analyze Anakin's midi-chlorian count",
+        description: '',
+
+        tShirtSize: 1,
+        assignedTo: {
+          connect: { id: characters.quiGon.id },
+        },
+      },
+    })
+
+    await this.prisma.task.create({
+      data: {
+        title: 'Destroy the data installation at Scarif',
+        description:
+          'The data installation has been compromised, it must be eliminated, along with anyone near it ...',
+
+        tShirtSize: 1,
+        assignedTo: {
+          connect: { id: characters.tarkin.id },
+        },
+      },
+    })
+
     console.log('Tasks have been seeded')
   }
 
