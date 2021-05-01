@@ -29,7 +29,8 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
       </Head>
       <h1>Events</h1>
       <div>
-        This page displays information on various events in Star Wars history!
+        This page displays information on various events (real and made up) in
+        Star Wars history!
       </div>
 
       <ul className='mt-2'>

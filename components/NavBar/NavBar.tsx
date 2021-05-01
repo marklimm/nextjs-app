@@ -9,6 +9,9 @@ export const NavBar: FunctionComponent = () => {
       <Link href='/'>
         <a className={`${styles.link}`}>Home</a>
       </Link>{' '}
+      <Link href='/about'>
+        <a className={`${styles.link}`}>About</a>
+      </Link>{' '}
       <Link href='/planets'>
         <a className={styles.link}>Planets</a>
       </Link>{' '}

@@ -1,0 +1,14 @@
+
+  .disclosure {
+    @apply mb-12
+  }
+  
+  /* focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75*/
+  .disclosureButton {
+    @apply px-4 py-2  bg-gray-200 text-gray-800 text-lg rounded-t-md focus:outline-none
+  }
+  
+  .disclosurePanel {
+    @apply w-2/3 px-4 py-2  text-gray-700 rounded-md rounded-tl-none border-gray-200 border-2
+  }
+  
