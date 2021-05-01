@@ -87,8 +87,18 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
       <div>
         This page retrieves tasks by calling the server-side /tasks API and then
-        does client-side rendering. Each reload of this page is querying the
-        prisma DB on the backend
+        does client-side rendering.
+        <ul>
+          <li>
+            Everytime the user changes the search criteria a new query to the
+            database is being made
+          </li>
+          <li>This data is not statically rendered</li>
+          <li>
+            The title text search is debounced so that the API isn't queried
+            until the user has finished typing
+          </li>
+        </ul>
       </div>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
