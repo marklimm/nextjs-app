@@ -14,8 +14,8 @@ export const DetentionBlock: FunctionComponent = () => {
       <div className='text-sm'>
         The below table shows &quot;detention block situation&quot; data that is
         shared between multiple page routes by using React Context. Clicking on
-        the &quot;Change Situation&quot; button will randomly change the shared
-        state
+        the &quot;Change Situation&quot; button will randomly change the
+        application-wide shared state
       </div>
       <table className='mt-2 table-fixed'>
         <thead>

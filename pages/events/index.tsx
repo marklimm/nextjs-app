@@ -28,16 +28,30 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
         <title>NextJS demo - Events</title>
       </Head>
       <h1>Events</h1>
-      <div className='mt-2'>
-        Please use the left hand sidebar to search for various events in Star
-        Wars history
+      <div>
+        This page displays information on various events in Star Wars history!
       </div>
 
-      <div className='mt-2'>
-        The list of filtered events and the selected filters are stored in a
-        dedicated Events reducer state, which is accessed via the useReducer()
-        hook
-      </div>
+      <ul className='mt-2'>
+        <li>
+          You have the option of searching by &quot;emotion&quot; and timestamp
+          of when the event happened
+        </li>
+
+        <li>
+          The list of filtered events and the selected filters are stored in a
+          dedicated Events reducer state, which is accessed via the useReducer()
+          hook
+        </li>
+        <li>
+          The data is statically rendered and the server is NOT queried as the
+          user is selecting filter options
+        </li>
+        <li>
+          The same FilterPanel component renders the left-hand filter panels for
+          both the /characters and /events routes
+        </li>
+      </ul>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>

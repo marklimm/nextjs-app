@@ -21,7 +21,24 @@ const PlanetsUI: FunctionComponent<PlanetsProps> = ({
       </Head>
       <h1>Planets</h1>
 
-      <div className=''>
+      <div>
+        This page displays information on various planets in the Star Wars
+        universe!
+      </div>
+      <ul className='mt-2'>
+        <li>The data is taken from the Star Wars API (https://swapi.dev/)</li>
+        <li>
+          I am using a pre-build script that fetch()-es the Star Wars data first
+          and writes it to JSON files. Then when the nextjs build happens, this
+          page is rendered at build time (static site generation)
+        </li>
+        <li>
+          Movies and residents for each planet are also included in the results.
+          This relational data is defined by the SWAPI API
+        </li>
+      </ul>
+
+      <div className='mt-2'>
         {planets &&
           planets.map((p) => (
             <div key={p.url}>

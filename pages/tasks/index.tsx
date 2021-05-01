@@ -85,21 +85,23 @@ const Tasks: FunctionComponent = (): JSX.Element => {
       </Head>
       <h1>Tasks</h1>
 
-      <div>
-        This page retrieves tasks by calling the server-side /tasks API and then
-        does client-side rendering.
-        <ul>
-          <li>
-            Everytime the user changes the search criteria a new query to the
-            database is being made
-          </li>
-          <li>This data is not statically rendered</li>
-          <li>
-            The title text search is debounced so that the API isn&apost queried
-            until the user has finished typing
-          </li>
-        </ul>
-      </div>
+      <div>This page displays various Tasks that Star Wars characters have</div>
+
+      <ul className='mt-2'>
+        <li>
+          This page retrieves tasks by calling the server-side /tasks API and
+          then does client-side rendering
+        </li>
+        <li>
+          Every time the user changes the search criteria a new query to the
+          database is being made
+        </li>
+        <li>The data is not statically rendered</li>
+        <li>
+          The title text search is debounced so that the API isn&apos;t queried
+          until the user has finished typing
+        </li>
+      </ul>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
