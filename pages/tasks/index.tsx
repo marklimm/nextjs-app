@@ -1,17 +1,15 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import Head from 'next/head'
 
+import { LoadingState } from 'lib/types/LoadingState'
 import { Task, TShirtSize } from 'lib/types/Task'
-import { SelectOption } from 'lib/types/SelectOption'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
-import { Textbox, useDebounce } from 'components/FilterPanel/Textbox'
+import { Textbox } from 'components/FilterPanel/Textbox'
 
-enum LoadingState {
-  LOADING,
-  DONE_LOADING,
-  ERROR,
-}
+import { useAssigneeSearch } from './useAssigneeSearch'
+import { useTitleSearch } from './useTitleSearch'
+import { useTShirtSearch } from './useTShirtSearch'
 
 /**
  * This component defines the UI for the /tasks route, which includes displaying the list of tasks
@@ -24,65 +22,26 @@ const Tasks: FunctionComponent = (): JSX.Element => {
   )
   const [tasks, setTasks] = useState<Task[]>([])
 
-  const [assigneeOptions, setAssigneeOptions] = useState<SelectOption[]>([])
-  const [tShirtSizes] = useState<SelectOption[]>([
-    {
-      label: TShirtSize[TShirtSize.SMALL],
-      value: TShirtSize.SMALL.toString(),
-    },
-    {
-      label: TShirtSize[TShirtSize.MEDIUM],
-      value: TShirtSize.MEDIUM.toString(),
-    },
-    {
-      label: TShirtSize[TShirtSize.LARGE],
-      value: TShirtSize.LARGE.toString(),
-    },
-  ])
+  const {
+    debouncedTitleSearchString,
+    setTitleSearchString,
+    titleSearchString,
+    titleSearchStringChanged,
+  } = useTitleSearch()
 
-  const [selectedAssigneeIds, setSelectedAssigneeIds] = useState<
-    SelectOption[]
-  >([])
+  const {
+    assigneeOptions,
+    assigneeSelected,
+    selectedAssigneeIds,
+    setSelectedAssigneeIds,
+  } = useAssigneeSearch(setLoadingState)
 
-  const [selectedTShirtSizes, setSelectedTShirtSizes] = useState<
-    SelectOption[]
-  >([])
-
-  //  the actual title search string that the user is currently seeing on screen
-  const [titleSearchString, setTitleSearchString] = useState<string>('')
-
-  //  the debounced title search string that will actually trigger an API call after a specified delay
-  const debouncedTitleSearchString = useDebounce(titleSearchString, 300)
-
-  const getCharactersTerse = async () => {
-    const response = await fetch('/api/charactersTerse', {})
-
-    if (response.status >= 400) {
-      console.error('there was some error', response.statusText)
-
-      setLoadingState(LoadingState.ERROR)
-      return
-    }
-
-    const data = await response.json()
-
-    const assigneeOptions = data.characters.map((character) => ({
-      label: `${character.firstName} ${character.lastName}`,
-      value: character.id.toString(),
-    }))
-
-    setAssigneeOptions(assigneeOptions)
-  }
-
-  useEffect(() => {
-    const loadCharacters = async () => {
-      await getCharactersTerse()
-
-      setLoadingState(LoadingState.DONE_LOADING)
-    }
-
-    loadCharacters()
-  }, [])
+  const {
+    selectedTShirtSizes,
+    setSelectedTShirtSizes,
+    tShirtSizes,
+    tShirtSizeSelected,
+  } = useTShirtSearch()
 
   useEffect(() => {
     const getTasks = async () => {
@@ -111,19 +70,9 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     getTasks()
   }, [selectedAssigneeIds, debouncedTitleSearchString, selectedTShirtSizes])
 
-  const assigneeSelected = (selectedAssignees: SelectOption[]) => {
-    setSelectedAssigneeIds(selectedAssignees)
-  }
+  const resetFilters = (event) => {
+    event.preventDefault()
 
-  const tShirtSizeSelected = (selectedTShirtSizes: SelectOption[]) => {
-    setSelectedTShirtSizes(selectedTShirtSizes)
-  }
-
-  const titleSearchStringChanged = (event) => {
-    setTitleSearchString(event.target.value)
-  }
-
-  const resetFilters = () => {
     setSelectedAssigneeIds([])
     setSelectedTShirtSizes([])
     setTitleSearchString('')
