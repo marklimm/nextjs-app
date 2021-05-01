@@ -32,6 +32,8 @@ const Characters: FunctionComponent<CharactersProps> = ({
     characterTagOptions
   )
 
+  //  I don't know if there's a way to implement "Reset Filters" with the current setup.  I'm rendering <FilterPanel /> the first time but not re-rendering it again as the user makes filter changes, I believe because I don't want to rebuild the entire filter panel just because one value changed.  And also the belief that I should be able to just pass in configuration into <FilterPanel /> and it should be able to render different combinations of filters without me having to explicitly hard code the filters for each route (/characters, /events, etc.)
+
   return (
     <>
       <Head>
@@ -41,7 +43,8 @@ const Characters: FunctionComponent<CharactersProps> = ({
 
       <div>
         The characters data on this page is retrieved from a local sqlite DB
-        file using the Prisma ORM.
+        file using the Prisma ORM. The data is statically rendered and the
+        server is NOT queried as the user is selecting filter options
       </div>
       <div className='mt-4'>
         The following relational data gets pulled in for each character

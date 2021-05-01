@@ -95,7 +95,7 @@ const Tasks: FunctionComponent = (): JSX.Element => {
           </li>
           <li>This data is not statically rendered</li>
           <li>
-            The title text search is debounced so that the API isn't queried
+            The title text search is debounced so that the API isn&apost queried
             until the user has finished typing
           </li>
         </ul>

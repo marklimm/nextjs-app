@@ -8,7 +8,7 @@ interface DropdownProps {
   optionSelected: (selectedOptions: SelectOption[]) => void
   placeholder: string
   selectOptions: SelectOption[]
-  value: SelectOption[]
+  value?: SelectOption[]
 }
 
 export const Dropdown: FunctionComponent<DropdownProps> = ({
@@ -28,7 +28,7 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({
         onChange={optionSelected}
         options={selectOptions}
         placeholder={placeholder}
-        instanceId='random-id-to-resolve-error-https://stackoverflow.com/questions/61290173/react-select-how-do-i-resolve-warning-prop-id-did-not-match'
+        instanceId={`random-id-to-resolve-error-https://stackoverflow.com/questions/61290173/react-select-how-do-i-resolve-warning-prop-id-did-not-match-${label}`}
       />
     </div>
   )

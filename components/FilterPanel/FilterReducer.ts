@@ -30,7 +30,19 @@ interface DropdownFilterState {
   ) => boolean
 }
 
-type FilterControlState = DateFilterState | DropdownFilterState
+interface TextFilterState {
+  type: FilterControlType.Text
+
+  id: string
+  value: string
+
+  itemMatchesTheSearchTerm: (item: unknown, searchTerm: string) => boolean
+}
+
+type FilterControlState =
+  | DateFilterState
+  | DropdownFilterState
+  | TextFilterState
 
 /**
  * The filter reducer's state
@@ -47,6 +59,8 @@ enum FilterActionType {
   DateSelectedStart = 'date-selected-start',
 
   OptionSelected = 'option-selected',
+
+  TextChanged = 'text-changed',
 }
 
 interface DateSelectedStartAction {
@@ -83,10 +97,21 @@ interface OptionSelectedAction<T> {
   }
 }
 
+interface TextChangedAction {
+  type: FilterActionType.TextChanged
+  payload: {
+    id: string
+    value: string
+
+    itemMatchesTheSearchTerm: (item: unknown, searchTerm: string) => boolean
+  }
+}
+
 type FilterAction<T> =
   | OptionSelectedAction<T>
   | DateSelectedEndAction
   | DateSelectedStartAction
+  | TextChangedAction
 
 /**
  * This class contains action creators for the FilterReducer.  I'm questioning whether this class is really necessary, can't I just call the action creator functions directly?
@@ -141,6 +166,19 @@ export class FilterActions {
       startDate,
     },
   })
+
+  public static textChanged = (
+    id = '',
+    value = '',
+    itemMatchesTheSearchTerm: (item: unknown, searchTerm: string) => boolean
+  ): TextChangedAction => ({
+    type: FilterActionType.TextChanged,
+    payload: {
+      id,
+      value: value.toLowerCase(),
+      itemMatchesTheSearchTerm,
+    },
+  })
 }
 
 /**
@@ -174,6 +212,15 @@ export class FilterReducerFactory<SearchType extends Character | Event> {
 
             selectedOptions: [],
           } as DropdownFilterState
+        }
+
+        case FilterControlType.Text: {
+          return {
+            type: FilterControlType.Text,
+            id: fc.id,
+
+            value: '',
+          } as TextFilterState
         }
       }
     })
@@ -244,6 +291,18 @@ export class FilterReducerFactory<SearchType extends Character | Event> {
               )
 
               return matchingOptions.length > 0
+            })
+          }
+
+          break
+
+        case FilterControlType.Text:
+          if (filterControl.value) {
+            filteredResults = filteredResults.filter((result) => {
+              return filterControl.itemMatchesTheSearchTerm(
+                result,
+                filterControl.value
+              )
             })
           }
 

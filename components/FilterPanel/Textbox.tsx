@@ -4,7 +4,7 @@ interface TextboxProps {
   label: string
   onChange: (event: React.FormEvent<HTMLInputElement>) => void
   placeholder: string
-  value: string
+  value?: string
 }
 
 export const Textbox: FunctionComponent<TextboxProps> = ({

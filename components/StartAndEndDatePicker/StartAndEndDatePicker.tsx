@@ -19,6 +19,8 @@ export interface StartAndEndDatePickerProps {
   initialEndDate: string
   initialStartDate: string
 
+  label: string
+
   endDateSelected: (string) => void
   startDateSelected: (string) => void
 }
@@ -30,6 +32,7 @@ export interface StartAndEndDatePickerProps {
 export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps> = ({
   clearEndDate,
   clearStartDate,
+  label,
   endDateSelected,
   startDateSelected,
   initialEndDate,
@@ -57,10 +60,12 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
   }, [])
 
   return (
-    <div>
+    <div className='my-4'>
       {/* because this web component isn't a react "controlled component", the data flow is slightly different because when the user selects a date/time, the date/time is immediately updated in this web component, and doesn't rely on the parent component to provide the new value (as is typically the case with unidirectional data flow) */}
 
-      <div>
+      <div className='font-bold mb-1'>{label}</div>
+
+      <div className='ml-5'>
         Start Date:
         <br />
         <vaadin-date-picker
@@ -83,7 +88,7 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
         </a>
       </div>
 
-      <div className='mt-3'>
+      <div className='mt-3 ml-5'>
         End Date:
         <br />
         <vaadin-date-picker

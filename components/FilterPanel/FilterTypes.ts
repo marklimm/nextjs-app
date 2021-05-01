@@ -5,11 +5,13 @@ import { SelectOption } from 'lib/types/SelectOption'
 export enum FilterControlType {
   DateSearch = 'date-search',
   Dropdown = 'dropdown',
+  Text = 'text',
 }
 
 export interface DateSearchFilter {
   type: FilterControlType.DateSearch
   id: string
+  label: string
 
   startDateSelected?: (string) => void
   endDateSelected?: (string) => void
@@ -21,9 +23,19 @@ export interface DropdownFilter {
   type: FilterControlType.Dropdown
   id: string
   label: string
+  placeholder: string
 
   optionSelected?: (selectedOptions: SelectOption[]) => void
   selectOptions?: SelectOption[]
 }
 
-export type FilterControl = DropdownFilter | DateSearchFilter
+export interface TextFilter {
+  type: FilterControlType.Text
+  id: string
+  label: string
+  placeholder: string
+
+  textChanged?: (event: React.FormEvent<HTMLInputElement>) => void
+}
+
+export type FilterControl = DropdownFilter | DateSearchFilter | TextFilter

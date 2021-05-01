@@ -37,12 +37,14 @@ const filterControls: FilterControl[] = [
     type: FilterControlType.Dropdown,
     id: FilteringOn.EmotionTags,
     label: 'Emotions',
+    placeholder: 'Emotions',
 
     selectOptions: emotionTagOptions,
   },
   {
     type: FilterControlType.DateSearch,
     id: FilteringOn.Timestamp,
+    label: 'Timestamp',
   },
 ]
 

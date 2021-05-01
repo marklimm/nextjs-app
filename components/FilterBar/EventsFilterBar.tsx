@@ -40,6 +40,7 @@ export const EventsFilterBar: FunctionComponent<EventsFilterBarProps> = ({
         clearStartDate={clearStartDate}
         initialEndDate={''}
         initialStartDate={''}
+        label={'Timestamp'}
         endDateSelected={endDateSelected}
         startDateSelected={startDateSelected}
       />

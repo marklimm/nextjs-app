@@ -4,6 +4,7 @@ import { FilterControl, FilterControlType } from './FilterTypes'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { StartAndEndDatePicker } from 'components/StartAndEndDatePicker/StartAndEndDatePicker'
+import { Textbox } from './Textbox'
 
 interface FilterPanelProps {
   filterControls: FilterControl[]
@@ -26,8 +27,10 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
               <Dropdown
                 key={index}
                 label={filterControl.label}
+                placeholder={filterControl.placeholder}
                 selectOptions={filterControl.selectOptions}
                 optionSelected={filterControl.optionSelected}
+                // value={[]}
               />
             )
           case FilterControlType.DateSearch:
@@ -38,8 +41,19 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
                 clearStartDate={filterControl.clearStartDate}
                 initialEndDate={''}
                 initialStartDate={''}
+                label={filterControl.label}
                 endDateSelected={filterControl.endDateSelected}
                 startDateSelected={filterControl.startDateSelected}
+              />
+            )
+
+          case FilterControlType.Text:
+            return (
+              <Textbox
+                key={index}
+                label={filterControl.label}
+                placeholder={filterControl.placeholder}
+                onChange={filterControl.textChanged}
               />
             )
         }
