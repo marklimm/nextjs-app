@@ -10,7 +10,7 @@ const Custom404: FunctionComponent = () => {
         </h1>
 
         <span className='mb-2'>
-          Back to the&nbsp;
+          But feel free to check out the above links or head back to the&nbsp;
           <Link href={`/`}>
             <a>Home page</a>
           </Link>
