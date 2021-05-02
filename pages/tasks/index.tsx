@@ -13,6 +13,8 @@ import { useCompletedSearch } from './useCompletedSearch'
 import { useTitleSearch } from './useTitleSearch'
 import { useTShirtSearch } from './useTShirtSearch'
 
+import descriptionStyle from '../index.module.scss'
+
 /**
  * This component defines the UI for the /tasks route, which includes displaying the list of tasks
  *
@@ -105,23 +107,27 @@ const Tasks: FunctionComponent = (): JSX.Element => {
       </Head>
       <h1>Tasks</h1>
 
-      <div>This page displays various Tasks that Star Wars characters have</div>
+      <div className={descriptionStyle.descriptionArea}>
+        <div>
+          This page displays various Tasks that Star Wars characters have
+        </div>
 
-      <ul className='mt-2'>
-        <li>
-          This page retrieves tasks by calling the server-side /tasks API and
-          then does client-side rendering
-        </li>
-        <li>
-          Every time the user changes the search criteria a new query to the
-          database is being made
-        </li>
-        <li>The data is not statically rendered</li>
-        <li>
-          The title text search is debounced so that the API isn&apos;t queried
-          until the user has finished typing
-        </li>
-      </ul>
+        <ul className='mt-2'>
+          <li>
+            This page retrieves tasks by calling the server-side /tasks API and
+            then does client-side rendering
+          </li>
+          <li>
+            Every time the user changes the search criteria a new query to the
+            database is being made
+          </li>
+          <li>The data is not statically rendered</li>
+          <li>
+            The title text search is debounced so that the API isn&apos;t
+            queried until the user has finished typing
+          </li>
+        </ul>
+      </div>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>

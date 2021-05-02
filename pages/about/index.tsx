@@ -13,7 +13,7 @@ const About: FunctionComponent = () => {
         <title>NextJS demo - About</title>
       </Head>
 
-      <div className={description.descriptionPage}>
+      <div className={description.descriptionArea}>
         <Disclosure defaultOpen={true}>
           <div className={styles.disclosure}>
             <Disclosure.Button className={styles.disclosureButton}>

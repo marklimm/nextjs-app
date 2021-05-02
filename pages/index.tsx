@@ -18,7 +18,7 @@ const HomePage: FunctionComponent<HomePageProps> = ({
       <Head>
         <title>NextJS demo - Home</title>
       </Head>
-      <div className={styles.descriptionPage}>
+      <div className={styles.descriptionArea}>
         <h1>Welcome!</h1>
         <div>
           <div dangerouslySetInnerHTML={{ __html: readmeContent }} />

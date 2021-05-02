@@ -1,34 +1,34 @@
-.descriptionPage {
+.descriptionArea {
   div {
     @apply mb-6;
-
-    //  override the h1 margin bottom that is set in app.scss
-    h1 {
-      @apply text-2xl;
-    }
-
-    ul {
-      @apply list-disc ml-5;
+  }
   
-      li {
-        @apply mt-0;
-      }
-    }
+  ul {
+    @apply list-disc ml-5;
 
-    
-    //  put extra space above for the markdown content being displayed on the Home page
-    p {
-      @apply mt-5;
-    }
-
-    //  I tried doing this but it has no effect
-    // ul {
-    //   @apply mb-5;
-    // }
-
-    //  Home page links are in red instead of blue
-    a {
-      @apply font-semibold text-red-600 hover:text-yellow-400;
+    li {
+      @apply mt-0;
     }
   }
+
+  //  override the h1 margin bottom that is set in app.scss
+  h1 {
+    @apply text-2xl;
+  }
+  
+  //  put extra space above for the markdown content being displayed on the Home page
+  p {
+    @apply mt-5;
+  }
+
+  //  I tried doing this but it has no effect
+  // ul {
+  //   @apply mb-5;
+  // }
+
+  //  Home page links are in red instead of blue
+  a {
+    @apply font-semibold text-red-600 hover:text-yellow-400;
+  }
+
 }

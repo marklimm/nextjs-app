@@ -12,6 +12,8 @@ import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 
 import { useCharactersFilterer } from './useCharactersFilterer'
 
+import descriptionStyle from '../index.module.scss'
+
 export interface CharactersProps {
   allCharacters: Character[]
   characterTagOptions: SelectOption[]
@@ -41,36 +43,39 @@ const Characters: FunctionComponent<CharactersProps> = ({
       </Head>
       <h1>Characters</h1>
 
-      <div>
-        This page displays information on Characters in the Star Wars universe!
-      </div>
-      <ul className='mt-2'>
-        <li>
-          The characters data on this page is retrieved from a local sqlite DB
-          file using the Prisma ORM
-        </li>
-        <li>
-          The data is statically rendered and the server is NOT queried as the
-          user is selecting filter options
-        </li>
-        <li>
-          The same FilterPanel component renders the left-hand filter panels for
-          both the /characters and /events routes
-        </li>
-        <li>
-          The schema for the three supporting prisma models (Character,
-          CharacterPost and CharacterTag) are defined in a schema.prisma text
-          file.
-        </li>
-      </ul>
-
-      <div className='mt-4'>
-        The following relational data gets pulled in for each character
+      <div className={descriptionStyle.descriptionArea}>
+        <div>
+          This page displays information on Characters in the Star Wars
+          universe!
+        </div>
         <ul>
-          <li>Tags - many Characters to many Tags relationship</li>
-          <li>Posts - one Character to many Posts relationship</li>
-          <li>Friends - many Characters to many Characters self-relation</li>
+          <li>
+            The characters data on this page is retrieved from a local sqlite DB
+            file using the Prisma ORM
+          </li>
+          <li>
+            The data is statically rendered and the server is NOT queried as the
+            user is selecting filter options
+          </li>
+          <li>
+            The same FilterPanel component renders the left-hand filter panels
+            for both the /characters and /events routes
+          </li>
+          <li>
+            The schema for the three supporting prisma models (Character,
+            CharacterPost and CharacterTag) are defined in a schema.prisma text
+            file.
+          </li>
         </ul>
+
+        <div className='mt-4'>
+          The following relational data gets pulled in for each character
+          <ul>
+            <li>Tags - many Characters to many Tags relationship</li>
+            <li>Posts - one Character to many Posts relationship</li>
+            <li>Friends - many Characters to many Characters self-relation</li>
+          </ul>
+        </div>
       </div>
 
       <div className='grid grid-cols-4 mt-4 items-start'>
