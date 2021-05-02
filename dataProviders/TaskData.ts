@@ -21,7 +21,6 @@ export const getTasks = async ({
   title,
   tShirtSizeIds,
 }: GetTasksQueryParam): Promise<Task[]> => {
-  console.log('in getTasks', assigneeIds, title, tShirtSizeIds)
   //  this is the filter criteria if there are no filter conditions (this returns all tasks)
   let taskFilterCriteria: Prisma.TaskFindManyArgs = {
     orderBy: [
@@ -95,8 +94,6 @@ export const getTasks = async ({
       },
     }
   }
-
-  console.log('taskFilterCriteria', taskFilterCriteria)
 
   const taskResults = await prisma.task.findMany(taskFilterCriteria)
 
