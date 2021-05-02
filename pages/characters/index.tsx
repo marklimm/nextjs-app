@@ -5,12 +5,12 @@ import { GetStaticProps } from 'next'
 
 import { getCharacters } from 'dataProviders/CharacterData'
 import { getCharacterTags } from 'dataProviders/CharacterTagData'
+
+import { useCharactersFilterer } from 'lib/characters/useCharactersFilterer'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
-
-import { useCharactersFilterer } from './useCharactersFilterer'
 
 import descriptionStyle from '../index.module.scss'
 

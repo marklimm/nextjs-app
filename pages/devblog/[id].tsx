@@ -3,8 +3,9 @@ import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { getAllMarkdownFileIds, getMarkdownFileData } from 'lib/markdownParser'
 
-import { DevBlogPost } from './devBlogPost'
 import { Post } from 'lib/types/Post'
+
+import { DevBlogPost } from 'components/DevBlogPost/devBlogPost'
 
 interface PostUIProps {
   postData: Post

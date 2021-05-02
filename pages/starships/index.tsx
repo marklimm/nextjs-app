@@ -5,10 +5,11 @@ import { GetServerSideProps } from 'next'
 import { getDenormalizedStarships } from 'dataProviders/SWAPI/Starships'
 
 import { PulseCircle } from 'components/PulseCircle/PulseCircle'
-import { StarshipCard } from './StarshipCard'
+import { StarshipCard } from 'components/StarshipCard/StarshipCard'
 import { SWAPIStarship } from 'lib/types/SWAPI'
 
 import descriptionStyle from '../index.module.scss'
+import styles from './index.module.scss'
 
 interface StarShipsProps {
   starships: SWAPIStarship[]
@@ -56,7 +57,7 @@ const StarshipsUI: FunctionComponent<StarShipsProps> = ({
         {starships &&
           starships.map((s) => (
             <div key={s.url}>
-              <StarshipCard starship={s} />
+              <StarshipCard starship={s} labelStyle={styles.label} />
             </div>
           ))}
       </div>

@@ -2,14 +2,15 @@ import React, { FunctionComponent } from 'react'
 
 import DisplayDate from 'components/DisplayDate/DisplayDate'
 
-import styles from './index.module.scss'
 import { SWAPIStarship } from 'lib/types/SWAPI'
 
 interface StarshipCardProps {
+  labelStyle: string
   starship: SWAPIStarship
 }
 
 export const StarshipCard: FunctionComponent<StarshipCardProps> = ({
+  labelStyle,
   starship,
 }: StarshipCardProps) => {
   return (
@@ -20,37 +21,36 @@ export const StarshipCard: FunctionComponent<StarshipCardProps> = ({
       <span>Manufacturer: {starship.manufacturer}</span>
       <div className='grid grid-cols-3 mt-4 text-sm'>
         <div>
-          <span className={styles.label}>Cost:</span> {starship.cost_in_credits}
+          <span className={labelStyle}>Cost:</span> {starship.cost_in_credits}
         </div>
 
         <div>
-          <span className={styles.label}>Crew:</span> {starship.crew}
+          <span className={labelStyle}>Crew:</span> {starship.crew}
         </div>
         <div>
-          <span className={styles.label}>Passengers:</span>{' '}
-          {starship.passengers}
+          <span className={labelStyle}>Passengers:</span> {starship.passengers}
         </div>
         <div>
-          <span className={styles.label}>Cargo Capacity:</span>{' '}
+          <span className={labelStyle}>Cargo Capacity:</span>{' '}
           {starship.cargo_capacity}
         </div>
         <div>
-          <span className={styles.label}>Consumables:</span>{' '}
+          <span className={labelStyle}>Consumables:</span>{' '}
           {starship.consumables}
         </div>
         <div>
-          <span className={styles.label}>Hyperdrive Rating:</span>{' '}
+          <span className={labelStyle}>Hyperdrive Rating:</span>{' '}
           {starship.hyperdrive_rating}
         </div>
         <div>
-          <span className={styles.label}>Length:</span> {starship.length}
+          <span className={labelStyle}>Length:</span> {starship.length}
         </div>
         <div>
-          <span className={styles.label}>Max speed:</span>{' '}
+          <span className={labelStyle}>Max speed:</span>{' '}
           {starship.max_atmosphering_speed}
         </div>
         <div>
-          <span className={styles.label}>Starship class:</span>{' '}
+          <span className={labelStyle}>Starship class:</span>{' '}
           {starship.starship_class}
         </div>
       </div>
@@ -60,7 +60,7 @@ export const StarshipCard: FunctionComponent<StarshipCardProps> = ({
         <div>
           {starship.films.length > 0 && (
             <>
-              <span className={styles.label}>Appeared in:</span>
+              <span className={labelStyle}>Appeared in:</span>
               <br />
               {starship.filmsObjects.map((f) => (
                 <div key={f.url}>

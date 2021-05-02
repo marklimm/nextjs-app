@@ -2,14 +2,15 @@ import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
 import DisplayDate from 'components/DisplayDate/DisplayDate'
 
-import styles from './index.module.scss'
 import { SWAPIPlanet } from 'lib/types/SWAPI'
 
 interface PlanetCardProps {
+  labelStyle: string
   planet: SWAPIPlanet
 }
 
 export const PlanetCard: FunctionComponent<PlanetCardProps> = ({
+  labelStyle,
   planet,
 }: PlanetCardProps) => {
   return (
@@ -20,32 +21,32 @@ export const PlanetCard: FunctionComponent<PlanetCardProps> = ({
 
       <div className='grid grid-cols-3 mt-2'>
         <div>
-          <span className={styles.label}>Climate:</span> {planet.climate}
+          <span className={labelStyle}>Climate:</span> {planet.climate}
         </div>
 
         <div>
-          <span className={styles.label}>Diameter:</span> {planet.diameter}
+          <span className={labelStyle}>Diameter:</span> {planet.diameter}
         </div>
         <div>
-          <span className={styles.label}>Gravity:</span> {planet.gravity}
+          <span className={labelStyle}>Gravity:</span> {planet.gravity}
         </div>
         <div>
-          <span className={styles.label}>Orbital Period:</span>
+          <span className={labelStyle}>Orbital Period:</span>
           {planet.orbital_period}
         </div>
         <div>
-          <span className={styles.label}>Population:</span> {planet.population}
+          <span className={labelStyle}>Population:</span> {planet.population}
         </div>
         <div>
-          <span className={styles.label}>Rotation Period:</span>{' '}
+          <span className={labelStyle}>Rotation Period:</span>{' '}
           {planet.rotation_period}
         </div>
         <div>
-          <span className={styles.label}>Surface Water:</span>{' '}
+          <span className={labelStyle}>Surface Water:</span>{' '}
           {planet.surface_water}
         </div>
         <div>
-          <span className={styles.label}>Terrain:</span> {planet.terrain}
+          <span className={labelStyle}>Terrain:</span> {planet.terrain}
         </div>
       </div>
 
@@ -53,7 +54,7 @@ export const PlanetCard: FunctionComponent<PlanetCardProps> = ({
         <div>
           {planet.people.length > 0 && (
             <>
-              <span className={styles.label}>Residents:</span>
+              <span className={labelStyle}>Residents:</span>
               <br />
               {planet.people.map((person) => (
                 <div key={person.url}>{person.name}</div>
@@ -64,7 +65,7 @@ export const PlanetCard: FunctionComponent<PlanetCardProps> = ({
         <div>
           {planet.films.length > 0 && (
             <>
-              <span className={styles.label}>Appeared in:</span>
+              <span className={labelStyle}>Appeared in:</span>
               <br />
               {planet.filmsObjects.map((f) => (
                 <div key={f.url}>

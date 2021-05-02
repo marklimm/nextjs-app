@@ -9,7 +9,7 @@ import DisplayDate from 'components/DisplayDate/DisplayDate'
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 
-import { useEventsFilterer } from './useEventsFilterer'
+import { useEventsFilterer } from 'lib/events/useEventsFilterer'
 
 import descriptionStyle from '../index.module.scss'
 

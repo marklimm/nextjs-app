@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { Post } from 'lib/types/Post'
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
 
-import { DevBlogPost } from './devBlogPost'
+import { DevBlogPost } from 'components/DevBlogPost/devBlogPost'
 import { DetentionBlock } from 'components/DetentionBlock/DetentionBlock'
 
 interface DevBlogProps {

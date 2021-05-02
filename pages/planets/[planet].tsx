@@ -6,8 +6,10 @@ import {
   getDenormalizedPlanet,
   getPlanetPaths,
 } from 'dataProviders/SWAPI/Planets'
-import { PlanetCard } from './PlanetCard'
+import { PlanetCard } from 'components/PlanetCard/PlanetCard'
 import { SWAPIPlanet } from 'lib/types/SWAPI'
+
+import styles from './index.module.scss'
 
 interface RenderPlanetProps {
   planet: SWAPIPlanet
@@ -23,7 +25,7 @@ const PlanetUI: FunctionComponent<RenderPlanetProps> = ({
       </Head>
       {!planet && <div>No planet data was returned</div>}
 
-      {planet && <PlanetCard planet={planet} />}
+      {planet && <PlanetCard planet={planet} labelStyle={styles.label} />}
     </>
   )
 }

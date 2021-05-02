@@ -4,14 +4,14 @@ import Head from 'next/head'
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
 
+import { useAssigneeSearch } from 'lib/tasks/useAssigneeSearch'
+import { useCompletedSearch } from 'lib/tasks/useCompletedSearch'
+import { useTitleSearch } from 'lib/tasks/useTitleSearch'
+import { useTShirtSearch } from 'lib/tasks/useTShirtSearch'
+
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { ListBox } from 'components/FilterPanel/ListBox'
 import { Textbox } from 'components/FilterPanel/Textbox'
-
-import { useAssigneeSearch } from './useAssigneeSearch'
-import { useCompletedSearch } from './useCompletedSearch'
-import { useTitleSearch } from './useTitleSearch'
-import { useTShirtSearch } from './useTShirtSearch'
 
 import descriptionStyle from '../index.module.scss'
 
