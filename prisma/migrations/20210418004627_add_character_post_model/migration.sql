@@ -1,9 +1,0 @@
--- CreateTable
-CREATE TABLE "CharacterPost" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    "body" TEXT NOT NULL,
-    "characterId" INTEGER NOT NULL,
-    FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
