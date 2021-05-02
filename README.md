@@ -35,8 +35,6 @@ Records in the Star Wars API come with various types of related data. For exampl
 
 In order to avoid this extra build time, I have a pre-build script (`npm run fetch-swapi-data`) that fetch()-s data from the Star Wars API and writes it out to local JSON files. Then during the build step these JSON files are parsed, instead of having to make 10-15 fetch()-s out to the Star Wars API
 
-Since I'm not using an ORM for the Star Wars API data, this seemed like a decent solution. But I'd be curious if I were using an ORM for the SWAPI data if this could be avoided
-
 **Code Linting:**
 
 Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules.  Prettier is also used with a few custom rule changes
