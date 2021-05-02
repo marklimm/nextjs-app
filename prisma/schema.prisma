@@ -66,7 +66,11 @@ model Task {
   title String
   description String
 
+  //  rough estimate of how long the task should take
   tShirtSize Int
+
+  //  has the task been completed or not
+  isComplete Boolean @default(false)
 
   //  this field does NOT exist in the DB, is used for prisma client
   assignedTo Character @relation(fields: [characterId], references: [id])
