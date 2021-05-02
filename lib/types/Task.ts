@@ -14,6 +14,15 @@ export type Task = Prisma.TaskGetPayload<{
 }>
 
 /**
+ * The search options when filtering by a Task's `isComplete` flag
+ */
+export enum IsCompletedFilter {
+  ALL = 'All Tasks',
+  COMPLETED = 'Completed',
+  NOT_COMPLETED = 'Not Completed',
+}
+
+/**
  * The enum of "t-shirt sizes" representing the overall difficulty of a Task
  */
 export enum TShirtSize {

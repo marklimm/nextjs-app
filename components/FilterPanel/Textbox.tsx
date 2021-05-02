@@ -19,7 +19,7 @@ export const Textbox: FunctionComponent<TextboxProps> = ({
       <input
         type='text'
         value={value}
-        className='p-2 border border-gray-300 rounded'
+        className='p-2 border border-gray-300 rounded-md shadow-md'
         onChange={onChange}
         placeholder={placeholder}
       />

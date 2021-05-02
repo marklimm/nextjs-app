@@ -9,13 +9,6 @@ body {
     @apply text-2xl mb-2;
   }
 
-  ul {
-    @apply list-disc ml-5;
-
-    li {
-      @apply mt-0;
-    }
-  }
 
   //  a typical search result card
   div.searchResultCard {

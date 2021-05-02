@@ -7,6 +7,15 @@
       @apply text-2xl;
     }
 
+    ul {
+      @apply list-disc ml-5;
+  
+      li {
+        @apply mt-0;
+      }
+    }
+
+    
     //  put extra space above for the markdown content being displayed on the Home page
     p {
       @apply mt-5;

@@ -2,13 +2,14 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import { LoadingState } from 'lib/types/LoadingState'
-import { Task, TShirtSize } from 'lib/types/Task'
+import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
+import { ListBox } from 'components/FilterPanel/ListBox'
 import { Textbox } from 'components/FilterPanel/Textbox'
-import { Toggle } from 'components/FilterPanel/Toggle'
 
 import { useAssigneeSearch } from './useAssigneeSearch'
+import { useCompletedSearch } from './useCompletedSearch'
 import { useTitleSearch } from './useTitleSearch'
 import { useTShirtSearch } from './useTShirtSearch'
 
@@ -23,7 +24,11 @@ const Tasks: FunctionComponent = (): JSX.Element => {
   )
   const [tasks, setTasks] = useState<Task[]>([])
 
-  const [showCompletedTasks, setShowCompletedTasks] = useState(false)
+  const {
+    completedFlag,
+    completedFlagOptions,
+    setCompletedFlag,
+  } = useCompletedSearch()
 
   const {
     debouncedTitleSearchString,
@@ -54,10 +59,16 @@ const Tasks: FunctionComponent = (): JSX.Element => {
       const tShirtSizeIds =
         selectedTShirtSizes.map((a) => a.value).join(',') || ''
 
-      const response = await fetch(
-        `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}&showCompleted=${showCompletedTasks}`,
-        {}
-      )
+      let queryTasksString = `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}`
+
+      if (
+        completedFlag.value === IsCompletedFilter.COMPLETED ||
+        completedFlag.value === IsCompletedFilter.NOT_COMPLETED
+      ) {
+        queryTasksString += `&completedFlag=${completedFlag.value.toString()}`
+      }
+
+      const response = await fetch(queryTasksString, {})
 
       if (response.status >= 400) {
         console.error('there was some error', response.statusText)
@@ -72,10 +83,10 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
     getTasks()
   }, [
-    selectedAssigneeIds,
+    completedFlag,
     debouncedTitleSearchString,
+    selectedAssigneeIds,
     selectedTShirtSizes,
-    showCompletedTasks,
   ])
 
   const resetFilters = (event) => {
@@ -83,7 +94,7 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
     setSelectedAssigneeIds([])
     setSelectedTShirtSizes([])
-    setShowCompletedTasks(false)
+    setCompletedFlag(completedFlagOptions[0])
     setTitleSearchString('')
   }
 
@@ -141,10 +152,18 @@ const Tasks: FunctionComponent = (): JSX.Element => {
             value={selectedTShirtSizes}
           />
 
-          <Toggle
+          {/* <Toggle /> is only good if you only have 2 options */}
+          {/* <Toggle
             label={'Completed Tasks'}
             enabled={showCompletedTasks}
             setEnabled={setShowCompletedTasks}
+          /> */}
+
+          <ListBox
+            label={'Completed Status'}
+            allOptions={completedFlagOptions}
+            selectedOption={completedFlag}
+            setSelectedOption={setCompletedFlag}
           />
         </div>
 
