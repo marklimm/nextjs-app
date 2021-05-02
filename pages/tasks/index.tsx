@@ -6,6 +6,7 @@ import { Task, TShirtSize } from 'lib/types/Task'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { Textbox } from 'components/FilterPanel/Textbox'
+import { Toggle } from 'components/FilterPanel/Toggle'
 
 import { useAssigneeSearch } from './useAssigneeSearch'
 import { useTitleSearch } from './useTitleSearch'
@@ -21,6 +22,8 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     LoadingState.LOADING
   )
   const [tasks, setTasks] = useState<Task[]>([])
+
+  const [showCompletedTasks, setShowCompletedTasks] = useState(false)
 
   const {
     debouncedTitleSearchString,
@@ -52,7 +55,7 @@ const Tasks: FunctionComponent = (): JSX.Element => {
         selectedTShirtSizes.map((a) => a.value).join(',') || ''
 
       const response = await fetch(
-        `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}`,
+        `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}&showCompleted=${showCompletedTasks}`,
         {}
       )
 
@@ -68,13 +71,19 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     }
 
     getTasks()
-  }, [selectedAssigneeIds, debouncedTitleSearchString, selectedTShirtSizes])
+  }, [
+    selectedAssigneeIds,
+    debouncedTitleSearchString,
+    selectedTShirtSizes,
+    showCompletedTasks,
+  ])
 
   const resetFilters = (event) => {
     event.preventDefault()
 
     setSelectedAssigneeIds([])
     setSelectedTShirtSizes([])
+    setShowCompletedTasks(false)
     setTitleSearchString('')
   }
 
@@ -131,6 +140,12 @@ const Tasks: FunctionComponent = (): JSX.Element => {
             placeholder={'T-shirt size'}
             value={selectedTShirtSizes}
           />
+
+          <Toggle
+            label={'Completed Tasks'}
+            enabled={showCompletedTasks}
+            setEnabled={setShowCompletedTasks}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>
@@ -154,6 +169,16 @@ const Tasks: FunctionComponent = (): JSX.Element => {
                   <div className='text-sm mt-2'>{t.description}</div>
                   <div className='text-sm mt-2'>
                     T-shirt size: {TShirtSize[t.tShirtSize]}
+                  </div>
+                  <div className='text-sm mt-2'>
+                    Completed:{' '}
+                    <span
+                      className={`${
+                        t.isComplete ? 'text-green-700' : 'text-red-700'
+                      } font-bold`}
+                    >
+                      {t.isComplete ? 'YES' : 'NO'}
+                    </span>
                   </div>
                 </div>
               )

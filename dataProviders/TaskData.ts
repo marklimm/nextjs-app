@@ -5,6 +5,7 @@ const prisma = new PrismaClient()
 
 interface GetTasksQueryParam {
   assigneeIds?: string
+  showCompleted?: string
   title?: string
   tShirtSizeIds?: string
 }
@@ -16,6 +17,7 @@ interface GetTasksQueryParam {
  */
 export const getTasks = async ({
   assigneeIds,
+  showCompleted,
   title,
   tShirtSizeIds,
 }: GetTasksQueryParam): Promise<Task[]> => {
@@ -67,6 +69,14 @@ export const getTasks = async ({
     }
 
     whereClauses.push(titleClause)
+  }
+
+  if (showCompleted === 'true') {
+    //  user has chosen to only show the completed tasks
+
+    whereClauses.push({
+      isComplete: true,
+    })
   }
 
   console.log('whereClauses', whereClauses)

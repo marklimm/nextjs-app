@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react'
 import { FilterControl, FilterControlType } from './FilterTypes'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
-import { StartAndEndDatePicker } from 'components/StartAndEndDatePicker/StartAndEndDatePicker'
+import { StartAndEndDatePicker } from 'components/FilterPanel/StartAndEndDatePicker'
 import { Textbox } from './Textbox'
 
 interface FilterPanelProps {
