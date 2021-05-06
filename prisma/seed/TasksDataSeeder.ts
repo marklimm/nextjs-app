@@ -1,10 +1,21 @@
-class TasksDataSeeder {
-  constructor(prismaClient) {
-    this.prisma = prismaClient
+import { PrismaClient } from '@prisma/client'
+import { CharacterTerse } from 'lib/types/Character'
+
+export class TasksDataSeeder {
+  private _prisma: PrismaClient
+
+  constructor(prismaClient: PrismaClient) {
+    this._prisma = prismaClient
   }
 
-  seedTasks = async (characters) => {
-    await this.prisma.task.create({
+  disconnect = async (): Promise<void> => {
+    await this._prisma.$disconnect()
+  }
+
+  seedTasks = async (characters: {
+    [key: string]: CharacterTerse
+  }): Promise<void> => {
+    await this._prisma.task.create({
       data: {
         title: 'Find a fast ship',
         description:
@@ -18,7 +29,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Find who this Yoda is and ask him to train me',
         description: 'Ben said that I would find Yoda on the Dagobah system',
@@ -31,7 +42,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Repair the Falcon',
         description:
@@ -45,7 +56,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title:
           'Quickly find some place where I can stash the stolen data tapes!',
@@ -59,7 +70,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Take Captain Solo to Jabba the Hut',
         description:
@@ -73,7 +84,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title:
           'Prove that the Death Star design has not been compromised in any way',
@@ -88,7 +99,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Win this pod race!',
         description: 'I need to win this pod race to win my freedom!',
@@ -101,7 +112,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Track the Millennium Falcon',
         description:
@@ -115,7 +126,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Recover the stolen data tapes',
         description:
@@ -129,7 +140,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title:
           'Escort Han and his friends to a dinner where Vader and a garrison of storm troopers are waiting',
@@ -143,7 +154,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Find a way out of this cell',
         description: "There's gotta be a way out of here ...",
@@ -156,7 +167,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title:
           'Recruit my old friend Galen Erso to complete work on the Death Star',
@@ -170,7 +181,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Find the parts needed for our ship',
         description:
@@ -184,7 +195,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: "Analyze Anakin's midi-chlorian count",
         description: '',
@@ -198,7 +209,7 @@ class TasksDataSeeder {
       },
     })
 
-    await this.prisma.task.create({
+    await this._prisma.task.create({
       data: {
         title: 'Destroy the data installation at Scarif',
         description:
@@ -216,15 +227,9 @@ class TasksDataSeeder {
     console.log('Tasks have been seeded')
   }
 
-  seedAllTaskData = async (characters) => {
-    const tasks = await this.seedTasks(characters)
-
-    return {
-      tasks,
-    }
+  seedAllTaskData = async (characters: {
+    [key: string]: CharacterTerse
+  }): Promise<void> => {
+    await this.seedTasks(characters)
   }
-}
-
-module.exports = {
-  TasksDataSeeder,
 }

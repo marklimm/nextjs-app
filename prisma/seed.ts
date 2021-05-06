@@ -1,9 +1,7 @@
-/* eslint @typescript-eslint/no-var-requires: 0 */
+import { CharactersDataSeeder } from './seed/CharactersDataSeeder'
+import { TasksDataSeeder } from './seed/TasksDataSeeder'
 
-const { CharactersDataSeeder } = require('./seed/CharactersDataSeeder.js')
-const { TasksDataSeeder } = require('./seed/TasksDataSeeder.js')
-
-const { PrismaClient } = require('@prisma/client')
+import { PrismaClient } from '@prisma/client'
 
 //  immediately execute this main() function
 ;(async function main() {

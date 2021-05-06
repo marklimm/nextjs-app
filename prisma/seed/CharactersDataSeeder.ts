@@ -1,16 +1,24 @@
+import { PrismaClient } from '@prisma/client'
+import { CharacterTag, CharacterTerse } from 'lib/types/Character'
+
 /**
  * This class contains the scripts for populating the Character, CharacterTag and CharacterPost prisma DB tables with Star Wars data!
  */
-class CharactersDataSeeder {
-  constructor(prismaClient) {
-    this.prisma = prismaClient
+export class CharactersDataSeeder {
+  private _prisma: PrismaClient
+
+  constructor(prismaClient: PrismaClient) {
+    this._prisma = prismaClient
   }
 
-  #createFriendshipRelation = async (characterA, characterB) => {
+  private createFriendshipRelation = async (
+    characterA: CharacterTerse,
+    characterB: CharacterTerse
+  ): Promise<void> => {
     //  we define the friendship links.  Friends is a self-relation on the Characters table, this can't be mapped like how the CharacterTags many-to-many relationship was done
     //  we have to map both sides of the friendship
 
-    await this.prisma.character.update({
+    await this._prisma.character.update({
       where: {
         id: characterA.id,
       },
@@ -21,7 +29,7 @@ class CharactersDataSeeder {
       },
     })
 
-    await this.prisma.character.update({
+    await this._prisma.character.update({
       where: {
         id: characterB.id,
       },
@@ -33,16 +41,18 @@ class CharactersDataSeeder {
     })
   }
 
-  disconnect = async () => {
-    await this.prisma.$disconnect()
+  disconnect = async (): Promise<void> => {
+    await this._prisma.$disconnect()
   }
 
   /**
    * Populate the database with the Star Wars characters
    */
-  seedCharacters = async (characterTags) => {
+  seedCharacters = async (characterTags: {
+    [key: string]: CharacterTag
+  }): Promise<{ [key: string]: CharacterTerse }> => {
     //  this didn't work for me, conflict with the where: { name: 'Jedi' } and the `name` field not being available
-    // const jedi = await this.prisma.characterTag.upsert({
+    // const jedi = await this._prisma.characterTag.upsert({
     //   where: { name: 'Jedi' },
     //   update: {},
     //   create: {
@@ -52,7 +62,7 @@ class CharactersDataSeeder {
     //   },
     // })
 
-    const luke = await this.prisma.character.create({
+    const luke = await this._prisma.character.create({
       data: {
         firstName: 'Luke',
         lastName: 'Skywalker',
@@ -78,7 +88,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const han = await this.prisma.character.create({
+    const han = await this._prisma.character.create({
       data: {
         firstName: 'Han',
         lastName: 'Solo',
@@ -102,7 +112,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const leia = await this.prisma.character.create({
+    const leia = await this._prisma.character.create({
       data: {
         firstName: 'Leia',
         lastName: 'Organa',
@@ -122,7 +132,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const chewbecca = await this.prisma.character.create({
+    const chewbecca = await this._prisma.character.create({
       data: {
         firstName: 'Chewbecca',
         lastName: '',
@@ -141,7 +151,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const lando = await this.prisma.character.create({
+    const lando = await this._prisma.character.create({
       data: {
         firstName: 'Lando',
         lastName: 'Calrissian',
@@ -161,7 +171,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const boba = await this.prisma.character.create({
+    const boba = await this._prisma.character.create({
       data: {
         firstName: 'Boba',
         lastName: 'Fett',
@@ -181,7 +191,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const anakin = await this.prisma.character.create({
+    const anakin = await this._prisma.character.create({
       data: {
         firstName: 'Anakin',
         lastName: 'Skywalker',
@@ -204,7 +214,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const obiWan = await this.prisma.character.create({
+    const obiWan = await this._prisma.character.create({
       data: {
         firstName: 'Obi-wan',
         lastName: 'Kenobi',
@@ -227,7 +237,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const darth = await this.prisma.character.create({
+    const darth = await this._prisma.character.create({
       data: {
         firstName: 'Darth',
         lastName: 'Vader',
@@ -247,7 +257,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const tarkin = await this.prisma.character.create({
+    const tarkin = await this._prisma.character.create({
       data: {
         firstName: 'Wilhuff',
         lastName: 'Tarkin',
@@ -267,7 +277,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const krennic = await this.prisma.character.create({
+    const krennic = await this._prisma.character.create({
       data: {
         firstName: 'Orson',
         lastName: 'Krennic',
@@ -287,7 +297,7 @@ class CharactersDataSeeder {
       },
     })
 
-    const quiGon = await this.prisma.character.create({
+    const quiGon = await this._prisma.character.create({
       data: {
         firstName: 'Qui-Gon',
         lastName: 'Jinn',
@@ -309,25 +319,25 @@ class CharactersDataSeeder {
 
     console.log('Characters have been seeded')
 
-    await this.#createFriendshipRelation(luke, han)
-    await this.#createFriendshipRelation(luke, leia)
-    await this.#createFriendshipRelation(han, leia)
+    await this.createFriendshipRelation(luke, han)
+    await this.createFriendshipRelation(luke, leia)
+    await this.createFriendshipRelation(han, leia)
 
-    await this.#createFriendshipRelation(luke, chewbecca)
-    await this.#createFriendshipRelation(han, chewbecca)
-    await this.#createFriendshipRelation(leia, chewbecca)
+    await this.createFriendshipRelation(luke, chewbecca)
+    await this.createFriendshipRelation(han, chewbecca)
+    await this.createFriendshipRelation(leia, chewbecca)
 
-    await this.#createFriendshipRelation(han, lando)
-    await this.#createFriendshipRelation(chewbecca, lando)
+    await this.createFriendshipRelation(han, lando)
+    await this.createFriendshipRelation(chewbecca, lando)
 
-    await this.#createFriendshipRelation(anakin, obiWan)
-    await this.#createFriendshipRelation(anakin, quiGon)
-    await this.#createFriendshipRelation(obiWan, quiGon)
+    await this.createFriendshipRelation(anakin, obiWan)
+    await this.createFriendshipRelation(anakin, quiGon)
+    await this.createFriendshipRelation(obiWan, quiGon)
 
-    await this.#createFriendshipRelation(luke, obiWan)
+    await this.createFriendshipRelation(luke, obiWan)
 
-    await this.#createFriendshipRelation(darth, tarkin)
-    await this.#createFriendshipRelation(tarkin, krennic)
+    await this.createFriendshipRelation(darth, tarkin)
+    await this.createFriendshipRelation(tarkin, krennic)
 
     console.log('Character friendships have been seeded')
 
@@ -350,9 +360,9 @@ class CharactersDataSeeder {
   /**
    * Populate the database with all of the CharacterTags
    */
-  seedCharacterTags = async () => {
+  seedCharacterTags = async (): Promise<{ [key: string]: CharacterTag }> => {
     const characterTagInsertPromises = [
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Jedi',
           description:
@@ -360,7 +370,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Scoundrel',
           description:
@@ -368,7 +378,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Wookie',
           description:
@@ -376,7 +386,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Mandalorian',
           description:
@@ -384,7 +394,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Imperial Officer',
           description:
@@ -392,7 +402,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Sith',
           description:
@@ -400,7 +410,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Rebel Alliance',
           description:
@@ -408,7 +418,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Gungan',
           description:
@@ -416,7 +426,7 @@ class CharactersDataSeeder {
         },
       }),
 
-      this.prisma.characterTag.create({
+      this._prisma.characterTag.create({
         data: {
           name: 'Clone Wars',
           description:
@@ -436,7 +446,10 @@ class CharactersDataSeeder {
     return characterTags
   }
 
-  seedAllCharacterData = async () => {
+  seedAllCharacterData = async (): Promise<{
+    characters: { [key: string]: CharacterTerse }
+    characterTags: { [key: string]: CharacterTag }
+  }> => {
     const characterTags = await this.seedCharacterTags()
     const characters = await this.seedCharacters(characterTags)
 
@@ -445,8 +458,4 @@ class CharactersDataSeeder {
       characterTags,
     }
   }
-}
-
-module.exports = {
-  CharactersDataSeeder,
 }
