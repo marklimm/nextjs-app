@@ -16,7 +16,7 @@ The data is retrieved from various data sources:
 - Tailwind (CSS library)
 - headless UI (unstyled JS components that integrate with tailwind)
 - Prisma (typescript ORM)
-- sqlite (embedded relational DB)
+- postgresql (relational DB)
 - eslint (javascript code linting)
 - Prettier (opinionated code style formatting)
 - the Star Wars API (a public API returning Star Wars relational data)
