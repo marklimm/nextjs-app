@@ -69,7 +69,7 @@ const About: FunctionComponent = () => {
                 worked on it more, I felt that the SWAPI data was a good start
                 but that the data could be more compelling. &nbsp;This led to me
                 creating my own Star Wars data (Characters, Events, Tasks) and
-                storing it in a SQLite DB file (with the prisma ORM) and
+                storing it in a postgres DB file (with the prisma ORM) and
                 markdown files.
               </div>
               <div>

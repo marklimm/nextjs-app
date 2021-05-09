@@ -50,8 +50,8 @@ const Characters: FunctionComponent<CharactersProps> = ({
         </div>
         <ul>
           <li>
-            The characters data on this page is retrieved from a local sqlite DB
-            file using the Prisma ORM
+            The characters data on this page is retrieved via prisma from a
+            hosted postgres DB
           </li>
           <li>
             The data is statically rendered and the server is NOT queried as the
