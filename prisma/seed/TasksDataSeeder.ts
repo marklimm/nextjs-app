@@ -198,7 +198,7 @@ export class TasksDataSeeder {
     await this._prisma.task.create({
       data: {
         title: "Analyze Anakin's midi-chlorian count",
-        description: '',
+        description: 'How strong can he be in the force?',
 
         tShirtSize: 1,
         isComplete: true,

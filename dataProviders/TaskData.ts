@@ -1,7 +1,7 @@
-import { Prisma, PrismaClient } from '@prisma/client'
-import { Task } from 'lib/types/Task'
+import { Prisma } from '@prisma/client'
+import prisma from './prisma'
 
-const prisma = new PrismaClient()
+import { Task } from 'lib/types/Task'
 
 interface GetTasksQueryParam {
   assigneeIds?: string

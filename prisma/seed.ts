@@ -1,14 +1,14 @@
+import { PrismaClient } from '@prisma/client'
+
 import { CharactersDataSeeder } from './seed/CharactersDataSeeder'
 import { TasksDataSeeder } from './seed/TasksDataSeeder'
 
-import { PrismaClient } from '@prisma/client'
-
 //  immediately execute this main() function
 ;(async function main() {
-  const prismaClient = new PrismaClient()
+  const prisma = new PrismaClient()
 
-  const charactersDataSeeder = new CharactersDataSeeder(prismaClient)
-  const tasksDataSeeder = new TasksDataSeeder(prismaClient)
+  const charactersDataSeeder = new CharactersDataSeeder(prisma)
+  const tasksDataSeeder = new TasksDataSeeder(prisma)
 
   try {
     const { characters } = await charactersDataSeeder.seedAllCharacterData()

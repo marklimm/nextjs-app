@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-import { Character, CharacterTerse } from 'lib/types/Character'
+import prisma from './prisma'
 
-const prisma = new PrismaClient()
+import { Character, CharacterTerse } from 'lib/types/Character'
 
 export const getCharacters = async (): Promise<Character[]> => {
   const characterResults = await prisma.character.findMany({
