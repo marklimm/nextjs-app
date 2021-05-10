@@ -11,6 +11,10 @@ export class CharactersDataSeeder {
     this._prisma = prismaClient
   }
 
+  disconnect = async (): Promise<void> => {
+    await this._prisma.$disconnect()
+  }
+
   private createFriendshipRelation = async (
     characterA: CharacterTerse,
     characterB: CharacterTerse
@@ -41,14 +45,10 @@ export class CharactersDataSeeder {
     })
   }
 
-  disconnect = async (): Promise<void> => {
-    await this._prisma.$disconnect()
-  }
-
   /**
    * Populate the database with the Star Wars characters
    */
-  seedCharacters = async (characterTags: {
+  private seedCharacters = async (characterTags: {
     [key: string]: CharacterTag
   }): Promise<{ [key: string]: CharacterTerse }> => {
     //  this didn't work for me, conflict with the where: { name: 'Jedi' } and the `name` field not being available
@@ -360,7 +360,9 @@ export class CharactersDataSeeder {
   /**
    * Populate the database with all of the CharacterTags
    */
-  seedCharacterTags = async (): Promise<{ [key: string]: CharacterTag }> => {
+  private seedCharacterTags = async (): Promise<{
+    [key: string]: CharacterTag
+  }> => {
     const characterTagInsertPromises = [
       this._prisma.characterTag.create({
         data: {

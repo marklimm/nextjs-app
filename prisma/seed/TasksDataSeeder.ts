@@ -12,7 +12,7 @@ export class TasksDataSeeder {
     await this._prisma.$disconnect()
   }
 
-  seedTasks = async (characters: {
+  private seedTasks = async (characters: {
     [key: string]: CharacterTerse
   }): Promise<void> => {
     await this._prisma.task.create({
