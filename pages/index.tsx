@@ -29,7 +29,10 @@ const HomePage: FunctionComponent<HomePageProps> = ({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const readmeData = await getMarkdownFileData('', 'README.md')
+  const readmeData = await getMarkdownFileData(
+    '',
+    'pages/landing-page-intro.md'
+  )
 
   return {
     props: {

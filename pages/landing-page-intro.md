@@ -1,4 +1,4 @@
-### This is a statically-generated NextJS website that displays various types of "Star Wars" data!
+This is a statically-generated NextJS website that displays various types of "Star Wars" data!
 
 The data is retrieved from various data sources:
 
