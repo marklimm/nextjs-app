@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 
 import { getDenormalizedStarships } from 'dataProviders/SWAPI/Starships'
 
@@ -35,10 +35,6 @@ const StarshipsUI: FunctionComponent<StarShipsProps> = ({
         </div>
 
         <ul>
-          <li>
-            This page uses getServerSideProps(), meaning it will re-render for
-            each server request
-          </li>
           <li>The data is taken from the Star Wars API (https://swapi.dev/)</li>
           <li>
             I am using a pre-build script that fetch()-es the Star Wars data
@@ -65,7 +61,7 @@ const StarshipsUI: FunctionComponent<StarShipsProps> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const starships = getDenormalizedStarships()
 
   return {
