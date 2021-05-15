@@ -1,5 +1,5 @@
 .descriptionArea {
-  div {
+  & > div {
     @apply mb-6;
   }
   
