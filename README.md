@@ -1,11 +1,13 @@
 ### This is a statically-generated NextJS website that displays various types of "Star Wars" data!
 
+The website can be seen at [https://nextjs-app-rust.vercel.app](https://nextjs-app-rust.vercel.app)
+
 The data is retrieved from various data sources:
 
-- The **[Events](/events)** and **[Developer Blog](/devblog)** pages pull their data from local markdown (.md) files
-- The **[Characters](/characters)** and **[Tasks](/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
-- The **[Planets](/planets)** and **[Starships](/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
-- The **[Detention Block](/detentionBlock)** and **[Developer Blog](/devblog)** pages display the same piece of site-wide shared state via react context
+- The **[Events](https://nextjs-app-rust.vercel.app/events)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages pull their data from local markdown (.md) files
+- The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
+- The **[Planets](/https://nextjs-app-rust.vercel.appplanets)** and **[Starships](https://nextjs-app-rust.vercel.app/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
+- The **[Detention Block](https://nextjs-app-rust.vercel.app/detentionBlock)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages display the same piece of site-wide shared state via react context
 
 **Technology stack:**
 
@@ -38,3 +40,7 @@ In order to avoid this extra build time, I have a pre-build script (`npm run fet
 **Code Linting:**
 
 Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules.  Prettier is also used with a few custom rule changes
+
+**Deployment:**
+
+This website is deployed on vercel
