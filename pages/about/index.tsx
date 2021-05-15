@@ -110,6 +110,51 @@ const About: FunctionComponent = () => {
         <Disclosure defaultOpen={true}>
           <div className={styles.disclosure}>
             <Disclosure.Button className={styles.disclosureButton}>
+              What are some of your previous side projects?
+            </Disclosure.Button>
+            <Disclosure.Panel className={styles.disclosurePanel}>
+              <div>
+                My previous projects include:
+                <br />
+                <ul>
+                  <li>
+                    a top comments dashboard that pulled top user comments from
+                    various popular websites leveraging the disqus API -{' '}
+                    <a href='https://github.com/marklimm/top-comments'>
+                      https://github.com/marklimm/top-comments
+                    </a>
+                  </li>
+                  <li>
+                    a realtime leaderboard for my company&apos;s &quot;pi
+                    day&quot; pie-in-the-face challenge. The standings updated
+                    in realtime and increased user engagement in the event -{' '}
+                    <a href='https://github.com/marklimm/pi-day'>
+                      https://github.com/marklimm/pi-day
+                    </a>
+                  </li>
+                  <li>
+                    a realtime event sign in application that used firebase to
+                    track attendees as they signed in -{' '}
+                    <a href='https://github.com/marklimm/pie-sign-in'>
+                      https://github.com/marklimm/pie-sign-in
+                    </a>
+                  </li>
+                  <li>
+                    a ruby CLI application that allowed a user to play
+                    tic-tac-toe against my tic-tac-toe-playing algorithm -{' '}
+                    <a href='https://github.com/marklimm/ruby-TicTacToe'>
+                      https://github.com/marklimm/ruby-TicTacToe
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </Disclosure.Panel>
+          </div>
+        </Disclosure>
+
+        <Disclosure defaultOpen={true}>
+          <div className={styles.disclosure}>
+            <Disclosure.Button className={styles.disclosureButton}>
               What were some of the resources you used to learn nextJS?
             </Disclosure.Button>
             <Disclosure.Panel className={styles.disclosurePanel}>
@@ -168,9 +213,8 @@ const About: FunctionComponent = () => {
             </Disclosure.Button>
             <Disclosure.Panel className={styles.disclosurePanel}>
               <div>
-                My favorites are Empire Strikes Back, Rogue One and A New Hope.
-                &nbsp;But I do get a lot of nostalgia from Phantom Menace, which
-                has the pod racing scene and the best lightsaber battle!
+                My favorites are Empire Strikes Back, A New Hope, Rogue One and
+                Solo.
               </div>
             </Disclosure.Panel>
           </div>
