@@ -7,8 +7,11 @@ import { NavBar } from 'components/NavBar/NavBar'
 
 import { DetentionBlockWrapper } from 'state/DetentionBlockContext'
 
-//  import tailwind
-import 'tailwindcss/tailwind.css'
+//  this was my previous way of bringing in tailwind which worked locally, but would lead to tailwind CSS classes being purged on production for a SSR-ed page
+// import 'tailwindcss/tailwind.css'
+
+//  this works for both local and prod (required tailwind css classes aren't unexpectedly missing for the SSR page)
+import './tailwind.css'
 
 //  import global styles following https://nextjs.org/docs/basic-features/built-in-css-support
 import 'scss/app.scss'
