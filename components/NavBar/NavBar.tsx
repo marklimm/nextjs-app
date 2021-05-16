@@ -27,6 +27,9 @@ export const NavBar: FunctionComponent = () => {
       <Link href='/events'>
         <a className={styles.link}>Events</a>
       </Link>
+      <Link href='/ssr'>
+        <a className={styles.link}>SSR</a>
+      </Link>
       <Link href='/detentionBlock'>
         <a className={styles.link}>Detention Block</a>
       </Link>

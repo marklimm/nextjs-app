@@ -8,6 +8,7 @@ The data is retrieved from various data sources:
 - The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
 - The **[Planets](/https://nextjs-app-rust.vercel.appplanets)** and **[Starships](https://nextjs-app-rust.vercel.app/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
 - The **[Detention Block](https://nextjs-app-rust.vercel.app/detentionBlock)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages display the same piece of site-wide shared state via react context
+- The **[SSR](https://nextjs-app-rust.vercel.app/ssr)** page retrieves reddit posts from the reddit API
 
 **Technology stack:**
 
@@ -29,6 +30,7 @@ The data is retrieved from various data sources:
 - date-fns (JS date formatting)
 - gray-matter (parsing markdown front matter)
 - remark (rendering markdown files as HTML)
+- ts-node (allows nodeJS to execute typescript files)
 - vaadin-date-picker (date picker web component)
 
 **Pre-build step:**
