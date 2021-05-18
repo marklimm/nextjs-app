@@ -1,8 +1,8 @@
-### This is a statically-generated NextJS website that displays various types of "Star Wars" data!
+### This is a statically-generated NextJS website that demonstrates various NextJS features
 
 The website can be seen at [https://nextjs-app-rust.vercel.app](https://nextjs-app-rust.vercel.app)
 
-The data is retrieved from various data sources:
+The data is retrieved from the following sources:
 
 - The **[Events](https://nextjs-app-rust.vercel.app/events)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages pull their data from local markdown (.md) files
 - The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
