@@ -11,7 +11,7 @@ import { DetentionBlockWrapper } from 'state/DetentionBlockContext'
 // import 'tailwindcss/tailwind.css'
 
 //  this works for both local and prod (required tailwind css classes aren't unexpectedly missing for the SSR page)
-import './tailwind.css'
+import './tailwind.scss'
 
 //  import global styles following https://nextjs.org/docs/basic-features/built-in-css-support
 import 'scss/app.scss'
