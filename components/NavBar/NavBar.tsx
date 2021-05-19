@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
+import { LinkDropdown } from 'components/LinkDropdown/LinkDropdown'
 
 import styles from './NavBar.module.scss'
 
@@ -27,9 +28,7 @@ export const NavBar: FunctionComponent = () => {
       <Link href='/events'>
         <a className={styles.link}>Events</a>
       </Link>
-      <Link href='/ssr'>
-        <a className={styles.link}>SSR</a>
-      </Link>
+      <LinkDropdown />
       <Link href='/detentionBlock'>
         <a className={styles.link}>Detention Block</a>
       </Link>
