@@ -1,6 +1,14 @@
 
   .disclosure {
-    @apply mb-12
+    @apply mb-12;
+
+    div {
+      @apply mb-4;
+    }
+
+    div:last-child {
+      @apply mb-0
+    }
   }
   
   /* focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75*/
