@@ -40,10 +40,10 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       timestamp,
-
-      //  using incremental static regeneration, this page will revalidate at most once every 5 minutes (300 seconds)
-      revalidate: 300,
     },
+
+    //  using incremental static regeneration, this page will revalidate at most once every 5 minutes (300 seconds)
+    revalidate: 300,
   }
 }
 
