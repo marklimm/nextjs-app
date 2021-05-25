@@ -2,8 +2,13 @@ import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 
 import { DetentionBlock } from 'components/DetentionBlock/DetentionBlock'
+import { toast } from 'react-toastify'
 
 const DetentionBlockUI: FunctionComponent = () => {
+  const openToastr = () => {
+    toast.info('toastr opened!')
+  }
+
   return (
     <>
       <Head>
@@ -15,6 +20,13 @@ const DetentionBlockUI: FunctionComponent = () => {
           <h1>Detention Block</h1>
 
           <DetentionBlock />
+
+          <button
+            className='mt-5 bg-indigo-800 focus:outline-none p-2 rounded-md text-sm text-white hover:text-yellow-400 hover:bg-red-700'
+            onClick={openToastr}
+          >
+            Open toastr
+          </button>
         </div>
         <div>
           <img

@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { AppProps } from 'next/app'
 
 import { Header } from 'components/Header/Header'
@@ -18,6 +21,16 @@ import 'scss/app.scss'
 
 //  import global markdown styles
 import 'scss/markdownContent.scss'
+
+//  styling the toastr taking cues from https://fkhadra.github.io/react-toastify/how-to-style#css-classes-as-function
+const contextClass = {
+  // success: "bg-blue-600",
+  error: 'bg-red-700',
+  info: 'bg-gray-600',
+  // warning: "bg-orange-400",
+  default: 'bg-indigo-600',
+  // dark: "bg-white-600 font-gray-300",
+}
 
 const MyApp: FunctionComponent<AppProps> = ({
   Component,
@@ -39,6 +52,20 @@ const MyApp: FunctionComponent<AppProps> = ({
           </DetentionBlockWrapper>
         </div>
         <NavBar />
+
+        {/* CSS classes taken from https://fkhadra.github.io/react-toastify/how-to-style#css-classes-as-function */}
+        <ToastContainer
+          position='bottom-center'
+          autoClose={30000}
+          hideProgressBar={true}
+          className='w-2/4'
+          // style={{ width: '50%' }}
+
+          toastClassName={({ type }) =>
+            contextClass[type || 'default'] +
+            ' relative flex mt-3 p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer'
+          }
+        />
       </div>
     </>
   )

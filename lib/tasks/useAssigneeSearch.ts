@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+
 import { SelectOption } from 'lib/types/SelectOption'
 
 import { LoadingState } from 'lib/types/LoadingState'
@@ -31,6 +33,8 @@ export const useAssigneeSearch = (
       const errorData = await response.json()
 
       console.error('server error: ', errorData.message)
+
+      toast.error(`Error: ${errorData.message}`)
 
       setLoadingState(LoadingState.ERROR)
       return

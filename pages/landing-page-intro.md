@@ -27,6 +27,7 @@ The data is retrieved from various data sources:
 
 - date-fns (JS date formatting)
 - gray-matter (parsing markdown front matter)
+- react-toastify (toastrs to display messages to the user)
 - remark (rendering markdown files as HTML)
 - ts-node (allows nodeJS to execute typescript files)
 - vaadin-date-picker (date picker web component)

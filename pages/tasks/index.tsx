@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import Head from 'next/head'
+import { toast } from 'react-toastify'
 
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
@@ -76,6 +77,8 @@ const Tasks: FunctionComponent = (): JSX.Element => {
         const errorData = await response.json()
 
         console.error('server error: ', errorData.message)
+
+        toast.error(`Error: ${errorData.message}`)
 
         setLoadingState(LoadingState.ERROR)
         return
