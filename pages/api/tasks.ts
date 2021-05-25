@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Task } from 'lib/types/Task'
 import { getTasks } from 'dataProviders/TaskData'
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<Task[]> => {
+): Promise<void> => {
   if (req.method === 'GET') {
     //  when this route receives a GET request, retrieve the tasks from prisma and return them
     let tasks = []

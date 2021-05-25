@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { CharacterTerse } from 'lib/types/Character'
 import { getCharactersTerse } from 'dataProviders/CharacterData'
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<CharacterTerse[]> => {
+): Promise<void> => {
   if (req.method === 'GET') {
     let characters = []
 
