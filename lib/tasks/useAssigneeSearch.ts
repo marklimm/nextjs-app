@@ -28,7 +28,9 @@ export const useAssigneeSearch = (
     const response = await fetch('/api/charactersTerse', {})
 
     if (response.status >= 400) {
-      console.error('there was some error', response.statusText)
+      const errorData = await response.json()
+
+      console.error('server error: ', errorData.message)
 
       setLoadingState(LoadingState.ERROR)
       return
@@ -48,6 +50,7 @@ export const useAssigneeSearch = (
     const loadCharacters = async () => {
       await getCharactersTerse()
 
+      //  since this is retrieve (I believe) the list of characters/assignees to filter on in the left-hand filter div, then I'm thinking that this setLoadingState() should not be here but instead be in /pages/tasks/index.tsx, because this deals with loading the list of tasks, not the list of characters/assignees
       setLoadingState(LoadingState.DONE_LOADING)
     }
 

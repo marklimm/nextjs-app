@@ -73,7 +73,9 @@ const Tasks: FunctionComponent = (): JSX.Element => {
       const response = await fetch(queryTasksString, {})
 
       if (response.status >= 400) {
-        console.error('there was some error', response.statusText)
+        const errorData = await response.json()
+
+        console.error('server error: ', errorData.message)
 
         setLoadingState(LoadingState.ERROR)
         return
@@ -179,6 +181,7 @@ const Tasks: FunctionComponent = (): JSX.Element => {
             <div>There are no tasks that match the current search criteria</div>
           )}
           {loadingState === LoadingState.DONE_LOADING &&
+            // tasks.length > 0 &&
             tasks.map((t) => {
               return (
                 <div key={t.id} className='searchResultCard'>

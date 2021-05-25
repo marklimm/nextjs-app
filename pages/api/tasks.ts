@@ -8,14 +8,18 @@ const handler = async (
 ): Promise<Task[]> => {
   if (req.method === 'GET') {
     //  when this route receives a GET request, retrieve the tasks from prisma and return them
-    const tasks = await getTasks(req.query)
-    res.status(200).json({ tasks })
+    let tasks = []
 
-    return tasks
+    try {
+      tasks = await getTasks(req.query)
+      res.status(200).json({ tasks })
+    } catch (error) {
+      res.status(500).json({
+        message: 'Server error attempting to retrieve the list of tasks',
+      })
+    }
   } else if (req.method === 'POST') {
     res.status(200).json({ status: 'success' })
-
-    return []
   }
 }
 
