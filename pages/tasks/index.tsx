@@ -46,7 +46,7 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     assigneeSelected,
     selectedAssigneeIds,
     setSelectedAssigneeIds,
-  } = useAssigneeSearch(setLoadingState)
+  } = useAssigneeSearch()
 
   const {
     selectedTShirtSizes,
@@ -72,6 +72,8 @@ const Tasks: FunctionComponent = (): JSX.Element => {
         queryTasksString += `&completedFlag=${completedFlag.value.toString()}`
       }
 
+      setLoadingState(LoadingState.LOADING)
+
       const response = await fetch(queryTasksString, {})
 
       if (response.status >= 400) {
@@ -87,6 +89,8 @@ const Tasks: FunctionComponent = (): JSX.Element => {
 
       const data = await response.json()
       setTasks(data.tasks)
+
+      setLoadingState(LoadingState.DONE_LOADING)
     }
 
     getTasks()

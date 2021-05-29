@@ -8,6 +8,7 @@ export type Task = Prisma.TaskGetPayload<{
         id: true
         firstName: true
         lastName: true
+        imageUrl: true
       }
     }
   }
