@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import { DetentionBlock } from 'components/DetentionBlock/DetentionBlock'
 import { toast } from 'react-toastify'
@@ -28,12 +29,14 @@ const DetentionBlockUI: FunctionComponent = () => {
             Open toastr
           </button>
         </div>
-        <div>
-          <img
+
+        {/* setting `position: relative` on this <div> is necessary in order for the below <Image /> to not fill up the entire page, since it is set to `layout: fill`.  Documentation at https://nextjs.org/docs/api-reference/next/image#layout */}
+        <div style={{ position: 'relative' }}>
+          <Image
             src='/detention-block.webp'
             alt='Star Wars detention block'
-            title='Star Wars detention block'
-            className=''
+            layout='fill'
+            objectFit='contain'
           />
         </div>
       </div>

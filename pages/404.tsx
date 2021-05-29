@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Custom404: FunctionComponent = () => {
   return (
@@ -16,11 +17,11 @@ const Custom404: FunctionComponent = () => {
           </Link>
         </span>
 
-        <img
+        <Image
           src='/technical-difficulties.jpg'
           alt='Star Wars technical difficulties image'
-          title='Star Wars technical difficulties image'
-          className='w-2/3'
+          width='987'
+          height='555'
         />
       </div>
     </>
