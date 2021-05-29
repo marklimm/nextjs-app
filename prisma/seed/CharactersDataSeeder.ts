@@ -71,6 +71,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Jedi'].id }],
         },
+        imageUrl: 'luke.jpg',
         posts: {
           create: [
             {
@@ -97,6 +98,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Scoundrel'].id }],
         },
+        imageUrl: 'han.jpg',
         posts: {
           create: [
             {
@@ -121,6 +123,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Rebel Alliance'].id }],
         },
+        imageUrl: 'leia.jpg',
         posts: {
           create: [
             {
@@ -141,6 +144,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Wookie'].id }],
         },
+        imageUrl: 'chewbecca.jpg',
         posts: {
           create: [
             {
@@ -180,6 +184,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Mandalorian'].id }],
         },
+        imageUrl: 'boba-fett.jpg',
         posts: {
           create: [
             {
@@ -226,6 +231,7 @@ export class CharactersDataSeeder {
             { id: characterTags['Clone Wars'].id },
           ],
         },
+        imageUrl: 'obi-wan.jpg',
         posts: {
           create: [
             {
@@ -246,6 +252,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Sith'].id }],
         },
+        imageUrl: 'darth.webp',
         posts: {
           create: [
             {

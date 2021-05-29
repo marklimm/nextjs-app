@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
+import Image from 'next/image'
 
 import { getCharacters } from 'dataProviders/CharacterData'
 import { getCharacterTags } from 'dataProviders/CharacterTagData'
@@ -86,48 +87,68 @@ const Characters: FunctionComponent<CharactersProps> = ({
         <div className='col-span-3 ml-8'>
           {filteredCharacters &&
             filteredCharacters.map((character) => (
-              <div key={character.id} className='searchResultCard'>
-                <Link href={`/people/${character.id}`}>
-                  <a target='_blank'>
-                    {character.firstName} {character.lastName}
-                  </a>
-                </Link>
+              <div key={character.id} className='searchResultCard flex'>
+                {character.imageUrl && (
+                  <div
+                    className='relative mr-3'
+                    style={{
+                      minWidth: '200px',
+                      maxHeight: '200px',
+                    }}
+                  >
+                    <Image
+                      src={`/characters/${character.imageUrl}`}
+                      alt={`${character.firstName} ${character.lastName}`}
+                      layout='fill'
+                      objectFit='fill'
+                      className='rounded-sm'
+                    />
+                  </div>
+                )}
 
-                {character.tags.length > 0 && (
-                  <div className='mb-1'>
-                    {character.tags.map((t) => (
-                      <span
-                        key={t.id}
-                        className='text-xs rounded-xl py-1 px-2 mr-2 bg-white border border-gray-300'
-                        title={t.description}
-                      >
-                        {t.name}
+                <div>
+                  <Link href={`/people/${character.id}`}>
+                    <a target='_blank'>
+                      {character.firstName} {character.lastName}
+                    </a>
+                  </Link>
+
+                  {character.tags.length > 0 && (
+                    <div className='mb-1'>
+                      {character.tags.map((t) => (
+                        <span
+                          key={t.id}
+                          className='text-xs rounded-xl py-1 px-2 mr-2 bg-white border border-gray-300'
+                          title={t.description}
+                        >
+                          {t.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className='text-sm mt-2'>{character.bio}</div>
+
+                  {character.posts.length > 0 && (
+                    <div className='my-4 text-sm rounded-md p-3 bg-white'>
+                      <span className='font-bold'>
+                        {character.firstName}&apos;s latest post:{' '}
                       </span>
-                    ))}
-                  </div>
-                )}
-                <div className='text-sm mt-2'>{character.bio}</div>
+                      <span>{character.posts[0].body}</span>
+                    </div>
+                  )}
 
-                {character.posts.length > 0 && (
-                  <div className='my-4 mx-5 text-sm rounded-md p-3 bg-white'>
-                    <span className='font-bold'>
-                      {character.firstName}&apos;s latest post:{' '}
+                  {character.friends.length > 0 && (
+                    <span className='text-sm'>
+                      Friends:{' '}
+                      {character.friends
+                        .map(
+                          (t) =>
+                            t.firstName + (t.lastName ? ' ' + t.lastName : '')
+                        )
+                        .join(', ')}
                     </span>
-                    <span>{character.posts[0].body}</span>
-                  </div>
-                )}
-
-                {character.friends.length > 0 && (
-                  <span className='text-sm'>
-                    Friends:{' '}
-                    {character.friends
-                      .map(
-                        (t) =>
-                          t.firstName + (t.lastName ? ' ' + t.lastName : '')
-                      )
-                      .join(', ')}
-                  </span>
-                )}
+                  )}
+                </div>
               </div>
             ))}
         </div>
