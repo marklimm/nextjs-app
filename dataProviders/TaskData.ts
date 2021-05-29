@@ -34,6 +34,7 @@ export const getTasks = async ({
           id: true,
           firstName: true,
           lastName: true,
+          imageUrl: true,
         },
       },
     },

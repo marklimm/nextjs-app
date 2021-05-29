@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 import { toast } from 'react-toastify'
 
 import { LoadingState } from 'lib/types/LoadingState'
@@ -190,14 +191,27 @@ const Tasks: FunctionComponent = (): JSX.Element => {
                 <div key={t.id} className='searchResultCard'>
                   <span className='text-lg'>{t.title}</span>
 
-                  <div className='text-sm'>
-                    <span>Assigned to: </span>
-                    <span className='font-bold'>
+                  <div className='text-sm mt-2'>{t.description}</div>
+
+                  <div className='text-sm flex items-center'>
+                    <div className='mr-3'>Assigned to: </div>
+
+                    {t.assignedTo.imageUrl && (
+                      <div className='mr-2'>
+                        <Image
+                          src={`/characters/${t.assignedTo.imageUrl}`}
+                          alt={`${t.assignedTo.firstName} ${t.assignedTo.lastName}`}
+                          width={50}
+                          height={50}
+                          className='rounded-full'
+                        />
+                      </div>
+                    )}
+                    <div className='font-bold'>
                       {t.assignedTo.firstName + ' ' + t.assignedTo.lastName}
-                    </span>
+                    </div>
                   </div>
 
-                  <div className='text-sm mt-2'>{t.description}</div>
                   <div className='text-sm mt-2'>
                     T-shirt size: {TShirtSize[t.tShirtSize]}
                   </div>
