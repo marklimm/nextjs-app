@@ -23,10 +23,10 @@ export const LinkDropdown: FunctionComponent = () => {
             {open && (
               <div>
                 {/* I tried using a <Transition /> like it shows in the headless UI example but I kept getting console errors */}
+                {/* I'm specifying a z-index of 10 `z-10` so that this menu appears above the detention block image which is rendered at runtime (since it's using nextjs image optimization) */}
                 <Menu.Items
                   as='div'
-                  static
-                  className='absolute focus:outline-none w-52 p-1 mt-3 bg-white rounded-md shadow-lg ring-2 ring-gray-300'
+                  className='absolute focus:outline-none w-52 p-1 mt-3 bg-white rounded-md shadow-lg ring-2 ring-gray-300 z-10'
                 >
                   <Menu.Item as='div' className={linkDropdownStyles.menuItem}>
                     <Link href='/ssr'>
