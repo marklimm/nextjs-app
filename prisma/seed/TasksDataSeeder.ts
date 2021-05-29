@@ -101,19 +101,6 @@ export class TasksDataSeeder {
 
     await this._prisma.task.create({
       data: {
-        title: 'Win this pod race!',
-        description: 'I need to win this pod race to win my freedom!',
-
-        tShirtSize: 2,
-        isComplete: true,
-        assignedTo: {
-          connect: { id: characters.anakin.id },
-        },
-      },
-    })
-
-    await this._prisma.task.create({
-      data: {
         title: 'Track the Millennium Falcon',
         description:
           'Track the Falcon to find information leading to retrieving Skywalker',
@@ -135,7 +122,7 @@ export class TasksDataSeeder {
         tShirtSize: 3,
         isComplete: false,
         assignedTo: {
-          connect: { id: characters.darth.id },
+          connect: { id: characters.vader.id },
         },
       },
     })
@@ -211,6 +198,20 @@ export class TasksDataSeeder {
 
     await this._prisma.task.create({
       data: {
+        title: 'Train Anakin as a Jedi',
+        description: 'This will have to be verified by the Council',
+
+        tShirtSize: 2,
+        isComplete: false,
+
+        assignedTo: {
+          connect: { id: characters.quiGon.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
         title: 'Destroy the data installation at Scarif',
         description:
           'The data installation has been compromised, it must be eliminated, along with anyone near it ...',
@@ -220,6 +221,34 @@ export class TasksDataSeeder {
         isComplete: false,
         assignedTo: {
           connect: { id: characters.tarkin.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
+        title: "Tell the Alliance about the Death Star's weakness",
+        description: 'We also need the plans ...',
+
+        tShirtSize: 1,
+
+        isComplete: false,
+        assignedTo: {
+          connect: { id: characters.jyn.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
+        title: 'Get vengeance on Sidious',
+        description: 'I have been betrayed by my former master ...',
+
+        tShirtSize: 3,
+
+        isComplete: false,
+        assignedTo: {
+          connect: { id: characters.maul.id },
         },
       },
     })

@@ -164,6 +164,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Scoundrel'].id }],
         },
+        imageUrl: 'lando.jpg',
         posts: {
           create: [
             {
@@ -196,29 +197,6 @@ export class CharactersDataSeeder {
       },
     })
 
-    const anakin = await this._prisma.character.create({
-      data: {
-        firstName: 'Anakin',
-        lastName: 'Skywalker',
-        bio:
-          'Anakin Skywalker was a human male Jedi Knight of the Galactic Republic and the prophesied Chosen One of the Jedi Order, destined to bring balance to the Force. Also known as "Ani" during his childhood, Skywalker earned the moniker "Hero With No Fear" from his accomplishments in the Clone Wars. His alter ego, Darth Vader, the Dark Lord of the Sith, was created when Skywalker turned to the dark side of the Force, pledging his allegiance to the Sith Lord Darth Sidious at the end of the Republic Era. ',
-        tags: {
-          connect: [
-            { id: characterTags['Jedi'].id },
-            { id: characterTags['Clone Wars'].id },
-          ],
-        },
-        posts: {
-          create: [
-            {
-              body:
-                'So there I was, having just made a deal with the Dark Lord and now having to face my old friend ...',
-            },
-          ],
-        },
-      },
-    })
-
     const obiWan = await this._prisma.character.create({
       data: {
         firstName: 'Obi-wan',
@@ -243,7 +221,7 @@ export class CharactersDataSeeder {
       },
     })
 
-    const darth = await this._prisma.character.create({
+    const vader = await this._prisma.character.create({
       data: {
         firstName: 'Darth',
         lastName: 'Vader',
@@ -273,6 +251,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Imperial Officer'].id }],
         },
+        imageUrl: 'tarkin.jpg',
         posts: {
           create: [
             {
@@ -293,6 +272,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Imperial Officer'].id }],
         },
+        imageUrl: 'krennic.jpg',
         posts: {
           create: [
             {
@@ -313,6 +293,7 @@ export class CharactersDataSeeder {
         tags: {
           connect: [{ id: characterTags['Jedi'].id }],
         },
+        imageUrl: 'qui-gon.jpg',
         posts: {
           create: [
             {
@@ -321,6 +302,156 @@ export class CharactersDataSeeder {
             },
           ],
         },
+      },
+    })
+
+    const threepio = await this._prisma.character.create({
+      data: {
+        firstName: 'C-3PO',
+        lastName: '',
+        bio:
+          'C-3PO, sometimes spelled See-Threepio and often referred to simply as Threepio, was a 3PO-series protocol droid designed to interact with organics, programmed primarily for etiquette and protocol. He was fluent in over six million forms of communication, and developed a fussy and worry-prone personality throughout his many decades of operation. Along with his counterpart, the astromech droid R2-D2, C-3PO constantly found himself directly involved in pivotal moments of galactic history, and aided in saving the galaxy on many occasions. ',
+        tags: {
+          connect: [{ id: characterTags['Droid'].id }],
+        },
+        imageUrl: 'threepio.jpg',
+        posts: {
+          create: [
+            {
+              body: 'So there I was, trying to get a hold of Master Luke...',
+            },
+          ],
+        },
+      },
+    })
+
+    const r2d2 = await this._prisma.character.create({
+      data: {
+        firstName: 'R2-D2',
+        lastName: '',
+        bio:
+          'R2-D2, pronounced Artoo-Deetoo and often referred to as R2 (Artoo), was an R2-series astromech droid manufactured by Industrial Automaton with masculine programming. A smart, spunky droid who would serve a multitude of masters over his lifetime, R2-D2 was never given a full memory wipe (apart from a partial wipe of select information by Cad Bane during the senate hostage crisis) nor did he ever receive new programming, with these factors resulting in an adventurous and independent attitude. Often finding himself in pivotal moments in galactic history, his bravery and ingenuity saved the galaxy on numerous occasions.',
+        tags: {
+          connect: [{ id: characterTags['Droid'].id }],
+        },
+        imageUrl: 'r2d2.jpg',
+      },
+    })
+
+    const jyn = await this._prisma.character.create({
+      data: {
+        firstName: 'Jyn',
+        lastName: 'Erso',
+        bio:
+          'Jyn Erso, known by the aliases Kestrel Dawn, Jyn Dawn, Liana Hallik, Tanith Ponta, Lyra Rallik, and Nari McVee, was a human female soldier and former criminal who became a pivotal member of the Alliance to Restore the Republic when she led Rogue One in stealing the Death Star plans during the Battle of Scarif. She was the daughter of Lyra Erso, a devout member of the Church of the Force, and scientist Galen Erso, who was forced into helping the Galactic Empire build the Death Star. Erso\'s mother was killed when Director Orson Krennic, the commander of the Death Star project, kidnapped her father—who affectionately referred to his daughter as "Stardust." She was raised by resistance fighter Saw Gerrera and became a child soldier in his army.',
+        tags: {
+          connect: [{ id: characterTags['Rebel Alliance'].id }],
+        },
+        imageUrl: 'jyn.jpg',
+        posts: {
+          create: [
+            {
+              body:
+                'So there I was, seeing my father for the first time in years...',
+            },
+          ],
+        },
+      },
+    })
+
+    const maul = await this._prisma.character.create({
+      data: {
+        firstName: 'Darth',
+        lastName: 'Maul',
+        bio:
+          'Maul, once known as Darth Maul, was a Force-sensitive Dathomirian Zabrak male who established himself as a crime lord during the reign of the Galactic Empire. Once, however, he was the Sith apprentice of Darth Sidious, and therefore, a Dark Lord of the Sith. Having trained in the ways of the Force, Maul was a formidable warrior strong with the dark side and deadly skilled in lightsaber combat. In addition, he was a scheming mastermind who plotted his return to power despite losing his place in the ranks of the Sith.',
+        tags: {
+          connect: [{ id: characterTags['Sith'].id }],
+        },
+        imageUrl: 'maul.jpg',
+        posts: {
+          create: [
+            {
+              body:
+                'So there I was, scouting the location of the Naboo ship...',
+            },
+          ],
+        },
+      },
+    })
+
+    const yoda = await this._prisma.character.create({
+      data: {
+        firstName: 'Yoda',
+        lastName: '',
+        bio:
+          'Yoda, a Force-sensitive male being belonging to a mysterious species, was a legendary Jedi Master who witnessed the rise and fall of the Galactic Republic, followed by the rise of the Galactic Empire. Small in stature but revered for his wisdom and power, Yoda trained generations of Jedi, ultimately serving as the Grand Master of the Jedi Order. Having lived through nine centuries of galactic history, he played integral roles in the Clone Wars, the rebirth of the Jedi through Luke Skywalker, and unlocking the path to immortality. ',
+        tags: {
+          connect: [{ id: characterTags['Jedi'].id }],
+        },
+        imageUrl: 'yoda.jpg',
+        posts: {
+          create: [
+            {
+              body:
+                'There was I, being tried by young Skywalker my patience was...',
+            },
+          ],
+        },
+      },
+    })
+
+    const sidious = await this._prisma.character.create({
+      data: {
+        firstName: 'Darth',
+        lastName: 'Sidious',
+        bio:
+          'Darth Sidious, born Sheev Palpatine and also known simply as the Emperor, was a human male Dark Lord of the Sith and Emperor of the Galactic Empire, ruling from 19 BBY to 4 ABY. Rising to power in the Republic Senate as the senator of Naboo, the secretive Sith Lord cultivated two identities, Sidious and Palpatine, using both to further his political career. He orchestrated the fall of the Galactic Republic and the Jedi Order through the Clone Wars, and then established his reign over the galaxy which lasted until his death at the Battle of Endor. However, the dark side of the Force gave rise to powers which allowed the Emperor to return from the grave.',
+        tags: {
+          connect: [{ id: characterTags['Sith'].id }],
+        },
+        imageUrl: 'sidious.jpg',
+        posts: {
+          create: [
+            {
+              body:
+                'So there I was, imploring young Anakin to allow me to help him...',
+            },
+          ],
+        },
+      },
+    })
+
+    const qira = await this._prisma.character.create({
+      data: {
+        firstName: 'Qi-ra',
+        lastName: '',
+        bio:
+          "Qi'ra was a human female from the planet Corellia who lived during the reign of the Galactic Empire. She grew up on the streets along with Han as part of the White Worms. Though they were at first rivals, the two Scrumrats eventually became lovers. Sometime after Qi'ra was made Head Girl by Lady Proxima, Han and Qi'ra attempted to escape with a vial of coaxium, but were separated at the Coronet Spaceport, with Han getting away, though he promised to return for her.",
+        tags: {
+          connect: [{ id: characterTags['Crimson Dawn'].id }],
+        },
+        imageUrl: 'qira.jpg',
+        posts: {
+          create: [
+            {
+              body: 'So there I was, seeing my naive childhood friend again...',
+            },
+          ],
+        },
+      },
+    })
+
+    const jarjar = await this._prisma.character.create({
+      data: {
+        firstName: 'Jar Jar',
+        lastName: 'Binks',
+        bio:
+          "Jar Jar Binks was a Gungan male military commander and politician who played a key role during the Invasion of Naboo and the Clone Wars that culminated in the fall of the Galactic Republic and the rise of the Galactic Empire. Once an outcast from Gungan society due to his clumsy behavior, he regained favor with his people by helping secure an alliance between the Gungan boss Rugor Nass and Queen Padmé Amidala of Naboo, an alliance vital in ending the Trade Federation's invasion of their shared homeworld. In the years that followed, Binks became a Junior Representative for his people in the Galactic Senate, serving alongside Amidala once she became the planet's senator. ",
+        tags: {
+          connect: [{ id: characterTags['Gungan'].id }],
+        },
+        imageUrl: 'jar-jar.jpg',
       },
     })
 
@@ -337,14 +468,28 @@ export class CharactersDataSeeder {
     await this.createFriendshipRelation(han, lando)
     await this.createFriendshipRelation(chewbecca, lando)
 
-    await this.createFriendshipRelation(anakin, obiWan)
-    await this.createFriendshipRelation(anakin, quiGon)
     await this.createFriendshipRelation(obiWan, quiGon)
 
     await this.createFriendshipRelation(luke, obiWan)
 
-    await this.createFriendshipRelation(darth, tarkin)
+    await this.createFriendshipRelation(vader, tarkin)
     await this.createFriendshipRelation(tarkin, krennic)
+
+    await this.createFriendshipRelation(luke, threepio)
+    await this.createFriendshipRelation(luke, r2d2)
+    await this.createFriendshipRelation(threepio, r2d2)
+
+    await this.createFriendshipRelation(maul, qira)
+
+    await this.createFriendshipRelation(luke, yoda)
+    await this.createFriendshipRelation(obiWan, yoda)
+    await this.createFriendshipRelation(quiGon, yoda)
+
+    await this.createFriendshipRelation(vader, sidious)
+
+    await this.createFriendshipRelation(han, qira)
+
+    await this.createFriendshipRelation(quiGon, jarjar)
 
     console.log('Character friendships have been seeded')
 
@@ -355,12 +500,19 @@ export class CharactersDataSeeder {
       chewbecca,
       lando,
       boba,
-      anakin,
       obiWan,
-      darth,
+      vader,
       tarkin,
       krennic,
       quiGon,
+      threepio,
+      r2d2,
+      jyn,
+      maul,
+      yoda,
+      sidious,
+      qira,
+      jarjar,
     }
   }
 
@@ -440,6 +592,22 @@ export class CharactersDataSeeder {
           name: 'Clone Wars',
           description:
             "The Clone Wars (22–19 BBY), was a major, three-year war between the Galactic Republic and the Confederacy of Independent Systems. The war was named after the army of clone troopers used by the Republic against the Confederacy's battle droid army. With both being fielded in enormous numbers by each respective side, the Grand Army of the Republic and the Separatist Droid Army were two of the largest military forces in galactic history, and fighting between them swept through the galaxy upon the outbreak of war in 22 BBY.",
+        },
+      }),
+
+      this._prisma.characterTag.create({
+        data: {
+          name: 'Droid',
+          description:
+            'Droids, less commonly known as robots and automatons, were mechanical beings that possessed artificial intelligence. They were used in a variety of roles and environments, often those considered too menial or too dangerous for other species, but also in fields that required extensive specialization and knowledge.',
+        },
+      }),
+
+      this._prisma.characterTag.create({
+        data: {
+          name: 'Crimson Dawn',
+          description:
+            "Crimson Dawn was a criminal organization led by the former Sith Lord Maul, who employed the gangster Dryden Vos as the public face of the syndicate during the reign of the Galactic Empire. Crimson Dawn was based aboard Vos' yacht First Light. During its existence, Crimson Dawn quickly cemented a reputation for being ruthless. Qi'ra publicly served as Vos' top lieutenant, but later directly worked with Maul after killing Vos. ",
         },
       }),
     ]
