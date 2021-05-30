@@ -47,7 +47,7 @@ export const LinkDropdown: FunctionComponent = () => {
                   </Menu.Item>
                   <Menu.Item as='div' className={linkDropdownStyles.menuItem}>
                     <Link href='/characters'>
-                      <a className={styles.link}>Static Site Generation</a>
+                      <a className={styles.link}>Static Site generation</a>
                     </Link>
                   </Menu.Item>
                 </Menu.Items>

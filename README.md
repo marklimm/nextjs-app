@@ -5,7 +5,7 @@ The website can be seen at [https://nextjs-app-rust.vercel.app](https://nextjs-a
 The data is retrieved from the following sources:
 
 - The **[Events](https://nextjs-app-rust.vercel.app/events)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages pull their data from local markdown (.md) files
-- The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
+- The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages pull data from a hosted postgres database using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
 - The **[Planets](/https://nextjs-app-rust.vercel.appplanets)** and **[Starships](https://nextjs-app-rust.vercel.app/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
 - The **[Detention Block](https://nextjs-app-rust.vercel.app/detentionBlock)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages display the same piece of site-wide shared state via react context
 - The **[SSR](https://nextjs-app-rust.vercel.app/ssr)** page retrieves reddit posts from the reddit API

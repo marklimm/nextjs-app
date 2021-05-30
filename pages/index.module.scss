@@ -1,6 +1,6 @@
 .descriptionArea {
   & > div {
-    @apply mb-6;
+    @apply mb-8;
   }
   
   ul {
@@ -18,7 +18,7 @@
   
   //  put extra space above for the markdown content being displayed on the Home page
   p {
-    @apply mt-5;
+    @apply mt-4;
   }
 
   //  I tried doing this but it has no effect

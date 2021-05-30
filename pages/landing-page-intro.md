@@ -3,7 +3,7 @@ This is a statically-generated NextJS website that displays various types of "St
 The data is retrieved from various data sources:
 
 - The **[Events](/events)** and **[Developer Blog](/devblog)** pages pull their data from local markdown (.md) files
-- The **[Characters](/characters)** and **[Tasks](/tasks)** pages pull data from a local sqlite DB file using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
+- The **[Characters](/characters)** and **[Tasks](/tasks)** pages pull data from a hosted postgres database using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
 - The **[Planets](/planets)** and **[Starships](/starships)** pages pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
 - The **[Detention Block](/detentionBlock)** and **[Developer Blog](/devblog)** pages display the same piece of site-wide shared state via react context
 - The **[SSR](/ssr)** page retrieves reddit posts from the reddit API

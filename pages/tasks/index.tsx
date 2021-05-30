@@ -136,6 +136,10 @@ const Tasks: FunctionComponent = (): JSX.Element => {
             The title text search is debounced so that the API isn&apos;t
             queried until the user has finished typing
           </li>
+          <li>
+            NextJS image optimization is used for each of the character
+            thumbnail images
+          </li>
         </ul>
       </div>
 

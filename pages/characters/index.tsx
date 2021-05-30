@@ -67,6 +67,10 @@ const Characters: FunctionComponent<CharactersProps> = ({
             CharacterPost and CharacterTag) are defined in a schema.prisma text
             file.
           </li>
+          <li>
+            NextJS image optimization is used for each of the character
+            thumbnail images
+          </li>
         </ul>
 
         <div className='mt-4'>
@@ -74,7 +78,9 @@ const Characters: FunctionComponent<CharactersProps> = ({
           <ul>
             <li>Tags - many Characters to many Tags relationship</li>
             <li>Posts - one Character to many Posts relationship</li>
-            <li>Friends - many Characters to many Characters self-relation</li>
+            <li>
+              Friends - many Characters to many Characters self-relationship
+            </li>
           </ul>
         </div>
       </div>
