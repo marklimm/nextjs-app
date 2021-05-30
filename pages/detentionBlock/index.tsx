@@ -14,6 +14,10 @@ const DetentionBlockUI: FunctionComponent = () => {
     <>
       <Head>
         <title>NextJS demo - Detention Block</title>
+        <meta
+          name='description'
+          content='Demonstration of react context in NextJS'
+        ></meta>
       </Head>
 
       <div className='grid grid-cols-2'>

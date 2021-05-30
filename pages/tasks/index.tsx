@@ -114,6 +114,10 @@ const Tasks: FunctionComponent = (): JSX.Element => {
     <>
       <Head>
         <title>NextJS demo - Tasks</title>
+        <meta
+          name='description'
+          content='A filterable list of data using client-side rendering in NextJS'
+        ></meta>
       </Head>
       <h1>Tasks</h1>
 

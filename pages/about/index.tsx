@@ -11,6 +11,7 @@ const About: FunctionComponent = () => {
     <>
       <Head>
         <title>NextJS demo - About</title>
+        <meta name="description" content="About myself and my NextJS website that uses Star Wars data"></meta>
       </Head>
 
       <div className={description.descriptionArea}>

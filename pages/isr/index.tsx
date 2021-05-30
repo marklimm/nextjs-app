@@ -16,6 +16,10 @@ const ISRUI: FunctionComponent<ISRProps> = ({ timestamp }: ISRProps) => {
     <>
       <Head>
         <title>Incremental Static Regeneration</title>
+        <meta
+          name='description'
+          content='A very basic example of incremental static regeneration in NextJS'
+        ></meta>
       </Head>
       <h1>Incremental Static Regeneration</h1>
 

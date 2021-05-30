@@ -17,6 +17,10 @@ const HomePage: FunctionComponent<HomePageProps> = ({
     <>
       <Head>
         <title>NextJS demo - Home</title>
+        <meta
+          name='description'
+          content='A demo NextJS website using typescript, react hooks, prisma, postgres, tailwind CSS, eslint and other web tools.  Uses Star Wars data'
+        ></meta>
       </Head>
       <div className={styles.descriptionArea}>
         <h1>Welcome!</h1>

@@ -19,6 +19,10 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({
     <>
       <Head>
         <title>NextJS demo - Developer blog</title>
+        <meta
+          name='description'
+          content='Markdown files being output to HTML.  A log of updates made to my NextJS app'
+        ></meta>
       </Head>
 
       <div className='grid grid-cols-3 gap-4 items-start'>

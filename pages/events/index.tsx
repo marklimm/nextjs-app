@@ -28,6 +28,10 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
     <>
       <Head>
         <title>NextJS demo - Events</title>
+        <meta
+          name='description'
+          content='A statically-rendered and filterable list of records created from markdown files'
+        ></meta>
       </Head>
       <h1>Events</h1>
 

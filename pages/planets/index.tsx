@@ -22,6 +22,10 @@ const PlanetsUI: FunctionComponent<PlanetsProps> = ({
     <>
       <Head>
         <title>NextJS demo - Planets</title>
+        <meta
+          name='description'
+          content='A statically rendered list of Star Wars API (SWAPI) data'
+        ></meta>
       </Head>
       <h1>Planets</h1>
 

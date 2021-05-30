@@ -22,6 +22,10 @@ const StarshipsUI: FunctionComponent<StarShipsProps> = ({
     <>
       <Head>
         <title>Star Wars Starships</title>
+        <meta
+          name='description'
+          content='A statically rendered list of Star Wars API (SWAPI) data'
+        ></meta>
       </Head>
       <h1>Starships</h1>
 

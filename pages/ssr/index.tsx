@@ -24,6 +24,10 @@ const SSRUI: FunctionComponent<SSRProps> = ({ posts, timestamp }: SSRProps) => {
     <>
       <Head>
         <title>Server-side Rendering example</title>
+        <meta
+          name='description'
+          content='An example of server-side rendering in NextJS'
+        ></meta>
       </Head>
       <h1>Server-side rendering (SSR) example</h1>
 

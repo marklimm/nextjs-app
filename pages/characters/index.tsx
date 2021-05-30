@@ -41,6 +41,10 @@ const Characters: FunctionComponent<CharactersProps> = ({
     <>
       <Head>
         <title>NextJS demo - Characters</title>
+        <meta
+          name='description'
+          content='An example of NextJS static site generation with relational data'
+        ></meta>
       </Head>
       <h1>Characters</h1>
 
