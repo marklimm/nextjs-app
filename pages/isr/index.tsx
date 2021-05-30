@@ -10,10 +10,18 @@ import descriptionStyle from '../index.module.scss'
 // import styles from './index.module.scss'
 
 interface ISRProps {
-  localDateTimeString: string
+  utcDateTimeString: string
 }
 
-const ISRUI: FunctionComponent<ISRProps> = ({ localDateTimeString }: ISRProps) => {
+const ISRUI: FunctionComponent<ISRProps> = ({
+  utcDateTimeString,
+}: ISRProps) => {
+  //  on the client-side, convert the UTC datetime from the server to the local timezone
+  const localDateTime = new Date(utcDateTimeString)
+
+  //  format the datetime
+  const localDateTimeString = format(localDateTime, 'LLLL d, yyyy pp')
+
   return (
     <>
       <Head>
@@ -42,17 +50,11 @@ const ISRUI: FunctionComponent<ISRProps> = ({ localDateTimeString }: ISRProps) =
 
 export const getStaticProps: GetStaticProps = async () => {
   //  get the UTC datetime as a string
-  const utcTimeString = new Date().toISOString()
-
-  //  convert to the local timezone
-  const localDateTime = new Date(utcTimeString)
-
-  //  format the datetime
-  const localDateTimeString = format(localDateTime, 'LLLL d, yyyy pp')
+  const utcDateTimeString = new Date().toISOString()
 
   return {
     props: {
-      localDateTimeString,
+      utcDateTimeString,
     },
 
     //  using incremental static regeneration, this page will revalidate at most once every 5 minutes (300 seconds)
