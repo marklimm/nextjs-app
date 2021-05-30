@@ -2,16 +2,18 @@ import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
+import { format } from 'date-fns'
+
 import { PulseCircle } from 'components/PulseCircle/PulseCircle'
 
 import descriptionStyle from '../index.module.scss'
 // import styles from './index.module.scss'
 
 interface ISRProps {
-  timestamp: string
+  localDateTimeString: string
 }
 
-const ISRUI: FunctionComponent<ISRProps> = ({ timestamp }: ISRProps) => {
+const ISRUI: FunctionComponent<ISRProps> = ({ localDateTimeString }: ISRProps) => {
   return (
     <>
       <Head>
@@ -32,18 +34,25 @@ const ISRUI: FunctionComponent<ISRProps> = ({ timestamp }: ISRProps) => {
           </span>
         </div>
 
-        <div>This page was last updated on {timestamp}</div>
+        <div>This page was last updated on {localDateTimeString}</div>
       </div>
     </>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const timestamp = new Date().toLocaleString()
+  //  get the UTC datetime as a string
+  const utcTimeString = new Date().toISOString()
+
+  //  convert to the local timezone
+  const localDateTime = new Date(utcTimeString)
+
+  //  format the datetime
+  const localDateTimeString = format(localDateTime, 'LLLL d, yyyy pp')
 
   return {
     props: {
-      timestamp,
+      localDateTimeString,
     },
 
     //  using incremental static regeneration, this page will revalidate at most once every 5 minutes (300 seconds)
