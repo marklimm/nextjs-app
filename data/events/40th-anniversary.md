@@ -1,7 +1,7 @@
 ---
 title: 'Star Wars 40th Anniversary celebration'
 date: '2017-04-13'
-emotionTags: ['nostalgic']
+emotionTags: ['nostalgic', 'excited']
 ---
 
 A very special tribute to the 40th anniversary of Star Wars will kick start Celebration Orlando in grand fashion.
