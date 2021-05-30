@@ -58,6 +58,20 @@ export class TasksDataSeeder {
 
     await this._prisma.task.create({
       data: {
+        title: 'Find a way to get this bounty off my head',
+        description:
+          "I'm running out of time, Jabba just sent Greedo to off me ...",
+
+        tShirtSize: 3,
+        isComplete: true,
+        assignedTo: {
+          connect: { id: characters.han.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
         title:
           'Quickly find some place where I can stash the stolen data tapes!',
         description: 'Vader is coming, maybe I can stash them in a droid?',
@@ -170,6 +184,19 @@ export class TasksDataSeeder {
 
     await this._prisma.task.create({
       data: {
+        title: 'Determine if the design of the Death Star has been compromised',
+        description: "Maybe I can't trust Galen after all ...",
+
+        tShirtSize: 2,
+        isComplete: false,
+        assignedTo: {
+          connect: { id: characters.krennic.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
         title: 'Find the parts needed for our ship',
         description:
           'The Naboo ship was disable in the battle, find replacement parts',
@@ -227,6 +254,21 @@ export class TasksDataSeeder {
 
     await this._prisma.task.create({
       data: {
+        title: 'Find the location of the hidden rebel base',
+        description:
+          'With the data tapes potentially compromised, time is not on our side ...',
+
+        tShirtSize: 3,
+
+        isComplete: false,
+        assignedTo: {
+          connect: { id: characters.tarkin.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
         title: "Tell the Alliance about the Death Star's weakness",
         description: 'We also need the plans ...',
 
@@ -249,6 +291,20 @@ export class TasksDataSeeder {
         isComplete: false,
         assignedTo: {
           connect: { id: characters.maul.id },
+        },
+      },
+    })
+
+    await this._prisma.task.create({
+      data: {
+        title: 'Restore power to the Millennium Falcon',
+        description: '',
+
+        tShirtSize: 1,
+
+        isComplete: true,
+        assignedTo: {
+          connect: { id: characters.r2d2.id },
         },
       },
     })

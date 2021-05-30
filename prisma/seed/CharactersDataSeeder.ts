@@ -78,7 +78,8 @@ export class CharactersDataSeeder {
               body: 'So there I was, running for my life on the Death Star ...',
             },
             {
-              body: 'So there I was, knee deep in sand without a soul in sight',
+              body:
+                'So there I was, knee deep in sand without a soul in sight ...',
             },
             {
               body:
@@ -148,7 +149,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body: 'Rowr ahragh awf ahraroww rowh rohngr grgrff rf rf...',
+              body: 'Rowr ahragh awf ahraroww rowh rohngr grgrff rf rf ...',
             },
           ],
         },
@@ -190,7 +191,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, the Captain in tow and on route to my client...',
+                'So there I was, Captain Solo in tow and en route to my client ...',
             },
           ],
         },
@@ -235,7 +236,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, desperately needing to recover those stolen data tapes...',
+                'So there I was, desperately needing to recover those stolen data tapes ...',
             },
           ],
         },
@@ -256,7 +257,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                "So there I was, at my wit's end trying to discover the hidden Rebel base ...",
+                "So there I was, at my wit's end trying to discover the location of the hidden Rebel base ...",
             },
           ],
         },
@@ -298,7 +299,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, getting frustrated with the needless bureaucracy of the Jedi Council ...',
+                'So there I was, becoming increasingly frustrated with the needless bureaucracy of the Jedi Council ...',
             },
           ],
         },
@@ -318,7 +319,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body: 'So there I was, trying to get a hold of Master Luke...',
+              body: 'So there I was, trying to get a hold of Master Luke ...',
             },
           ],
         },
@@ -352,7 +353,11 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, seeing my father for the first time in years...',
+                'So there I was, seeing my father for the first time in years ...',
+            },
+            {
+              body:
+                'So there I was, with the Alliance deciding not to do anything ...',
             },
           ],
         },
@@ -373,7 +378,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, scouting the location of the Naboo ship...',
+                'So there I was, scouting the location of the Naboo ship ...',
             },
           ],
         },
@@ -415,7 +420,7 @@ export class CharactersDataSeeder {
           create: [
             {
               body:
-                'So there I was, imploring young Anakin to allow me to help him...',
+                'So there I was, imploring young Anakin to allow me to help him ...',
             },
           ],
         },
@@ -435,7 +440,8 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body: 'So there I was, seeing my naive childhood friend again...',
+              body:
+                'So there I was, confronted by my naive childhood friend ...',
             },
           ],
         },
