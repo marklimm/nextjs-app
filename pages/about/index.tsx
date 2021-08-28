@@ -212,8 +212,7 @@ const About: FunctionComponent = () => {
             </Disclosure.Button>
             <Disclosure.Panel className={styles.disclosurePanel}>
               <div>
-                I like Empire Strikes Back, A New Hope, Rogue One, Solo and
-                Phantom Menace.
+                I like Empire Strikes Back, A New Hope, Rogue One and Solo
               </div>
             </Disclosure.Panel>
           </div>

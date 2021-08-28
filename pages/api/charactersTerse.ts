@@ -14,10 +14,13 @@ const handler = async (
 
       res.status(200).json({ characters })
     } catch (error) {
+      console.log(
+        'server error attempting to retrieve the list of characters: ',
+        error
+      )
+
       res.status(500).json({
-        message:
-          'Server error attempting to retrieve the list of characters: ' +
-          error,
+        message: 'Server error attempting to retrieve the list of characters: ',
       })
     }
   }
