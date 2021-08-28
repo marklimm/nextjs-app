@@ -81,6 +81,8 @@ export const getCharactersTerse = async (): Promise<CharacterTerse[]> => {
     ],
   })
 
+  console.log('getCharactersTerse : characters', characters)
+
   return characters
 }
 

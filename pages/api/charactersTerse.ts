@@ -15,7 +15,9 @@ const handler = async (
       res.status(200).json({ characters })
     } catch (error) {
       res.status(500).json({
-        message: 'Server error attempting to retrieve the list of characters',
+        message:
+          'Server error attempting to retrieve the list of characters: ' +
+          error,
       })
     }
   }
