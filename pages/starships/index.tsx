@@ -41,10 +41,11 @@ const StarshipsUI: FunctionComponent<StarShipsProps> = ({
         <ul>
           <li>The data is taken from the Star Wars API (https://swapi.dev/)</li>
           <li>
-            I am using a pre-build script that fetch()-es the Star Wars data
-            first and writes it to JSON files. Then when the nextjs build
-            happens, this page is rendered at build time (static site
-            generation)
+            A pre-build script was ran that fetch()-ed the Star Wars API data
+            and then wrote the data out to JSON files (which happened 1 time).
+            Then when the nextjs build happens (which happens multiple times),
+            this page gets rendered at build time (static site generation) by
+            reading from one of those JSON files
           </li>
           <li>
             Movies for each starship are also included in the results. This

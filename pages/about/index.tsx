@@ -25,14 +25,13 @@ const About: FunctionComponent = () => {
             </Disclosure.Button>
             <Disclosure.Panel className={styles.disclosurePanel}>
               <div>
-                Thanks for visiting my site! &nbsp;This website is my way of
-                learning NextJS while also getting familiar with modern web
-                development tools (like prettier, prisma, tailwind, headless UI,
-                etc.). &nbsp;I wanted to incorporate these tools all together in
-                a single project to learn about any potential integration
-                issues. &nbsp;This website demonstrates how NextJS allows
-                content to be rendered at build time, request time or on the
-                client-side and is built with react hooks and typescript.
+                Thanks for visiting my site! &nbsp;This website was my way of
+                learning NextJS while also getting familiar with various web
+                development tools (prettier, prisma, tailwind, headless UI,
+                etc.). &nbsp;This website demonstrates how NextJS allows content
+                to be rendered at build time, request time or on the
+                client-side. Typescript and React hooks is used throughout this
+                project
               </div>
             </Disclosure.Panel>
           </div>
@@ -51,16 +50,16 @@ const About: FunctionComponent = () => {
                 SWAPI data provides a good start, but as I fleshed out the
                 website more, I noticed that the data could be more compelling.
                 &nbsp;This led to me creating my own Star Wars data (Characters,
-                Events, Tasks) and storing it in either a hosted postgres DB
-                (accessible via the prisma ORM) or markdown files.
+                Events, Tasks), which is now being stored in a hosted postgres
+                DB (accessible via the prisma ORM).
               </div>
               <div>
-                For modeling test relational data, I think Star Wars is a good
-                frame of reference, since most people are familiar with it!
-                &nbsp;It&apos;s easy for me to imagine{' '}
+                Since a lot of people are familiar with Star Wars I think it
+                makes for a good set of test relational data (Characters, Tasks,
+                Planets, etc.) &nbsp;Examples of relational data include{' '}
                 <a href='/tasks'>tasks</a> that a particular Star Wars{' '}
                 <a href='/characters'>character</a> might have or the
-                friendships between characters. &nbsp;And real-life Star Wars
+                friendships between characters. &nbsp;Also real-life Star Wars
                 history goes back to 1977 so there are plenty of note-worthy
                 Star Wars <a href='/events'>events</a> to reference as well
               </div>
@@ -91,18 +90,15 @@ const About: FunctionComponent = () => {
             </Disclosure.Button>
             <Disclosure.Panel className={styles.disclosurePanel}>
               <div>
-                I&apos;m a web developer based in Northern VA. &nbsp;My primary
-                focus is full stack development with javascript/typescript and
-                react. &nbsp;I currently work in downtown DC. &nbsp;Places
-                I&apos;ve worked at include smaller startups, non-profits and a
-                federal contractor, working on both internal admin tools as well
-                as outward-facing UIs. &nbsp;I have also done previous work in
-                C#/.NET/SQL Server. &nbsp;I graduated with a computer science
-                degree from the University of Maryland
-              </div>
-              <div>
-                In my spare time I enjoy working out, spending time with
-                friends, following pro basketball and reading
+                I&apos;m a web developer based in Arlington, VA. &nbsp;My
+                primary focus is full stack development with
+                javascript/typescript and react. &nbsp;I currently work in
+                downtown DC. &nbsp;Places I&apos;ve worked at include smaller
+                startups, non-profits and a federal contractor, working on both
+                internal admin tools as well as outward-facing UIs. &nbsp;My
+                previous work also includes C#/.NET/SQL Server. &nbsp;I
+                graduated with a computer science degree from the University of
+                Maryland
               </div>
             </Disclosure.Panel>
           </div>

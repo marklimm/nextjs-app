@@ -117,11 +117,9 @@ const Characters: FunctionComponent<CharactersProps> = ({
                 )}
 
                 <div>
-                  <Link href={`/people/${character.id}`}>
-                    <a target='_blank'>
-                      {character.firstName} {character.lastName}
-                    </a>
-                  </Link>
+                  <div className='mb-2 text-lg'>
+                    {character.firstName} {character.lastName}
+                  </div>
 
                   {character.tags.length > 0 && (
                     <div className='mb-1'>
@@ -137,7 +135,6 @@ const Characters: FunctionComponent<CharactersProps> = ({
                     </div>
                   )}
                   <div className='text-sm mt-2'>{character.bio}</div>
-
                   {character.posts.length > 0 && (
                     <div className='my-4 text-sm rounded-md p-3 bg-white'>
                       <span className='font-bold'>
@@ -146,7 +143,6 @@ const Characters: FunctionComponent<CharactersProps> = ({
                       <span>{character.posts[0].body}</span>
                     </div>
                   )}
-
                   {character.friends.length > 0 && (
                     <span className='text-sm'>
                       Friends:{' '}
