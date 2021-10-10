@@ -65,6 +65,7 @@ export const getTasks = async ({
     const titleClause = {
       title: {
         contains: title,
+        mode: 'insensitive',
       },
     }
 
