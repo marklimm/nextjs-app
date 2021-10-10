@@ -7,7 +7,7 @@ import { useAppSelector } from 'lib/redux/hooks'
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
 
-export const TasksResults: React.FC = (): JSX.Element => {
+const TasksResults = (): JSX.Element => {
   const {
     completed: { selectedCompletedOption },
     title: { searchString },
@@ -119,3 +119,5 @@ export const TasksResults: React.FC = (): JSX.Element => {
     </>
   )
 }
+
+export default TasksResults

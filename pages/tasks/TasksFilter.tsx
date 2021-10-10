@@ -13,7 +13,7 @@ import {
 import { SelectOption } from 'lib/types/SelectOption'
 import { useDebounce } from 'components/FilterPanel/Textbox'
 
-export const TasksFilter: React.FC = (): JSX.Element => {
+const TasksFilter = (): JSX.Element => {
   const dispatch = useAppDispatch()
 
   const {
@@ -99,3 +99,5 @@ export const TasksFilter: React.FC = (): JSX.Element => {
     </>
   )
 }
+
+export default TasksFilter
