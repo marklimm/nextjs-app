@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 
-import { IReduxStore } from 'lib/redux/ReduxStore'
+import { useAppSelector } from 'lib/redux/hooks'
 
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
 
 export const TasksResults: React.FC = (): JSX.Element => {
   const {
-    completed: { selectedOption: selectedCompletedOption },
+    completed: { selectedCompletedOption },
     title: { searchString },
     tShirtSize: { selectedTShirtSizes },
-  } = useSelector<IReduxStore>((state) => {
+  } = useAppSelector((state) => {
     return state.tasksFilter
   })
 

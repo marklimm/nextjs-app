@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { ListBox } from 'components/FilterPanel/ListBox'
 import { Textbox } from 'components/FilterPanel/Textbox'
-
-import { IReduxStore } from 'lib/redux/ReduxStore'
 
 import {
   setCompleted,
@@ -16,15 +14,12 @@ import { SelectOption } from 'lib/types/SelectOption'
 import { useDebounce } from 'components/FilterPanel/Textbox'
 
 export const TasksFilter: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const {
-    completed: {
-      options: completedStatusOptions,
-      selectedOption: selectedCompletedOption,
-    },
-    tShirtSize: { options: tShirtSizeOptions, selectedTShirtSize },
-  } = useSelector<IReduxStore>((state) => {
+    completed: { completedStatusOptions, selectedCompletedOption },
+    tShirtSize: { selectedTShirtSizes, tShirtSizeOptions },
+  } = useAppSelector((state) => {
     return state.tasksFilter
   })
 
@@ -40,7 +35,7 @@ export const TasksFilter: React.FC = (): JSX.Element => {
 
     // setSelectedAssigneeIds([])
 
-    setTShirtSizes([])
+    setTShirtSizesHandler([])
 
     setCompletedFlag(completedStatusOptions[0])
 
@@ -55,7 +50,7 @@ export const TasksFilter: React.FC = (): JSX.Element => {
     setTitleSearchString(event.target.value)
   }
 
-  const setTShirtSizes = (selectedTShirtSizes: SelectOption[]) => {
+  const setTShirtSizesHandler = (selectedTShirtSizes: SelectOption[]) => {
     dispatch(setTShirtSizes(selectedTShirtSizes))
   }
 
@@ -83,9 +78,9 @@ export const TasksFilter: React.FC = (): JSX.Element => {
       <Dropdown
         label={'T-shirt size'}
         selectOptions={tShirtSizeOptions}
-        optionSelected={setTShirtSizes}
+        optionSelected={setTShirtSizesHandler}
         placeholder={'T-shirt size'}
-        value={selectedTShirtSize}
+        value={selectedTShirtSizes}
       />
 
       {/* <Toggle /> is only good if you only have 2 options */}

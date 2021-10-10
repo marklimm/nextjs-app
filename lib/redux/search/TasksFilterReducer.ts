@@ -6,34 +6,34 @@ import { TShirtSize } from 'lib/types/Task'
 
 export interface TasksFilterState {
   assignee: {
-    options: SelectOption[]
+    assigneeOptions: SelectOption[]
     selectedAssignees: SelectOption[]
   }
   completed: {
-    options: SelectOption[]
-    selectedOption: SelectOption
+    completedStatusOptions: SelectOption[]
+    selectedCompletedOption: SelectOption
   }
   title: {
     searchString: string
   }
   tShirtSize: {
-    options: SelectOption[]
+    tShirtSizeOptions: SelectOption[]
     selectedTShirtSizes: SelectOption[]
   }
 }
 
-const allOption = {
+const allOption: SelectOption = {
   label: IsCompletedFilter.ALL.toString(),
   value: IsCompletedFilter.ALL,
 }
 
 const initialState: TasksFilterState = {
   assignee: {
-    options: [],
+    assigneeOptions: [],
     selectedAssignees: [],
   },
   completed: {
-    options: [
+    completedStatusOptions: [
       allOption,
       {
         label: IsCompletedFilter.NOT_COMPLETED.toString(),
@@ -44,13 +44,13 @@ const initialState: TasksFilterState = {
         value: IsCompletedFilter.COMPLETED,
       },
     ],
-    selectedOption: allOption,
+    selectedCompletedOption: allOption,
   },
   title: {
     searchString: '',
   },
   tShirtSize: {
-    options: [
+    tShirtSizeOptions: [
       {
         label: TShirtSize[TShirtSize.SMALL],
         value: TShirtSize.SMALL.toString(),
@@ -73,12 +73,12 @@ const tasksFilterSlice = createSlice({
   initialState,
   reducers: {
     setCompleted(state, action: PayloadAction<SelectOption>) {
-      state.completed.selectedOption = action.payload
+      state.completed.selectedCompletedOption = action.payload
     },
     setTitle(state, action: PayloadAction<string>) {
       state.title.searchString = action.payload
     },
-    setTShirtSizes(state, action: PayloadAction<SelectOption>) {
+    setTShirtSizes(state, action: PayloadAction<SelectOption[]>) {
       state.tShirtSize.selectedTShirtSizes = action.payload
     },
   },
