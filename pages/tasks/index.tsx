@@ -3,8 +3,6 @@ import Head from 'next/head'
 
 import { Provider } from 'react-redux'
 
-// import { useAssigneeSearch } from 'lib/tasks/useAssigneeSearch'
-
 import ReduxStore from 'lib/redux/ReduxStore'
 
 import descriptionStyle from '../index.module.scss'
@@ -18,13 +16,6 @@ import TasksResults from 'components/Tasks/TasksResults'
  * @returns
  */
 const Tasks: FunctionComponent = (): JSX.Element => {
-  // const {
-  //   assigneeOptions,
-  //   assigneeSelected,
-  //   selectedAssigneeIds,
-  //   setSelectedAssigneeIds,
-  // } = useAssigneeSearch()
-
   return (
     <>
       <Head>

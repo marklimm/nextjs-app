@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 
-// import { useAppSelector } from 'lib/redux/hooks'
-
+import { useAppSelector } from 'lib/redux/hooks'
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
-import { useAppSelector } from 'lib/redux/hooks'
 
 const TasksResults = (): JSX.Element => {
   const {
+    assignee: { selectedAssignees },
     completed: { selectedCompletedOption },
     title: { searchString },
     tShirtSize: { selectedTShirtSizes },
@@ -25,14 +24,12 @@ const TasksResults = (): JSX.Element => {
 
   useEffect(() => {
     const getTasks = async () => {
-      // const assigneeIds =
-      //   selectedAssigneeIds.map((a) => a.value).join(',') || ''
+      const assigneeIds = selectedAssignees.map((a) => a.value).join(',') || ''
 
       const tShirtSizeIds =
         selectedTShirtSizes.map((a) => a.value).join(',') || ''
 
-      // let queryTasksString = `/api/tasks?assigneeIds=${assigneeIds}&title=${debouncedTitleSearchString}&tShirtSizeIds=${tShirtSizeIds}`
-      let queryTasksString = `/api/tasks?title=${searchString}&tShirtSizeIds=${tShirtSizeIds}`
+      let queryTasksString = `/api/tasks?assigneeIds=${assigneeIds}&title=${searchString}&tShirtSizeIds=${tShirtSizeIds}`
 
       if (
         selectedCompletedOption.value === IsCompletedFilter.COMPLETED ||
@@ -43,8 +40,9 @@ const TasksResults = (): JSX.Element => {
 
       setLoadingState(LoadingState.LOADING)
 
-      console.log('----')
-      console.log('queryTasksString', queryTasksString)
+      // console.log('----')
+      // console.log('queryTasksString', queryTasksString)
+
       const response = await fetch(queryTasksString)
 
       if (response.status >= 400) {
@@ -65,7 +63,12 @@ const TasksResults = (): JSX.Element => {
     }
 
     getTasks()
-  }, [searchString, selectedCompletedOption, selectedTShirtSizes])
+  }, [
+    searchString,
+    selectedAssignees,
+    selectedCompletedOption,
+    selectedTShirtSizes,
+  ])
 
   return (
     <>

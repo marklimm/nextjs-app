@@ -72,6 +72,12 @@ const tasksFilterSlice = createSlice({
   name: 'TasksFilters',
   initialState,
   reducers: {
+    setAssigneeOptions(state, action: PayloadAction<SelectOption[]>) {
+      state.assignee.assigneeOptions = action.payload
+    },
+    setSelectedAssignees(state, action: PayloadAction<SelectOption[]>) {
+      state.assignee.selectedAssignees = action.payload
+    },
     setCompleted(state, action: PayloadAction<SelectOption>) {
       state.completed.selectedCompletedOption = action.payload
     },
@@ -85,6 +91,8 @@ const tasksFilterSlice = createSlice({
 })
 
 export const {
+  setAssigneeOptions,
+  setSelectedAssignees,
   setCompleted,
   setTitle,
   setTShirtSizes,

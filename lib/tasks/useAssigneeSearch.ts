@@ -1,26 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
-import { SelectOption } from 'lib/types/SelectOption'
-
-interface UseAssigneeSearchReturnType {
-  assigneeOptions: SelectOption[]
-  assigneeSelected: (selectedAssignees: SelectOption[]) => void
-  selectedAssigneeIds: SelectOption[]
-  setSelectedAssigneeIds: (selectedAssigneeIds: SelectOption[]) => void
-}
+import { useAppDispatch } from 'lib/redux/hooks'
+import { setAssigneeOptions } from 'lib/redux/search/TasksFilterReducer'
 
 /**
- * This custom hook stores the user-specified assignees when the user is searching Tasks by their assignee
+ * This custom hook retrieves the list of characters/assignees and sends them to the redux store on page load
  * @param
  * @returns
  */
-export const useAssigneeSearch = (): UseAssigneeSearchReturnType => {
-  const [assigneeOptions, setAssigneeOptions] = useState<SelectOption[]>([])
-
-  const [selectedAssigneeIds, setSelectedAssigneeIds] = useState<
-    SelectOption[]
-  >([])
+export const useAssigneeSearch = (): void => {
+  const dispatch = useAppDispatch()
 
   const getCharactersTerse = async () => {
     const response = await fetch('/api/charactersTerse', {})
@@ -41,7 +31,7 @@ export const useAssigneeSearch = (): UseAssigneeSearchReturnType => {
       value: character.id.toString(),
     }))
 
-    setAssigneeOptions(assigneeOptions)
+    dispatch(setAssigneeOptions(assigneeOptions))
   }
 
   useEffect(() => {
@@ -51,15 +41,4 @@ export const useAssigneeSearch = (): UseAssigneeSearchReturnType => {
 
     loadCharacters()
   }, [])
-
-  const assigneeSelected = (selectedAssignees: SelectOption[]) => {
-    setSelectedAssigneeIds(selectedAssignees)
-  }
-
-  return {
-    assigneeOptions,
-    assigneeSelected,
-    selectedAssigneeIds,
-    setSelectedAssigneeIds,
-  }
 }

@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
-// import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
-
-import { Dropdown } from 'components/FilterPanel/Dropdown'
-import { ListBox } from 'components/FilterPanel/ListBox'
-import { Textbox } from 'components/FilterPanel/Textbox'
 
 import {
+  setSelectedAssignees,
   setCompleted,
   setTitle,
   setTShirtSizes,
 } from 'lib/redux/search/TasksFilterReducer'
+
 import { SelectOption } from 'lib/types/SelectOption'
-import { useDebounce } from 'components/FilterPanel/Textbox'
 import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
+import { useAssigneeSearch } from 'lib/tasks/useAssigneeSearch'
+
+import { Dropdown } from 'components/FilterPanel/Dropdown'
+import { ListBox } from 'components/FilterPanel/ListBox'
+import { Textbox } from 'components/FilterPanel/Textbox'
+import { useDebounce } from 'components/FilterPanel/Textbox'
 
 const TasksFilter = (): JSX.Element => {
   const dispatch = useAppDispatch()
 
   const {
+    assignee: { assigneeOptions, selectedAssignees },
     completed: { completedStatusOptions, selectedCompletedOption },
     tShirtSize: { selectedTShirtSizes, tShirtSizeOptions },
   } = useAppSelector((state) => {
@@ -31,16 +34,23 @@ const TasksFilter = (): JSX.Element => {
     dispatch(setTitle(debouncedTitleSearchString))
   }, [debouncedTitleSearchString])
 
+  //  retrieve the list of characters/assignees for tasks
+  useAssigneeSearch()
+
   const resetFilters = (event) => {
     event.preventDefault()
 
-    // setSelectedAssigneeIds([])
+    setAssigneesHandler([])
 
     setTShirtSizesHandler([])
 
     setCompletedFlag(completedStatusOptions[0])
 
     setTitleSearchString('')
+  }
+
+  const setAssigneesHandler = (selectedAssignees: SelectOption[]) => {
+    dispatch(setSelectedAssignees(selectedAssignees))
   }
 
   const setCompletedFlag = (selectedOption: SelectOption) => {
@@ -67,15 +77,15 @@ const TasksFilter = (): JSX.Element => {
         placeholder={'Title search'}
         value={titleSearchString}
       />
-      {/* 
+
       <Dropdown
         label={'Assignee'}
         selectOptions={assigneeOptions}
-        optionSelected={assigneeSelected}
+        optionSelected={setAssigneesHandler}
         placeholder={'Assigned to'}
-        value={selectedAssigneeIds}
+        value={selectedAssignees}
       />
-*/}
+
       <Dropdown
         label={'T-shirt size'}
         selectOptions={tShirtSizeOptions}
