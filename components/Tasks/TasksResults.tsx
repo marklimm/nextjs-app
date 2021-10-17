@@ -6,15 +6,14 @@ import { toast } from 'react-toastify'
 
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
-import { useSelector } from 'react-redux'
-import { IReduxStore } from 'lib/redux/ReduxStore'
+import { useAppSelector } from 'lib/redux/hooks'
 
 const TasksResults = (): JSX.Element => {
   const {
     completed: { selectedCompletedOption },
     title: { searchString },
     tShirtSize: { selectedTShirtSizes },
-  } = useSelector((state: IReduxStore) => {
+  } = useAppSelector((state) => {
     return state.tasksFilter
   })
 
