@@ -9,8 +9,8 @@ import ReduxStore from 'lib/redux/ReduxStore'
 
 import descriptionStyle from '../index.module.scss'
 
-import TasksFilter from './TasksFilter'
-import TasksResults from './TasksResults'
+import TasksFilter from 'components/Tasks/TasksFilter'
+import TasksResults from 'components/Tasks/TasksResults'
 
 /**
  * This component defines the UI for the /tasks route, which includes displaying the list of tasks
