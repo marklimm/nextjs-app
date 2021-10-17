@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
+// import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { ListBox } from 'components/FilterPanel/ListBox'
@@ -12,14 +12,16 @@ import {
 } from 'lib/redux/search/TasksFilterReducer'
 import { SelectOption } from 'lib/types/SelectOption'
 import { useDebounce } from 'components/FilterPanel/Textbox'
+import { useDispatch, useSelector } from 'react-redux'
+import { IReduxStore } from 'lib/redux/ReduxStore'
 
 const TasksFilter = (): JSX.Element => {
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   const {
     completed: { completedStatusOptions, selectedCompletedOption },
     tShirtSize: { selectedTShirtSizes, tShirtSizeOptions },
-  } = useAppSelector((state) => {
+  } = useSelector<IReduxStore>((state) => {
     return state.tasksFilter
   })
 
