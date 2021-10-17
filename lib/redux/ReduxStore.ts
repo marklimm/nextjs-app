@@ -12,7 +12,7 @@ const ReduxStore = configureStore({
 })
 
 //  following https://react-redux.js.org/using-react-redux/usage-with-typescript#define-typed-hooks
-export type IReduxStore = ReturnType<typeof ReduxStore.getState>
+export type IReduxStore = ReturnType<typeof reducer>
 export type AppDispatch = typeof ReduxStore.dispatch
 
 export default ReduxStore
