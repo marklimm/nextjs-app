@@ -14,7 +14,7 @@ const TasksResults = (): JSX.Element => {
     completed: { selectedCompletedOption },
     title: { searchString },
     tShirtSize: { selectedTShirtSizes },
-  } = useSelector<IReduxStore>((state) => {
+  } = useSelector((state: IReduxStore) => {
     return state.tasksFilter
   })
 
