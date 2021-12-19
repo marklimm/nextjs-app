@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import Head from 'next/head'
+import { AppProps } from 'next/app'
+
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { AppProps } from 'next/app'
+import { Provider } from 'react-redux'
+import ReduxStore from 'lib/redux/ReduxStore'
 
 import { Header } from 'components/Header/Header'
 import { NavBar } from 'components/NavBar/NavBar'
@@ -46,10 +49,12 @@ const MyApp: FunctionComponent<AppProps> = ({
         <Header />
         <NavBar />
         <div className='flex-grow p-5'>
-          {/* wrap every route with our react context */}
-          <DetentionBlockWrapper>
-            <Component {...pageProps} />
-          </DetentionBlockWrapper>
+          <Provider store={ReduxStore}>
+            {/* wrap every route with our redux store */}
+            <DetentionBlockWrapper>
+              <Component {...pageProps} />
+            </DetentionBlockWrapper>
+          </Provider>
         </div>
         <NavBar />
 

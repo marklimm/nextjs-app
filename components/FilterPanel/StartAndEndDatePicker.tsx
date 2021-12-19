@@ -13,9 +13,6 @@ declare global {
 }
 
 export interface StartAndEndDatePickerProps {
-  clearEndDate: () => void
-  clearStartDate: () => void
-
   initialEndDate: string
   initialStartDate: string
 
@@ -30,8 +27,6 @@ export interface StartAndEndDatePickerProps {
  * @param StartAndEndDatePickerProps
  */
 export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps> = ({
-  clearEndDate,
-  clearStartDate,
   label,
   endDateSelected,
   startDateSelected,
@@ -81,7 +76,6 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
           onClick={(event) => {
             event.preventDefault()
             startDatePicker.current.value = ''
-            clearStartDate()
           }}
         >
           Clear
@@ -104,7 +98,6 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
           onClick={(event) => {
             event.preventDefault()
             endDatePicker.current.value = ''
-            clearEndDate()
           }}
         >
           Clear

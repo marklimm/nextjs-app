@@ -1,3 +1,5 @@
+//  This file is no longer being used, but I've kept it as an example of a non-generic search filter
+
 import { SelectOption } from 'lib/types/SelectOption'
 import { EmotionTag, Event } from 'lib/types/Event'
 

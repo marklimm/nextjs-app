@@ -1,29 +1,35 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
+import { EmotionTagLabels, Event } from 'lib/types/Event'
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
-import { Event } from 'lib/types/Event'
 
-import DisplayDate from 'components/DisplayDate/DisplayDate'
+import {
+  FilterControl,
+  FilterControlType,
+  SearchType,
+} from 'lib/redux/searchFilters/filterTypes'
+
+import {
+  EventFilterFields,
+  EventsResults,
+} from 'components/Events/EventsResults'
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
-
-import { useEventsFilterer } from 'lib/events/useEventsFilterer'
 
 import descriptionStyle from '../index.module.scss'
 
 interface EventsProps {
   allEvents: Event[]
+  filterControls: FilterControl[]
 }
 
 /**
  * This component defines the /events route, displaying the list of Star Wars events and a left-hand filter
  * @param EventsProps
  */
-const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
-  const { filterControls, filteredEvents } = useEventsFilterer(allEvents)
-
+const Events = ({ allEvents, filterControls }: EventsProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -65,26 +71,14 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          <FilterPanel filterControls={filterControls} />
+          <FilterPanel
+            searchType={SearchType.Events}
+            filterControls={filterControls}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>
-          {filteredEvents.length > 0 &&
-            filteredEvents.map((event) => {
-              return (
-                <div key={event.id} className='searchResultCard'>
-                  <div className='text-lg'>{event.title}</div>
-                  <div className='text-sm text-red-600'>
-                    <DisplayDate dateString={event.date} />
-                  </div>
-                  Tags: {event.emotionTags.join(', ')}
-                  <div
-                    className={`markdownContent text-sm mt-2`}
-                    dangerouslySetInnerHTML={{ __html: event.contentHtml }}
-                  />
-                </div>
-              )
-            })}
+          <EventsResults allEvents={allEvents} />
         </div>
       </div>
     </>
@@ -94,9 +88,32 @@ const Events: FunctionComponent<EventsProps> = ({ allEvents }: EventsProps) => {
 export const getStaticProps: GetStaticProps = async () => {
   const allEvents = await getSortedMarkdownFiles('data/events')
 
+  const emotionTagOptions = EmotionTagLabels.map((tag) => ({
+    //  capitalize the first letter and lowercase the rest of the tag
+    label: tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase(),
+    value: tag,
+  }))
+
+  const filterControls: FilterControl[] = [
+    {
+      type: FilterControlType.Dropdown,
+      id: EventFilterFields.EmotionTags,
+      label: 'Emotions',
+      placeholder: 'Emotions',
+
+      options: emotionTagOptions,
+    },
+    {
+      type: FilterControlType.DateSearch,
+      id: EventFilterFields.Timestamp,
+      label: 'Timestamp',
+    },
+  ]
+
   return {
     props: {
       allEvents,
+      filterControls,
     },
   }
 }

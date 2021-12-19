@@ -1,22 +1,30 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 
 import { getCharacters } from 'dataProviders/CharacterData'
 import { getCharacterTags } from 'dataProviders/CharacterTagData'
 
-import { useCharactersFilterer } from 'lib/characters/useCharactersFilterer'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
+import {
+  FilterControl,
+  FilterControlType,
+  SearchType,
+} from 'lib/redux/searchFilters/filterTypes'
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
+
+import {
+  CharacterFilterFields,
+  CharactersResults,
+} from 'components/Characters/CharactersResults'
 
 import descriptionStyle from '../index.module.scss'
 
 export interface CharactersProps {
   allCharacters: Character[]
-  characterTagOptions: SelectOption[]
+  filterControls: FilterControl[]
 }
 
 /**
@@ -24,18 +32,10 @@ export interface CharactersProps {
  * @param param0
  * @returns
  */
-const Characters: FunctionComponent<CharactersProps> = ({
+const Characters = ({
   allCharacters,
-  characterTagOptions,
-}: CharactersProps) => {
-  //  we use the useCharactersFilterer custom hook to get the filters and filtered search results
-  const { filterControls, filteredCharacters } = useCharactersFilterer(
-    allCharacters,
-    characterTagOptions
-  )
-
-  //  I don't know if there's a way to implement "Reset Filters" with the current setup.  I'm rendering <FilterPanel /> the first time but not re-rendering it again as the user makes filter changes, I believe because I don't want to rebuild the entire filter panel just because one value changed.  And also the belief that I should be able to just pass in configuration into <FilterPanel /> and it should be able to render different combinations of filters without me having to explicitly hard code the filters for each route (/characters, /events, etc.)
-
+  filterControls,
+}: CharactersProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -90,72 +90,14 @@ const Characters: FunctionComponent<CharactersProps> = ({
 
       <div className='grid grid-cols-4 mt-4 items-start'>
         <div className='col-span-1 text-sm searchResultCard'>
-          <FilterPanel filterControls={filterControls} />
+          <FilterPanel
+            searchType={SearchType.Characters}
+            filterControls={filterControls}
+          />
         </div>
 
         <div className='col-span-3 ml-8'>
-          {filteredCharacters &&
-            filteredCharacters.map((character) => (
-              <div key={character.id} className='searchResultCard flex'>
-                {character.imageUrl && (
-                  <div
-                    className='relative mr-3'
-                    style={{
-                      minWidth: '200px',
-                      maxHeight: '200px',
-                    }}
-                  >
-                    <Image
-                      src={`/characters/${character.imageUrl}`}
-                      alt={`${character.firstName} ${character.lastName}`}
-                      layout='fill'
-                      objectFit='fill'
-                      className='rounded-sm'
-                    />
-                  </div>
-                )}
-
-                <div>
-                  <div className='mb-2 text-lg'>
-                    {character.firstName} {character.lastName}
-                  </div>
-
-                  {character.tags.length > 0 && (
-                    <div className='mb-1'>
-                      {character.tags.map((t) => (
-                        <span
-                          key={t.id}
-                          className='text-xs rounded-xl py-1 px-2 mr-2 bg-white border border-gray-300'
-                          title={t.description}
-                        >
-                          {t.name}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  <div className='text-sm mt-2'>{character.bio}</div>
-                  {character.posts.length > 0 && (
-                    <div className='my-4 text-sm rounded-md p-3 bg-white'>
-                      <span className='font-bold'>
-                        {character.firstName}&apos;s latest post:{' '}
-                      </span>
-                      <span>{character.posts[0].body}</span>
-                    </div>
-                  )}
-                  {character.friends.length > 0 && (
-                    <span className='text-sm'>
-                      Friends:{' '}
-                      {character.friends
-                        .map(
-                          (t) =>
-                            t.firstName + (t.lastName ? ' ' + t.lastName : '')
-                        )
-                        .join(', ')}
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+          <CharactersResults allCharacters={allCharacters} />
         </div>
       </div>
     </>
@@ -166,15 +108,51 @@ export const getStaticProps: GetStaticProps = async () => {
   const characters = await getCharacters()
   const characterTags = await getCharacterTags()
 
-  const characterTagOptions = characterTags.map((tag) => ({
+  const characterTagOptions: SelectOption[] = characterTags.map((tag) => ({
     label: tag.name,
     value: tag.id.toString(),
   }))
 
+  const friendOptions: SelectOption[] = characters.map((c) => ({
+    label: `${c.firstName} ${c.lastName}`,
+    value: c.id.toString(),
+  }))
+
+  const filterControls: FilterControl[] = [
+    {
+      type: FilterControlType.Dropdown,
+      id: CharacterFilterFields.CharacterTags,
+      label: 'Tags',
+      placeholder: 'Character Tags',
+
+      options: characterTagOptions,
+    },
+    {
+      type: FilterControlType.Dropdown,
+      id: CharacterFilterFields.Friends,
+      label: 'Friends',
+      placeholder: 'Friends with',
+
+      options: friendOptions,
+    },
+    {
+      type: FilterControlType.Text,
+      id: CharacterFilterFields.Name,
+      label: 'Name',
+      placeholder: 'Name',
+    },
+    {
+      type: FilterControlType.Text,
+      id: CharacterFilterFields.Bio,
+      label: 'Bio',
+      placeholder: 'Bio keyword',
+    },
+  ]
+
   return {
     props: {
       allCharacters: characters,
-      characterTagOptions,
+      filterControls,
     },
   }
 }

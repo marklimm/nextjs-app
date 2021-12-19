@@ -1,0 +1,104 @@
+import { SelectOption } from 'lib/types/SelectOption'
+import { FilterControlType, SearchType } from './filterTypes'
+
+//  -----------------------------------------
+//  The below interfaces define the state for search filters
+
+export interface DateFilterState {
+  type: FilterControlType.DateSearch
+
+  //  a unique identifier for the value that is being searched on
+  id: string
+
+  endDate: string
+  startDate: string
+}
+
+export interface DropdownFilterState {
+  type: FilterControlType.Dropdown
+
+  //  a unique identifier for the value that is being searched on
+  id: string
+
+  selectedOptions: SelectOption[]
+}
+
+export interface TextFilterState {
+  type: FilterControlType.Text
+
+  id: string
+  value: string
+}
+
+export type FilterControlState =
+  | DateFilterState
+  | DropdownFilterState
+  | TextFilterState
+
+// /**
+//  * The filter reducer's state
+//  */
+export interface FilterState {
+  [SearchType.Characters]: {
+    filterControlValues: FilterControlState[]
+  }
+  [SearchType.Events]: {
+    filterControlValues: FilterControlState[]
+  }
+  [SearchType.Tasks]: {
+    filterControlValues: FilterControlState[]
+  }
+}
+
+//  -------------------------
+//  the below interfaces are redux reducer actions that change the filter state
+
+export enum FilterActionType {
+  DateSelectedEnd = 'date-selected-end',
+  DateSelectedStart = 'date-selected-start',
+
+  OptionSelected = 'option-selected',
+
+  TextChanged = 'text-changed',
+}
+
+/**
+ * The common fields used in a redux filter action payload
+ */
+type SearchFilterPayloadBase = {
+  /**
+   * The search type (Characters/Events, etc.)
+   */
+  searchType: SearchType
+
+  /**
+   * The particular filter
+   */
+  id: string
+}
+
+type OptionSelectedPayload = SearchFilterPayloadBase & {
+  filterActionType: FilterActionType.OptionSelected
+  value: SelectOption[]
+}
+
+type TextChangedPayload = SearchFilterPayloadBase & {
+  filterActionType: FilterActionType.TextChanged
+  value: string
+}
+
+type DateSelectedStartPayload = SearchFilterPayloadBase & {
+  filterActionType: FilterActionType.DateSelectedStart
+  value: string
+}
+
+type DateSelectedEndPayload = SearchFilterPayloadBase & {
+  filterActionType: FilterActionType.DateSelectedEnd
+  value: string
+}
+
+export type SearchFilterPayload =
+  | OptionSelectedPayload
+  | DateSelectedEndPayload
+  | DateSelectedStartPayload
+  | TextChangedPayload

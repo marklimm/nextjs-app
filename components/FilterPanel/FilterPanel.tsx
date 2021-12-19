@@ -1,23 +1,95 @@
-import React, { FunctionComponent } from 'react'
+import React, { useRef } from 'react'
 
-import { FilterControl, FilterControlType } from './FilterTypes'
+import { SelectOption } from 'lib/types/SelectOption'
+import {
+  FilterControl,
+  FilterControlType,
+  SearchType,
+} from 'lib/redux/searchFilters/filterTypes'
+import { useAppDispatch } from 'lib/redux/hooks'
+import { FilterActionType } from 'lib/redux/searchFilters/searchFilterReducerTypes'
+import { updateFilter } from 'lib/redux/searchFilters/searchFilterReducer'
 
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { StartAndEndDatePicker } from 'components/FilterPanel/StartAndEndDatePicker'
 import { Textbox } from './Textbox'
 
-interface FilterPanelProps {
+export interface FilterPanelProps {
+  searchType: SearchType
   filterControls: FilterControl[]
 }
 
 /**
- * A component intended to be used by different search types that renders a filter panel containing the given filterControls
+ * A component used by different search types that renders a filter panel containing the given filterControls
  * @param param0
  * @returns
  */
-const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
+export const FilterPanel = ({
   filterControls,
-}: FilterPanelProps) => {
+  searchType,
+}: FilterPanelProps): JSX.Element => {
+  const dispatch = useAppDispatch()
+
+  const dispatchOptionSelected = (
+    filterControlId = '',
+    selectedOptions: SelectOption[]
+  ) => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.OptionSelected,
+        id: filterControlId,
+        value: selectedOptions,
+      })
+    )
+  }
+
+  const textChangeTimeoutRef = useRef<NodeJS.Timeout>()
+  const onTextChanged = (filterControlId = '', value = '') => {
+    //  cancel any previous timeout
+    clearTimeout(textChangeTimeoutRef.current)
+
+    textChangeTimeoutRef.current = setTimeout(() => {
+      //  dispatch text change
+
+      //  don't search if the user has only typed 1 or 2 characters.  0 characters will remove the text filter control
+      if (value.length === 1 || value.length === 2) {
+        return
+      }
+
+      dispatch(
+        updateFilter({
+          searchType,
+          filterActionType: FilterActionType.TextChanged,
+          id: filterControlId,
+          value,
+        })
+      )
+    }, 300)
+  }
+
+  const setStartDate = (filterControlId = '', startDate = '') => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.DateSelectedStart,
+        id: filterControlId,
+        value: startDate,
+      })
+    )
+  }
+
+  const setEndDate = (filterControlId = '', endDate = '') => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.DateSelectedEnd,
+        id: filterControlId,
+        value: endDate,
+      })
+    )
+  }
+
   return (
     <div>
       {filterControls.map((filterControl, index) => {
@@ -28,22 +100,25 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
                 key={index}
                 label={filterControl.label}
                 placeholder={filterControl.placeholder}
-                selectOptions={filterControl.selectOptions}
-                optionSelected={filterControl.optionSelected}
-                // value={[]}
+                selectOptions={filterControl.options}
+                optionSelected={(selectedOptions) =>
+                  dispatchOptionSelected(filterControl.id, selectedOptions)
+                }
               />
             )
           case FilterControlType.DateSearch:
             return (
               <StartAndEndDatePicker
                 key={index}
-                clearEndDate={filterControl.clearEndDate}
-                clearStartDate={filterControl.clearStartDate}
                 initialEndDate={''}
                 initialStartDate={''}
                 label={filterControl.label}
-                endDateSelected={filterControl.endDateSelected}
-                startDateSelected={filterControl.startDateSelected}
+                endDateSelected={(endDate = '') =>
+                  setEndDate(filterControl.id, endDate)
+                }
+                startDateSelected={(startDate = '') =>
+                  setStartDate(filterControl.id, startDate)
+                }
               />
             )
 
@@ -53,7 +128,12 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
                 key={index}
                 label={filterControl.label}
                 placeholder={filterControl.placeholder}
-                onChange={filterControl.textChanged}
+                onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                  onTextChanged(
+                    filterControl.id,
+                    (event.target as HTMLInputElement).value
+                  )
+                }
               />
             )
         }
@@ -61,8 +141,3 @@ const UnMemoizedFilterPanel: FunctionComponent<FilterPanelProps> = ({
     </div>
   )
 }
-
-export const FilterPanel = React.memo(UnMemoizedFilterPanel, () => {
-  //  my attempt to stop the re-render, this does seem to stop the re-render, meaning that the <FilterPanel /> will only be built on the initial load and does NOT get re-rendered as the user is selecting filter options
-  return true
-})

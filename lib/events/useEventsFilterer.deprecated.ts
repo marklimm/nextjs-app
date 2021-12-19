@@ -1,7 +1,8 @@
+//  This file is no longer being used, but I've kept it as an example of a non-generic search filter
+
 import { useReducer } from 'react'
 
 import { EmotionTag, EmotionTagLabels, Event } from 'lib/types/Event'
-
 import { SelectOption } from 'lib/types/SelectOption'
 
 import {
@@ -14,7 +15,7 @@ import {
   DropdownFilter,
   FilterControl,
   FilterControlType,
-} from 'components/FilterPanel/FilterTypes'
+} from 'lib/redux/searchFilters/filterTypes'
 
 interface UseEventsFiltererResult {
   filteredEvents: Event[]
