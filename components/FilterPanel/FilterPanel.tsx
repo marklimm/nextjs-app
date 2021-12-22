@@ -20,7 +20,7 @@ export interface FilterPanelProps {
 }
 
 /**
- * A component used by different search types that renders a filter panel containing the given filterControls
+ * A component used by different search types that renders a filter panel containing the given filterControls.  When the user sets a filter, that state changes gets dispatched to the redux store, which gets read by the component that renders the search results
  * @param param0
  * @returns
  */

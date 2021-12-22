@@ -12,7 +12,7 @@ import {
 } from './searchFilterReducerTypes'
 
 /**
- * This non-generic searchFilterReducer.ts file knows all of the different search types
+ * This non-generic searchFilterReducer.ts file stores the state of all the different search types
  */
 const initialState: FilterState = {
   [SearchType.Characters]: {

@@ -2,12 +2,14 @@ import { SelectOption } from 'lib/types/SelectOption'
 import { FilterControlType, SearchType } from './filterTypes'
 
 //  -----------------------------------------
-//  The below interfaces define the state for search filters
+//  The below interfaces are used for defining search filter state
 
 export interface DateFilterState {
   type: FilterControlType.DateSearch
 
-  //  a unique identifier for the value that is being searched on
+  /**
+   * A unique identifier for this particular date filter
+   */
   id: string
 
   endDate: string
@@ -17,7 +19,9 @@ export interface DateFilterState {
 export interface DropdownFilterState {
   type: FilterControlType.Dropdown
 
-  //  a unique identifier for the value that is being searched on
+  /**
+   * A unique identifier for this particular dropdown filter
+   */
   id: string
 
   selectedOptions: SelectOption[]
@@ -36,7 +40,7 @@ export type FilterControlState =
   | TextFilterState
 
 // /**
-//  * The filter reducer's state
+//  * The search filter reducer's state.  This contains the current state of all the different search filters
 //  */
 export interface FilterState {
   [SearchType.Characters]: {
@@ -58,7 +62,6 @@ export enum FilterActionType {
   DateSelectedStart = 'date-selected-start',
 
   OptionSelected = 'option-selected',
-
   TextChanged = 'text-changed',
 }
 
