@@ -5,15 +5,15 @@ import { toast } from 'react-toastify'
 import { useAppSelector } from 'lib/redux/hooks'
 import { LoadingState } from 'lib/types/LoadingState'
 import { IsCompletedFilter, Task, TShirtSize } from 'lib/types/Task'
+import {
+  FilterControlType,
+  SearchType,
+  TaskFilterFields,
+} from 'lib/redux/searchFilters/filterTypes'
 
 const TasksResults = (): JSX.Element => {
-  const {
-    assignee: { selectedAssignees },
-    completed: { selectedCompletedOption },
-    title: { searchString },
-    tShirtSize: { selectedTShirtSizes },
-  } = useAppSelector((state) => {
-    return state.tasksFilter
+  const { filterControlValues } = useAppSelector((state) => {
+    return state.searchFilter[SearchType.Tasks]
   })
 
   const [loadingState, setLoadingState] = useState<LoadingState>(
@@ -24,24 +24,66 @@ const TasksResults = (): JSX.Element => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const assigneeIds = selectedAssignees.map((a) => a.value).join(',') || ''
+      let queryTasksString = `/api/tasks?`
 
-      const tShirtSizeIds =
-        selectedTShirtSizes.map((a) => a.value).join(',') || ''
+      filterControlValues.forEach((filter) => {
+        //  why do I need to do a switch-case inside of a switch-case?  The outer switch-case allows us to have a strongly typed `filter` variable based on the type of filter control and the inner switch-case updates the appropriate part of `queryTasksString`
 
-      let queryTasksString = `/api/tasks?assigneeIds=${assigneeIds}&title=${searchString}&tShirtSizeIds=${tShirtSizeIds}`
+        switch (filter.type) {
+          case FilterControlType.Text:
+            {
+              switch (filter.id) {
+                case TaskFilterFields.Title: {
+                  queryTasksString += `&title=${filter.value}`
+                  break
+                }
+              }
+            }
 
-      if (
-        selectedCompletedOption.value === IsCompletedFilter.COMPLETED ||
-        selectedCompletedOption.value === IsCompletedFilter.NOT_COMPLETED
-      ) {
-        queryTasksString += `&completedFlag=${selectedCompletedOption.value.toString()}`
-      }
+            break
+
+          case FilterControlType.Dropdown:
+            {
+              const selectedIds =
+                filter.selectedOptions
+                  .map((assignee) => assignee.value)
+                  .join(',') || ''
+
+              switch (filter.id) {
+                case TaskFilterFields.Assignee: {
+                  queryTasksString += `&assigneeIds=${selectedIds}`
+                  break
+                }
+
+                case TaskFilterFields.TShirtSize: {
+                  queryTasksString += `&tShirtSizeIds=${selectedIds}`
+                  break
+                }
+              }
+            }
+            break
+
+          case FilterControlType.ListBox:
+            {
+              switch (filter.id) {
+                case TaskFilterFields.Completed: {
+                  if (
+                    filter.selectedOption.value ===
+                      IsCompletedFilter.COMPLETED ||
+                    filter.selectedOption.value ===
+                      IsCompletedFilter.NOT_COMPLETED
+                  ) {
+                    queryTasksString += `&completedFlag=${filter.selectedOption.value.toString()}`
+                  }
+                  break
+                }
+              }
+            }
+            break
+        }
+      })
 
       setLoadingState(LoadingState.LOADING)
-
-      // console.log('----')
-      // console.log('queryTasksString', queryTasksString)
 
       const response = await fetch(queryTasksString)
 
@@ -63,12 +105,7 @@ const TasksResults = (): JSX.Element => {
     }
 
     getTasks()
-  }, [
-    searchString,
-    selectedAssignees,
-    selectedCompletedOption,
-    selectedTShirtSizes,
-  ])
+  }, [filterControlValues])
 
   return (
     <>
@@ -77,22 +114,21 @@ const TasksResults = (): JSX.Element => {
         <div>There are no tasks that match the current search criteria</div>
       )}
       {loadingState === LoadingState.DONE_LOADING &&
-        // tasks.length > 0 &&
-        tasks.map((t) => {
+        tasks.map((task) => {
           return (
-            <div key={t.id} className='searchResultCard'>
-              <span className='text-lg'>{t.title}</span>
+            <div key={task.id} className='searchResultCard'>
+              <span className='text-lg'>{task.title}</span>
 
-              <div className='text-sm mt-2'>{t.description}</div>
+              <div className='text-sm mt-2'>{task.description}</div>
 
               <div className='text-sm flex items-center'>
                 <div className='mr-3'>Assigned to: </div>
 
-                {t.assignedTo.imageUrl && (
+                {task.assignedTo.imageUrl && (
                   <div className='mr-2'>
                     <Image
-                      src={`/characters/${t.assignedTo.imageUrl}`}
-                      alt={`${t.assignedTo.firstName} ${t.assignedTo.lastName}`}
+                      src={`/characters/${task.assignedTo.imageUrl}`}
+                      alt={`${task.assignedTo.firstName} ${task.assignedTo.lastName}`}
                       width={50}
                       height={50}
                       className='rounded-full'
@@ -100,21 +136,21 @@ const TasksResults = (): JSX.Element => {
                   </div>
                 )}
                 <div className='font-bold'>
-                  {t.assignedTo.firstName + ' ' + t.assignedTo.lastName}
+                  {task.assignedTo.firstName + ' ' + task.assignedTo.lastName}
                 </div>
               </div>
 
               <div className='text-sm mt-2'>
-                T-shirt size: {TShirtSize[t.tShirtSize]}
+                T-shirt size: {TShirtSize[task.tShirtSize]}
               </div>
               <div className='text-sm mt-2'>
                 Completed:{' '}
                 <span
                   className={`${
-                    t.isComplete ? 'text-green-700' : 'text-red-700'
+                    task.isComplete ? 'text-green-700' : 'text-red-700'
                   } font-bold`}
                 >
-                  {t.isComplete ? 'YES' : 'NO'}
+                  {task.isComplete ? 'YES' : 'NO'}
                 </span>
               </div>
             </div>

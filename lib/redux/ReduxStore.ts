@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
-import tasksFilterReducer from './search/TasksFilterReducer'
 import searchFilterReducer from './searchFilters/searchFilterReducer'
 
 const reducer = combineReducers({
   searchFilter: searchFilterReducer,
-  tasksFilter: tasksFilterReducer,
 })
 
 const ReduxStore = configureStore({

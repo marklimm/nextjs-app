@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { allOption } from 'lib/types/Task'
 
-import { FilterControlType, SearchType } from './filterTypes'
+import { FilterControlType, SearchType, TaskFilterFields } from './filterTypes'
 import {
   DateFilterState,
   DropdownFilterState,
   FilterActionType,
   FilterControlState,
   FilterState,
+  ListBoxFilterState,
   SearchFilterPayload,
   TextFilterState,
 } from './searchFilterReducerTypes'
@@ -22,7 +24,14 @@ const initialState: FilterState = {
     filterControlValues: [],
   },
   [SearchType.Tasks]: {
-    filterControlValues: [],
+    //  the ListBox filter control is unique in that it gets put into filter state by default and remains in filter state
+    filterControlValues: [
+      {
+        type: FilterControlType.ListBox,
+        id: TaskFilterFields.Completed,
+        selectedOption: allOption,
+      },
+    ],
   },
 }
 
@@ -39,6 +48,11 @@ const updateFilterValue = (
     case FilterActionType.OptionSelected:
       filterToUpdate.type = FilterControlType.Dropdown
       ;(filterToUpdate as DropdownFilterState).selectedOptions = payload.value
+      break
+
+    case FilterActionType.RadioOptionSelected:
+      filterToUpdate.type = FilterControlType.ListBox
+      ;(filterToUpdate as ListBoxFilterState).selectedOption = payload.value
       break
 
     case FilterActionType.TextChanged:
@@ -89,15 +103,16 @@ export const updateFilterReducer = (
   } else {
     //  this particular filter was already set previously
 
-    if (
-      filterToUpdate.type !== FilterControlType.DateSearch &&
-      action.payload.value.length === 0
-    ) {
-      //  if the value of the filterControl has a length of 0 (is an empty array or an empty string) remove the entire filter value
-      searchTypeFilterState.filterControlValues = searchTypeFilterState.filterControlValues.filter(
-        (fc) => fc.id !== action.payload.id
-      )
-      return
+    switch (action.payload.filterActionType) {
+      case FilterActionType.OptionSelected:
+      case FilterActionType.TextChanged:
+        if (action.payload.value.length === 0) {
+          //  for dropdown or text filter types --> if the value of the filterControl has a length of 0 (is an empty array or an empty string) remove the entire filter value
+          searchTypeFilterState.filterControlValues = searchTypeFilterState.filterControlValues.filter(
+            (fc) => fc.id !== action.payload.id
+          )
+          return
+        }
     }
 
     updateFilterValue(filterToUpdate, action.payload)

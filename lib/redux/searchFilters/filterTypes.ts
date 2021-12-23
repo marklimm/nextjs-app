@@ -17,6 +17,7 @@ export enum SearchType {
 export enum FilterControlType {
   DateSearch = 'date-search',
   Dropdown = 'dropdown',
+  ListBox = 'listbox',
   Text = 'text',
 }
 
@@ -38,6 +39,15 @@ export interface DropdownFilter {
   options: SelectOption[]
 }
 
+export interface ListBoxFilter {
+  type: FilterControlType.ListBox
+  id: string
+  label: string
+  placeholder: string
+
+  options: SelectOption[]
+}
+
 export interface TextFilter {
   type: FilterControlType.Text
   id: string
@@ -45,4 +55,38 @@ export interface TextFilter {
   placeholder: string
 }
 
-export type FilterControl = DropdownFilter | DateSearchFilter | TextFilter
+export type FilterControl =
+  | DropdownFilter
+  | DateSearchFilter
+  | ListBoxFilter
+  | TextFilter
+
+//  below are the specific filters used by all the different search types
+
+/**
+ * The characters search filter fields
+ */
+export enum CharacterFilterFields {
+  Bio = 'bio',
+  CharacterTags = 'character-tags',
+  Friends = 'friends',
+  Name = 'name',
+}
+
+/**
+ * The events search filter fields
+ */
+export enum EventFilterFields {
+  EmotionTags = 'emotion-tags',
+  Timestamp = 'timestamp',
+}
+
+/**
+ * The task search filter fields
+ */
+export enum TaskFilterFields {
+  Title = 'title',
+  Assignee = 'assignee',
+  TShirtSize = 't-shirtSize',
+  Completed = 'completed',
+}

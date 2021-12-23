@@ -6,15 +6,13 @@ import { EmotionTagLabels, Event } from 'lib/types/Event'
 import { getSortedMarkdownFiles } from 'lib/markdownParser'
 
 import {
+  EventFilterFields,
   FilterControl,
   FilterControlType,
   SearchType,
 } from 'lib/redux/searchFilters/filterTypes'
 
-import {
-  EventFilterFields,
-  EventsResults,
-} from 'components/Events/EventsResults'
+import { EventsResults } from 'components/Events/EventsResults'
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 

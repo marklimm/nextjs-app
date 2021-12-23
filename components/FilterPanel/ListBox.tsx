@@ -1,23 +1,27 @@
-import React, { FunctionComponent } from 'react'
+import React, { useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 
 import { SelectOption } from 'lib/types/SelectOption'
+import { allOption } from 'lib/types/Task'
 
 interface ListBoxProps {
   allOptions: SelectOption[]
   label: string
-  selectedOption: SelectOption
-  setSelectedOption: (SelectOption) => void
+  setSelectedOption: (selectedOption: SelectOption) => void
 }
 
 //  Note that I called this component <ListBox />, but the headless UI component is <Listbox />
 
-export const ListBox: FunctionComponent<ListBoxProps> = ({
+export const ListBox = ({
   allOptions,
   label,
-  selectedOption,
   setSelectedOption,
-}: ListBoxProps) => {
+}: ListBoxProps): JSX.Element => {
+  //  for Listbox we need to define a local state variable to store the value, in addition to `seteSelectedOption` which updates redux (tells the rest of the app what ListBox filter state is)
+  const [selectedOption, setSelectedOptionLocal] = useState<SelectOption>(
+    allOption
+  )
+
   return (
     <div className='my-4'>
       <div className='font-bold mb-1'>{label}</div>
@@ -28,7 +32,12 @@ export const ListBox: FunctionComponent<ListBoxProps> = ({
           const selectedOption = allOptions.find(
             (o) => o.value === selectedValue
           )
+
+          //  update redux state
           setSelectedOption(selectedOption)
+
+          //  update this local ListBox component's state
+          setSelectedOptionLocal(selectedOption)
         }}
       >
         {({ open }) => (

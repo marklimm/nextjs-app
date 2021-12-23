@@ -5,16 +5,10 @@ import { useAppSelector } from 'lib/redux/hooks'
 import { Character } from 'lib/types/Character'
 
 import {
+  CharacterFilterFields,
   FilterControlType,
   SearchType,
 } from 'lib/redux/searchFilters/filterTypes'
-
-export enum CharacterFilterFields {
-  Bio = 'bio',
-  CharacterTags = 'character-tags',
-  Friends = 'friends',
-  Name = 'name',
-}
 
 export interface CharactersResultsProps {
   allCharacters: Character[]

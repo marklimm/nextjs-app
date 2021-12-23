@@ -8,6 +8,7 @@ import { getCharacterTags } from 'dataProviders/CharacterTagData'
 import { SelectOption } from 'lib/types/SelectOption'
 import { Character } from 'lib/types/Character'
 import {
+  CharacterFilterFields,
   FilterControl,
   FilterControlType,
   SearchType,
@@ -15,10 +16,7 @@ import {
 
 import { FilterPanel } from 'components/FilterPanel/FilterPanel'
 
-import {
-  CharacterFilterFields,
-  CharactersResults,
-} from 'components/Characters/CharactersResults'
+import { CharactersResults } from 'components/Characters/CharactersResults'
 
 import descriptionStyle from '../index.module.scss'
 

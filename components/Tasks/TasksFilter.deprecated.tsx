@@ -1,3 +1,5 @@
+//  This file is no longer being used, but I'm keeping this as an example of a non-generic filter component
+
 import React, { useEffect, useState } from 'react'
 
 import {
@@ -5,7 +7,7 @@ import {
   setCompleted,
   setTitle,
   setTShirtSizes,
-} from 'lib/redux/search/TasksFilterReducer'
+} from 'lib/redux/TasksFilterReducer'
 
 import { SelectOption } from 'lib/types/SelectOption'
 import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
@@ -16,6 +18,10 @@ import { ListBox } from 'components/FilterPanel/ListBox'
 import { Textbox } from 'components/FilterPanel/Textbox'
 import { useDebounce } from 'components/FilterPanel/Textbox'
 
+/**
+ * This component is hard-coded ... I'm wondering if I can convert this to use the generic <FilterPanel /> instead
+ * @returns
+ */
 const TasksFilter = (): JSX.Element => {
   const dispatch = useAppDispatch()
 

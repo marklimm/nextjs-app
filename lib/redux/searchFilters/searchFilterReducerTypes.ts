@@ -27,6 +27,17 @@ export interface DropdownFilterState {
   selectedOptions: SelectOption[]
 }
 
+export interface ListBoxFilterState {
+  type: FilterControlType.ListBox
+
+  /**
+   * A unique identifier for this particular listbox filter
+   */
+  id: string
+
+  selectedOption: SelectOption
+}
+
 export interface TextFilterState {
   type: FilterControlType.Text
 
@@ -37,6 +48,7 @@ export interface TextFilterState {
 export type FilterControlState =
   | DateFilterState
   | DropdownFilterState
+  | ListBoxFilterState
   | TextFilterState
 
 // /**
@@ -62,6 +74,7 @@ export enum FilterActionType {
   DateSelectedStart = 'date-selected-start',
 
   OptionSelected = 'option-selected',
+  RadioOptionSelected = 'radio-option-selected',
   TextChanged = 'text-changed',
 }
 
@@ -85,6 +98,11 @@ type OptionSelectedPayload = SearchFilterPayloadBase & {
   value: SelectOption[]
 }
 
+type RadioOptionSelectedPayload = SearchFilterPayloadBase & {
+  filterActionType: FilterActionType.RadioOptionSelected
+  value: SelectOption
+}
+
 type TextChangedPayload = SearchFilterPayloadBase & {
   filterActionType: FilterActionType.TextChanged
   value: string
@@ -104,4 +122,5 @@ export type SearchFilterPayload =
   | OptionSelectedPayload
   | DateSelectedEndPayload
   | DateSelectedStartPayload
+  | RadioOptionSelectedPayload
   | TextChangedPayload

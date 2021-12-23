@@ -1,3 +1,5 @@
+//  I'm no longer using this file but keeping this file as an example of a non-generic reducer that I was using for the Tasks Filter before switching to searchFilterReducer
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SelectOption } from 'lib/types/SelectOption'
 

@@ -2,17 +2,13 @@ import React from 'react'
 
 import { EmotionTag, Event } from 'lib/types/Event'
 import {
+  EventFilterFields,
   FilterControlType,
   SearchType,
 } from 'lib/redux/searchFilters/filterTypes'
 import { useAppSelector } from 'lib/redux/hooks'
 
 import DisplayDate from 'components/DisplayDate/DisplayDate'
-
-export enum EventFilterFields {
-  EmotionTags = 'emotion-tags',
-  Timestamp = 'timestamp',
-}
 
 export interface EventsResultsProps {
   allEvents: Event[]

@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client'
+import { SelectOption } from './SelectOption'
 
 //  define the Task type using the Prisma-generated Task type
 export type Task = Prisma.TaskGetPayload<{
@@ -30,4 +31,12 @@ export enum TShirtSize {
   SMALL = 1,
   MEDIUM = 2,
   LARGE = 3,
+}
+
+/**
+ * Represents the initial completed status that shows "ALL" Tasks regardless of completion status
+ */
+export const allOption: SelectOption = {
+  label: IsCompletedFilter.ALL.toString(),
+  value: IsCompletedFilter.ALL,
 }

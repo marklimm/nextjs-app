@@ -13,6 +13,7 @@ import { updateFilter } from 'lib/redux/searchFilters/searchFilterReducer'
 import { Dropdown } from 'components/FilterPanel/Dropdown'
 import { StartAndEndDatePicker } from 'components/FilterPanel/StartAndEndDatePicker'
 import { Textbox } from './Textbox'
+import { ListBox } from './ListBox'
 
 export interface FilterPanelProps {
   searchType: SearchType
@@ -44,6 +45,20 @@ export const FilterPanel = ({
     )
   }
 
+  const dispatchRadioOptionSelected = (
+    filterControlId = '',
+    selectedOption: SelectOption
+  ) => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.RadioOptionSelected,
+        id: filterControlId,
+        value: selectedOption,
+      })
+    )
+  }
+
   const textChangeTimeoutRef = useRef<NodeJS.Timeout>()
   const onTextChanged = (filterControlId = '', value = '') => {
     //  cancel any previous timeout
@@ -52,8 +67,8 @@ export const FilterPanel = ({
     textChangeTimeoutRef.current = setTimeout(() => {
       //  dispatch text change
 
-      //  don't search if the user has only typed 1 or 2 characters.  0 characters will remove the text filter control
-      if (value.length === 1 || value.length === 2) {
+      //  don't search if the user has only typed 1-3 characters.  0 characters will remove the text filter control
+      if (value.length > 0 && value.length < 4) {
         return
       }
 
@@ -92,12 +107,12 @@ export const FilterPanel = ({
 
   return (
     <div>
-      {filterControls.map((filterControl, index) => {
+      {filterControls.map((filterControl) => {
         switch (filterControl.type) {
           case FilterControlType.Dropdown:
             return (
               <Dropdown
-                key={index}
+                key={filterControl.id}
                 label={filterControl.label}
                 placeholder={filterControl.placeholder}
                 selectOptions={filterControl.options}
@@ -106,10 +121,23 @@ export const FilterPanel = ({
                 }
               />
             )
+
+          case FilterControlType.ListBox:
+            return (
+              <ListBox
+                key={filterControl.id}
+                label={filterControl.label}
+                allOptions={filterControl.options}
+                setSelectedOption={(selectedOption) =>
+                  dispatchRadioOptionSelected(filterControl.id, selectedOption)
+                }
+              />
+            )
+
           case FilterControlType.DateSearch:
             return (
               <StartAndEndDatePicker
-                key={index}
+                key={filterControl.id}
                 initialEndDate={''}
                 initialStartDate={''}
                 label={filterControl.label}
@@ -125,7 +153,7 @@ export const FilterPanel = ({
           case FilterControlType.Text:
             return (
               <Textbox
-                key={index}
+                key={filterControl.id}
                 label={filterControl.label}
                 placeholder={filterControl.placeholder}
                 onChange={(event: React.FormEvent<HTMLInputElement>) =>
