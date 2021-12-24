@@ -11,7 +11,7 @@ export const DetentionBlock: FunctionComponent = () => {
 
   return (
     <div className='max-w-md'>
-      <div className='text-sm'>
+      <div className=''>
         The below table shows &quot;detention block situation&quot; data that is
         shared between multiple page routes by using React Context. Clicking on
         the &quot;Change Situation&quot; button will randomly change the

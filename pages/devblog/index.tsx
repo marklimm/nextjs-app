@@ -36,7 +36,9 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({
               </div>
             ))}
         </div>
-        <div className='col-span-1'>
+
+        {/* usage of tailwindcss v3 --> arbitrary values */}
+        <div className='ml-[35px] col-span-1 '>
           <DetentionBlock />
         </div>
       </div>
