@@ -1,26 +1,78 @@
-import React, { FunctionComponent, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+
+import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
+import { SearchType } from 'lib/redux/searchFilters/filterTypes'
+import {
+  FilterActionType,
+  TextFilterState,
+} from 'lib/redux/searchFilters/searchFilterReducerTypes'
+import { updateFilter } from 'lib/redux/searchFilters/searchFilterReducer'
 
 interface TextboxProps {
+  filterId: string
   label: string
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void
   placeholder: string
-  value?: string
+  searchType: SearchType
 }
 
-export const Textbox: FunctionComponent<TextboxProps> = ({
+export const Textbox = ({
+  filterId,
   label,
-  onChange,
   placeholder,
-  value,
-}: TextboxProps) => {
+  searchType,
+}: TextboxProps): JSX.Element => {
+  const textboxFilterState = useAppSelector((state) => {
+    return state.searchFilter[searchType].filterControlValues.find(
+      (filter) => filter.id === filterId
+    ) as TextFilterState
+  })
+
+  const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    //  when the redux textboxFilterState value changes then that sets the searchTerm (this allows the searchTerm to be reset back to empty string
+    setSearchTerm(textboxFilterState.value)
+  }, [textboxFilterState])
+
+  const dispatch = useAppDispatch()
+
+  const textChangeTimeoutRef = useRef<NodeJS.Timeout>()
+
+  const onTextChanged = (event: React.FormEvent<HTMLInputElement>) => {
+    const value = (event.target as HTMLInputElement).value
+
+    setSearchTerm(value)
+
+    //  cancel any previous timeout
+    clearTimeout(textChangeTimeoutRef.current)
+
+    textChangeTimeoutRef.current = setTimeout(() => {
+      //  dispatch the text change
+
+      //  don't search if the user has only typed 1-3 characters.  0 characters will remove the text filter control
+      if (value.length > 0 && value.length < 4) {
+        return
+      }
+
+      dispatch(
+        updateFilter({
+          searchType,
+          filterActionType: FilterActionType.TextChanged,
+          id: filterId,
+          value,
+        })
+      )
+    }, 300)
+  }
+
   return (
     <div className='my-4'>
       <div className='font-bold mb-1'>{label}</div>
       <input
         type='text'
-        value={value}
-        className='p-2 border border-gray-300 rounded-md shadow-md'
-        onChange={onChange}
+        value={searchTerm}
+        className='p-2 border border-gray-300 rounded-md shadow-md focus:outline-none'
+        onChange={onTextChanged}
         placeholder={placeholder}
       />
     </div>

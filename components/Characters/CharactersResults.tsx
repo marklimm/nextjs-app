@@ -47,6 +47,11 @@ export const CharactersResults = ({
         }
 
         case FilterControlType.Dropdown: {
+          //  if there are no filter options selected --> return all characters
+          if (filterControl.selectedOptions.length === 0) {
+            break
+          }
+
           filteredCharacters = filteredCharacters.filter((character) => {
             if (filterControl.id === CharacterFilterFields.Friends) {
               const matchingFriends = filterControl.selectedOptions.filter(

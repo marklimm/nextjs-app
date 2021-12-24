@@ -1,49 +1,68 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 
 import { SelectOption } from 'lib/types/SelectOption'
-import { allOption } from 'lib/types/Task'
+import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
+
+import { SearchType } from 'lib/redux/searchFilters/filterTypes'
+import {
+  FilterActionType,
+  ListBoxFilterState,
+} from 'lib/redux/searchFilters/searchFilterReducerTypes'
+import { updateFilter } from 'lib/redux/searchFilters/searchFilterReducer'
 
 interface ListBoxProps {
   allOptions: SelectOption[]
+  filterId: string
   label: string
-  setSelectedOption: (selectedOption: SelectOption) => void
+  searchType: SearchType
 }
 
 //  Note that I called this component <ListBox />, but the headless UI component is <Listbox />
 
 export const ListBox = ({
   allOptions,
+  filterId,
   label,
-  setSelectedOption,
+  searchType,
 }: ListBoxProps): JSX.Element => {
-  //  for Listbox we need to define a local state variable to store the value, in addition to `seteSelectedOption` which updates redux (tells the rest of the app what ListBox filter state is)
-  const [selectedOption, setSelectedOptionLocal] = useState<SelectOption>(
-    allOption
-  )
+  const dispatch = useAppDispatch()
+
+  const listboxFilterState = useAppSelector((state) => {
+    return state.searchFilter[searchType].filterControlValues.find(
+      (filter) => filter.id === filterId
+    ) as ListBoxFilterState
+  })
+
+  const setSelectedOption = (selectedOption: SelectOption) => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.RadioOptionSelected,
+        id: filterId,
+        value: selectedOption,
+      })
+    )
+  }
 
   return (
     <div className='my-4'>
       <div className='font-bold mb-1'>{label}</div>
 
       <Listbox
-        value={selectedOption.value}
+        value={listboxFilterState.selectedOption.value}
         onChange={(selectedValue) => {
           const selectedOption = allOptions.find(
             (o) => o.value === selectedValue
           )
 
-          //  update redux state
           setSelectedOption(selectedOption)
-
-          //  update this local ListBox component's state
-          setSelectedOptionLocal(selectedOption)
         }}
       >
         {({ open }) => (
           <>
             <Listbox.Button className='w-1/2 py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md focus:outline-none border border-gray-300'>
-              {selectedOption.label}
+              {listboxFilterState.selectedOption.label}
             </Listbox.Button>
 
             <Transition

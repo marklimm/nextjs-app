@@ -30,6 +30,11 @@ export const EventsResults = ({
     filterControlValues.forEach((filterControl) => {
       switch (filterControl.type) {
         case FilterControlType.Dropdown: {
+          //  if there are no filter options selected --> return all events
+          if (filterControl.selectedOptions.length === 0) {
+            break
+          }
+
           filteredEvents = filteredEvents.filter((event) => {
             if (filterControl.id === EventFilterFields.EmotionTags) {
               const matchingEmotions = filterControl.selectedOptions.filter(

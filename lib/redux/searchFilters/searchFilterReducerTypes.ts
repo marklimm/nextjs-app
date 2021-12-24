@@ -124,3 +124,7 @@ export type SearchFilterPayload =
   | DateSelectedStartPayload
   | RadioOptionSelectedPayload
   | TextChangedPayload
+
+export interface ResetFiltersPayload {
+  searchType: SearchType
+}

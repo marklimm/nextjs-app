@@ -1,4 +1,13 @@
-import React, { FunctionComponent, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+
+import { useAppDispatch, useAppSelector } from 'lib/redux/hooks'
+import { SearchType } from 'lib/redux/searchFilters/filterTypes'
+
+import {
+  FilterActionType,
+  DateFilterState,
+} from 'lib/redux/searchFilters/searchFilterReducerTypes'
+import { updateFilter } from 'lib/redux/searchFilters/searchFilterReducer'
 
 //  adding `vaadin-date-picker` to IntrinsicElements to resolve a typescript error
 declare global {
@@ -13,26 +22,22 @@ declare global {
 }
 
 export interface StartAndEndDatePickerProps {
-  initialEndDate: string
-  initialStartDate: string
+  filterId: string
 
   label: string
 
-  endDateSelected: (string) => void
-  startDateSelected: (string) => void
+  searchType: SearchType
 }
 
 /**
  * Component that renders the start and end date pickers within the set of filters
  * @param StartAndEndDatePickerProps
  */
-export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps> = ({
+export const StartAndEndDatePicker = ({
+  filterId,
   label,
-  endDateSelected,
-  startDateSelected,
-  initialEndDate,
-  initialStartDate,
-}: StartAndEndDatePickerProps) => {
+  searchType,
+}: StartAndEndDatePickerProps): JSX.Element => {
   //  in order for maxDate to actually take effect for the vaadin-date-picker, I have to ensure that the maxDate passed in is in YYYY-MM-DD format, which is why I'm slice()-ing below
   const maxDate = useRef(new Date().toJSON().slice(0, -14))
   const minDate = useRef('2015-01-01')
@@ -40,18 +45,73 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
   const startDatePicker = useRef(null)
   const endDatePicker = useRef(null)
 
+  const dateFilterState = useAppSelector((state) => {
+    return state.searchFilter[searchType].filterControlValues.find(
+      (filter) => filter.id === filterId
+    ) as DateFilterState
+  })
+
+  const dispatch = useAppDispatch()
+
+  const startDateChanged = (startDate) => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.DateSelectedStart,
+        id: filterId,
+        value: startDate,
+      })
+    )
+  }
+
+  const endDateChanged = (endDate) => {
+    dispatch(
+      updateFilter({
+        searchType,
+        filterActionType: FilterActionType.DateSelectedEnd,
+        id: filterId,
+        value: endDate,
+      })
+    )
+  }
+
+  const startDateChangedHandler = (event) => {
+    startDateChanged(event.detail.value)
+  }
+
+  const endDateChangedHandler = (event) => {
+    endDateChanged(event.detail.value)
+  }
+
   useEffect(() => {
     //  import the web component on the client-side with this import()
     import('node_modules/@vaadin/vaadin-date-picker/vaadin-date-picker.js')
 
     //  define an event handler for the date picker's `value-changed` event
-    startDatePicker.current.addEventListener('value-changed', (event) => {
-      startDateSelected(event.detail.value)
-    })
+    startDatePicker.current.addEventListener(
+      'value-changed',
+      startDateChangedHandler
+    )
 
-    endDatePicker.current.addEventListener('value-changed', (event) => {
-      endDateSelected(event.detail.value)
-    })
+    endDatePicker.current.addEventListener(
+      'value-changed',
+      endDateChangedHandler
+    )
+
+    return () => {
+      if (!startDatePicker.current) {
+        return
+      }
+
+      startDatePicker.current.removeEventListener(
+        'value-changed',
+        startDateChangedHandler
+      )
+      endDatePicker.current.removeEventListener(
+        'value-changed',
+        endDateChangedHandler
+      )
+    }
   }, [])
 
   return (
@@ -69,13 +129,14 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
           date-placeholder='Start Date'
           max={maxDate.current}
           min={minDate.current}
-          value={initialStartDate}
+          value={dateFilterState.startDate}
         ></vaadin-date-picker>
         <a
           className='ml-3 cursor-pointer'
           onClick={(event) => {
             event.preventDefault()
-            startDatePicker.current.value = ''
+
+            startDateChanged('')
           }}
         >
           Clear
@@ -91,13 +152,14 @@ export const StartAndEndDatePicker: FunctionComponent<StartAndEndDatePickerProps
           date-placeholder='End Date'
           max={maxDate.current}
           min={minDate.current}
-          value={initialEndDate}
+          value={dateFilterState.endDate}
         ></vaadin-date-picker>
         <a
           className='ml-3 cursor-pointer'
           onClick={(event) => {
             event.preventDefault()
-            endDatePicker.current.value = ''
+
+            endDateChanged('')
           }}
         >
           Clear
