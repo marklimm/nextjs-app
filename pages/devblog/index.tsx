@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
@@ -12,9 +12,7 @@ interface DevBlogProps {
   devBlogPosts: Post[]
 }
 
-const DevBlog: FunctionComponent<DevBlogProps> = ({
-  devBlogPosts,
-}: DevBlogProps) => {
+const DevBlog = ({ devBlogPosts }: DevBlogProps): JSX.Element => {
   return (
     <>
       <Head>
@@ -48,11 +46,11 @@ const DevBlog: FunctionComponent<DevBlogProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   const devBlogPosts = await getSortedMarkdownFiles('data/devblog')
-  const lastTenPosts = devBlogPosts.slice(0, 20)
+  const recentPosts = devBlogPosts.slice(0, 20)
 
   return {
     props: {
-      devBlogPosts: lastTenPosts,
+      devBlogPosts: recentPosts,
     },
   }
 }
