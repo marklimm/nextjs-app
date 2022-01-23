@@ -47,16 +47,33 @@ const MyApp: FunctionComponent<AppProps> = ({
       </Head>
       <div className='flex flex-col h-screen'>
         <Header />
-        <NavBar />
-        <div className='flex-grow p-5'>
-          <Provider store={ReduxStore}>
-            {/* wrap every route with our redux store */}
-            <DetentionBlockWrapper>
-              <Component {...pageProps} />
-            </DetentionBlockWrapper>
-          </Provider>
+
+        {/* the horizontal navigation menu that appears on larger screen sizes */}
+        <div className='hidden xl:block border-gray-400 border-t-2'>
+          <NavBar />
         </div>
-        <NavBar />
+
+        <div className='grow flex flex-row border-y-2 border-gray-400'>
+          {/* the sidebar navigation menu that appears on smaller screen sizes */}
+          <div className='xl:hidden border-r-2 border-gray-400 '>
+            <NavBar />
+          </div>
+
+          {/* the main page content */}
+          <div className='p-5'>
+            <Provider store={ReduxStore}>
+              {/* wrap every route with our redux store */}
+              <DetentionBlockWrapper>
+                <Component {...pageProps} />
+              </DetentionBlockWrapper>
+            </Provider>
+          </div>
+        </div>
+
+        {/* the horizontal navigation menu that appears on larger screen sizes */}
+        <div className='hidden xl:block border-gray-400 border-b-2'>
+          <NavBar />
+        </div>
 
         {/* CSS classes taken from https://fkhadra.github.io/react-toastify/how-to-style#css-classes-as-function */}
         <ToastContainer
