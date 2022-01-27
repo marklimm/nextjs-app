@@ -18,7 +18,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "incremental": true
+    "incremental": true,
+    "sourceMap": true,
+    "outDir": "dist",
   },
   "include": [
     "next-env.d.ts",

@@ -26,9 +26,12 @@
   },
   "author": "",
   "license": "ISC",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@headlessui/react": "^1.1.1",
-    "@prisma/client": "^2.23.0",
+    "@prisma/client": "^3.8.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/react-redux": "^7.1.20",
     "@vaadin/vaadin-date-picker": "^5.0.0",
@@ -60,7 +63,7 @@
     "sass": "CSS pre-processor"
   },
   "devDependencies": {
-    "@types/node": "^15.0.2",
+    "@types/node": "^17.0.12",
     "@types/react": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
@@ -72,10 +75,10 @@
     "node-fetch": "^2.6.1",
     "postcss": "^8.4.5",
     "prettier": "^2.2.1",
-    "prisma": "^2.23.0",
+    "prisma": "^3.8.1",
     "tailwindcss": "^3.0.7",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.4.3"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
   },
   "devDependenciesComments": {
     "@types/node": "typescript types for node",

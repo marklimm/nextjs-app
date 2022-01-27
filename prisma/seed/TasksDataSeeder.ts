@@ -199,7 +199,7 @@ export class TasksDataSeeder {
       data: {
         title: 'Find the parts needed for our ship',
         description:
-          'The Naboo ship was disable in the battle, find replacement parts',
+          'The Naboo ship was disabled in the battle, find replacement parts',
 
         tShirtSize: 3,
         isComplete: false,

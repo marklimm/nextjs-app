@@ -172,6 +172,9 @@ export class CharactersDataSeeder {
               body:
                 'So there I was, having just made a deal with the Dark Lord and now having to face my old friend ...',
             },
+            {
+              body: "So there I was, in the middle of Jabba's palace ...",
+            },
           ],
         },
       },
@@ -192,6 +195,10 @@ export class CharactersDataSeeder {
             {
               body:
                 'So there I was, Captain Solo in tow and en route to my client ...',
+            },
+            {
+              body:
+                'So there I was, armorless and about as good as dead in the Tatooine sand ...',
             },
           ],
         },
@@ -237,6 +244,10 @@ export class CharactersDataSeeder {
             {
               body:
                 'So there I was, desperately needing to recover those stolen data tapes ...',
+            },
+            {
+              body:
+                'So there I was, not sure if the dreams about Padme were true ...',
             },
           ],
         },
