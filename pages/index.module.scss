@@ -2,7 +2,7 @@
   & > div {
     @apply mb-8;
   }
-  
+
   ul {
     @apply list-disc ml-5;
 
@@ -15,7 +15,7 @@
   h1 {
     @apply text-2xl;
   }
-  
+
   //  put extra space above for the markdown content being displayed on the Home page
   p {
     @apply mt-4;
@@ -30,5 +30,4 @@
   a {
     @apply font-semibold text-red-600 hover:text-yellow-400;
   }
-
 }

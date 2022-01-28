@@ -42,4 +42,4 @@ In order to avoid this extra build time, I have a pre-build script (`npm run fet
 
 **Code Linting:**
 
-Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules.  Prettier is also used with a few custom rule changes
+Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules. Prettier is also used with a few custom rule changes

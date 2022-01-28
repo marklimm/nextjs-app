@@ -6,9 +6,9 @@ Read more about this project on the **[About](https://nextjs-app-rust.vercel.app
 
 Pages on this website include:
 
-- The **[Events](https://nextjs-app-rust.vercel.app/events)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages that pull  their data from local markdown (.md) files
-- The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages that pull  data from a hosted postgres database using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
-- The **[Planets](/https://nextjs-app-rust.vercel.appplanets)** and **[Starships](https://nextjs-app-rust.vercel.app/starships)** pages that pull  their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
+- The **[Events](https://nextjs-app-rust.vercel.app/events)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages that pull their data from local markdown (.md) files
+- The **[Characters](https://nextjs-app-rust.vercel.app/characters)** and **[Tasks](https://nextjs-app-rust.vercel.app/tasks)** pages that pull data from a hosted postgres database using the Prisma ORM ([https://www.prisma.io/](https://www.prisma.io/))
+- The **[Planets](/https://nextjs-app-rust.vercel.appplanets)** and **[Starships](https://nextjs-app-rust.vercel.app/starships)** pages that pull their data from the Star Wars API ([https://swapi.dev/](https://swapi.dev/)). See the **Pre-build step** below for additional details
 - The **[Detention Block](https://nextjs-app-rust.vercel.app/detentionBlock)** and **[Developer Blog](https://nextjs-app-rust.vercel.app/devblog)** pages that display the same piece of site-wide shared state via react context
 - The **[SSR](https://nextjs-app-rust.vercel.app/ssr)** page that retrieves reddit posts from the reddit API
 
@@ -44,7 +44,7 @@ In order to avoid this extra build time, I have a pre-build script (`npm run fet
 
 **Code Linting:**
 
-Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules.  Prettier is also used with a few custom rule changes
+Code linting is done with the `eslint:recommended`, react recommended and typescript recommended rules. Prettier is also used with a few custom rule changes
 
 **Deployment:**
 

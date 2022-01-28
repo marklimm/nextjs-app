@@ -66,8 +66,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Luke',
         lastName: 'Skywalker',
-        bio:
-          'Luke Skywalker, a Force-sensitive human male, was a legendary Jedi Master who fought in the Galactic Civil War during the reign of the Galactic Empire. Along with his companions, Princess Leia Organa and General Han Solo, Skywalker served on the side of the Alliance to Restore the Republic—an organization committed to the downfall of the Galactic Empire and the restoration of democracy. Following the war, Skywalker became a living legend, and was remembered as one of the greatest Jedi in galactic history.',
+        bio: 'Luke Skywalker, a Force-sensitive human male, was a legendary Jedi Master who fought in the Galactic Civil War during the reign of the Galactic Empire. Along with his companions, Princess Leia Organa and General Han Solo, Skywalker served on the side of the Alliance to Restore the Republic—an organization committed to the downfall of the Galactic Empire and the restoration of democracy. Following the war, Skywalker became a living legend, and was remembered as one of the greatest Jedi in galactic history.',
         tags: {
           connect: [{ id: characterTags['Jedi'].id }],
         },
@@ -78,12 +77,10 @@ export class CharactersDataSeeder {
               body: 'So there I was, running for my life on the Death Star ...',
             },
             {
-              body:
-                'So there I was, knee deep in sand without a soul in sight ...',
+              body: 'So there I was, knee deep in sand without a soul in sight ...',
             },
             {
-              body:
-                'So there I was, in the middle of a wretched bar trying to pass for a regular ...',
+              body: 'So there I was, in the middle of a wretched bar trying to pass for a regular ...',
             },
           ],
         },
@@ -94,8 +91,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Han',
         lastName: 'Solo',
-        bio:
-          'Han Solo, known only as Han until being given the surname Solo by an Imperial recruitment officer, and formerly known as Cadet 124-329 while serving as an Imperial cadet, was a human male smuggler. He became a leader in the Alliance to Restore the Republic and an instrumental figure in the defeat of the Galactic Empire during the Galactic Civil War. He hailed from Corellia and became a smuggler, even completing the Kessel Run in just twelve parsecs with his prized ship, the Millennium Falcon, and coming under the employ of Jabba the Hutt. He was the son-in-law of fallen Jedi Knight Anakin Skywalker and Senator Padmé Amidala, husband of Princess Leia Organa, brother-in-law of Jedi Master Luke Skywalker, father of Ben Solo, rivals and close friends with fellow smuggler Lando Calrissian, and best friends with the Wookiee Chewbacca, his trusted copilot who swore a life debt to the Corellian smuggler.',
+        bio: 'Han Solo, known only as Han until being given the surname Solo by an Imperial recruitment officer, and formerly known as Cadet 124-329 while serving as an Imperial cadet, was a human male smuggler. He became a leader in the Alliance to Restore the Republic and an instrumental figure in the defeat of the Galactic Empire during the Galactic Civil War. He hailed from Corellia and became a smuggler, even completing the Kessel Run in just twelve parsecs with his prized ship, the Millennium Falcon, and coming under the employ of Jabba the Hutt. He was the son-in-law of fallen Jedi Knight Anakin Skywalker and Senator Padmé Amidala, husband of Princess Leia Organa, brother-in-law of Jedi Master Luke Skywalker, father of Ben Solo, rivals and close friends with fellow smuggler Lando Calrissian, and best friends with the Wookiee Chewbacca, his trusted copilot who swore a life debt to the Corellian smuggler.',
         tags: {
           connect: [{ id: characterTags['Scoundrel'].id }],
         },
@@ -103,12 +99,10 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, loading up the Falcon and trying to put all this behind me ...',
+              body: 'So there I was, loading up the Falcon and trying to put all this behind me ...',
             },
             {
-              body:
-                'So there I was, waist-high in Imperial garbage and waste ...',
+              body: 'So there I was, waist-high in Imperial garbage and waste ...',
             },
           ],
         },
@@ -119,8 +113,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Leia',
         lastName: 'Organa',
-        bio:
-          'Leia Skywalker Organa Solo was a Force-sensitive human female political and military leader who served in the Alliance to Restore the Republic during the Imperial Era and the New Republic and Resistance in the subsequent New Republic Era. Adopted into the House of Organa, the Alderaanian royal family, she was Princess Leia Organa of Alderaan, a planet in the Core Worlds known for its dedication to pacifism. The princess was raised as the daughter of Senator Bail Organa and his wife, Queen Breha Organa, making her the heir to the Alderaanian monarchy. Instilled with the values of her adopted homeworld, Organa devoted her life to the restoration of democracy by opposing authoritarian regimes such as the Galactic Empire and the First Order.',
+        bio: 'Leia Skywalker Organa Solo was a Force-sensitive human female political and military leader who served in the Alliance to Restore the Republic during the Imperial Era and the New Republic and Resistance in the subsequent New Republic Era. Adopted into the House of Organa, the Alderaanian royal family, she was Princess Leia Organa of Alderaan, a planet in the Core Worlds known for its dedication to pacifism. The princess was raised as the daughter of Senator Bail Organa and his wife, Queen Breha Organa, making her the heir to the Alderaanian monarchy. Instilled with the values of her adopted homeworld, Organa devoted her life to the restoration of democracy by opposing authoritarian regimes such as the Galactic Empire and the First Order.',
         tags: {
           connect: [{ id: characterTags['Rebel Alliance'].id }],
         },
@@ -128,8 +121,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, locked in a 8x12 cell and waiting to be interrogated ...',
+              body: 'So there I was, locked in a 8x12 cell and waiting to be interrogated ...',
             },
           ],
         },
@@ -140,8 +132,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Chewbecca',
         lastName: '',
-        bio:
-          "Chewbacca, known affectionately to his friends as Chewie, was a Wookiee male warrior, smuggler, mechanic, pilot, and resistance fighter who fought in the Clone Wars, the Galactic Civil War, and the conflict and subsequent war between the First Order and the Resistance. He hailed from the planet Kashyyyk and became a Wookiee military leader. During the Clone Wars, he was captured by Trandoshan slavers and held captive on Wasskah, but he worked with a fellow captive, Jedi Commander Ahsoka Tano, to escape. He later commanded Wookiee forces during the Battle of Kashyyyk alongside the Grand Army of the Republic, led by Jedi Master Yoda. During the battle, one of the last ones of the war, Yoda's clone troopers received Order 66 from Supreme Chancellor Palpatine and, with the help of Chewbacca and his fellow Wookiee Tarfful, Yoda escaped Kashyyyk and the destruction of the Jedi Order.",
+        bio: "Chewbacca, known affectionately to his friends as Chewie, was a Wookiee male warrior, smuggler, mechanic, pilot, and resistance fighter who fought in the Clone Wars, the Galactic Civil War, and the conflict and subsequent war between the First Order and the Resistance. He hailed from the planet Kashyyyk and became a Wookiee military leader. During the Clone Wars, he was captured by Trandoshan slavers and held captive on Wasskah, but he worked with a fellow captive, Jedi Commander Ahsoka Tano, to escape. He later commanded Wookiee forces during the Battle of Kashyyyk alongside the Grand Army of the Republic, led by Jedi Master Yoda. During the battle, one of the last ones of the war, Yoda's clone troopers received Order 66 from Supreme Chancellor Palpatine and, with the help of Chewbacca and his fellow Wookiee Tarfful, Yoda escaped Kashyyyk and the destruction of the Jedi Order.",
         tags: {
           connect: [{ id: characterTags['Wookie'].id }],
         },
@@ -160,8 +151,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Lando',
         lastName: 'Calrissian',
-        bio:
-          'Lando Calrissian was a Human male professional gambler, entrepreneur, smuggler, and general throughout various points in his life. Born on Socorro, he became a gambler and con man early in his life and acquired his own ship, the Millennium Falcon, in a game of sabacc with a man named Cix Trouvee. He went on to have numerous adventures with the Falcon and its piloting droid, Vuffi Raa, during which he ran afoul of a Sorcerer of Tund named Rokur Gepta, whom Calrissian eventually killed. After a series of events led to him losing the Millennium Falcon to a Corellian named Han Solo on Bespin, Calrissian eventually became the Baron Administrator of Cloud City for a time—a position he once again gained through sabacc.',
+        bio: 'Lando Calrissian was a Human male professional gambler, entrepreneur, smuggler, and general throughout various points in his life. Born on Socorro, he became a gambler and con man early in his life and acquired his own ship, the Millennium Falcon, in a game of sabacc with a man named Cix Trouvee. He went on to have numerous adventures with the Falcon and its piloting droid, Vuffi Raa, during which he ran afoul of a Sorcerer of Tund named Rokur Gepta, whom Calrissian eventually killed. After a series of events led to him losing the Millennium Falcon to a Corellian named Han Solo on Bespin, Calrissian eventually became the Baron Administrator of Cloud City for a time—a position he once again gained through sabacc.',
         tags: {
           connect: [{ id: characterTags['Scoundrel'].id }],
         },
@@ -169,8 +159,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, having just made a deal with the Dark Lord and now having to face my old friend ...',
+              body: 'So there I was, having just made a deal with the Dark Lord and now having to face my old friend ...',
             },
             {
               body: "So there I was, in the middle of Jabba's palace ...",
@@ -184,8 +173,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Boba',
         lastName: 'Fett',
-        bio:
-          'Boba Fett, an unaltered clone of the famous Mandalorian bounty hunter Jango Fett, was a human male bounty hunter whose career spanned decades, from the fall of the Galactic Republic to the rise of the Galactic Empire. Fett emulated his genetic donor, whom he regarded as his father, by wearing a customized suit of Mandalorian armor. His personal starship was the Slave I, a Firespray-31-class patrol and attack craft that once belonged to Jango. Trained in combat and martial skills from a young age, Fett was one of the most feared bounty hunters in the galaxy during the reign of Emperor Palpatine. He became a legend over the course of his career, which included contracts for both the Empire and the extensive criminal underworld',
+        bio: 'Boba Fett, an unaltered clone of the famous Mandalorian bounty hunter Jango Fett, was a human male bounty hunter whose career spanned decades, from the fall of the Galactic Republic to the rise of the Galactic Empire. Fett emulated his genetic donor, whom he regarded as his father, by wearing a customized suit of Mandalorian armor. His personal starship was the Slave I, a Firespray-31-class patrol and attack craft that once belonged to Jango. Trained in combat and martial skills from a young age, Fett was one of the most feared bounty hunters in the galaxy during the reign of Emperor Palpatine. He became a legend over the course of his career, which included contracts for both the Empire and the extensive criminal underworld',
         tags: {
           connect: [{ id: characterTags['Mandalorian'].id }],
         },
@@ -193,12 +181,10 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, Captain Solo in tow and en route to my client ...',
+              body: 'So there I was, Captain Solo in tow and en route to my client ...',
             },
             {
-              body:
-                'So there I was, armorless and about as good as dead in the Tatooine sand ...',
+              body: 'So there I was, armorless and about as good as dead in the Tatooine sand ...',
             },
           ],
         },
@@ -209,8 +195,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Obi-wan',
         lastName: 'Kenobi',
-        bio:
-          'Obi-Wan Kenobi was a Force-sensitive legendary human male Jedi Master who served on the Jedi High Council during the last years of the Republic Era. During the Imperial Era, he adopted the alias Ben Kenobi in order to hide from the regime that drove the Jedi to near extinction. A noble man known for his skills with the Force, Kenobi trained Anakin Skywalker, served as a Jedi General in the Grand Army of the Republic, and became a mentor to Luke Skywalker prior to his death in 0 BBY.',
+        bio: 'Obi-Wan Kenobi was a Force-sensitive legendary human male Jedi Master who served on the Jedi High Council during the last years of the Republic Era. During the Imperial Era, he adopted the alias Ben Kenobi in order to hide from the regime that drove the Jedi to near extinction. A noble man known for his skills with the Force, Kenobi trained Anakin Skywalker, served as a Jedi General in the Grand Army of the Republic, and became a mentor to Luke Skywalker prior to his death in 0 BBY.',
         tags: {
           connect: [
             { id: characterTags['Jedi'].id },
@@ -221,8 +206,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, in the midst of the most wretched hive of scum and villainy ...',
+              body: 'So there I was, in the midst of the most wretched hive of scum and villainy ...',
             },
           ],
         },
@@ -233,8 +217,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Darth',
         lastName: 'Vader',
-        bio:
-          'Darth Vader is a fictional character in the Star Wars franchise. The character is a primary antagonist in the original trilogy and a primary protagonist in the prequel trilogy. Star Wars creator George Lucas has collectively referred to the first six episodic films of the franchise as "the tragedy of Darth Vader".[3]  Originally a slave on Tatooine, Anakin Skywalker is a Jedi prophesied to bring balance to the Force. He is lured to the dark side of the Force by Palpatine and becomes a Sith lord. After a lightsaber battle with his former mentor Obi-Wan Kenobi, in which he is severely injured, Vader is transformed into a cyborg. He then serves the Galactic Empire as its chief enforcer until he ultimately redeems himself by saving his son, Luke Skywalker, and killing Palpatine, sacrificing his own life in the process.[4] He is also the secret husband of Padmé Amidala, father of Princess Leia, and grandfather of Kylo Ren.',
+        bio: 'Darth Vader is a fictional character in the Star Wars franchise. The character is a primary antagonist in the original trilogy and a primary protagonist in the prequel trilogy. Star Wars creator George Lucas has collectively referred to the first six episodic films of the franchise as "the tragedy of Darth Vader".[3]  Originally a slave on Tatooine, Anakin Skywalker is a Jedi prophesied to bring balance to the Force. He is lured to the dark side of the Force by Palpatine and becomes a Sith lord. After a lightsaber battle with his former mentor Obi-Wan Kenobi, in which he is severely injured, Vader is transformed into a cyborg. He then serves the Galactic Empire as its chief enforcer until he ultimately redeems himself by saving his son, Luke Skywalker, and killing Palpatine, sacrificing his own life in the process.[4] He is also the secret husband of Padmé Amidala, father of Princess Leia, and grandfather of Kylo Ren.',
         tags: {
           connect: [{ id: characterTags['Sith'].id }],
         },
@@ -242,12 +225,10 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, desperately needing to recover those stolen data tapes ...',
+              body: 'So there I was, desperately needing to recover those stolen data tapes ...',
             },
             {
-              body:
-                'So there I was, not sure if the dreams about Padme were true ...',
+              body: 'So there I was, not sure if the dreams about Padme were true ...',
             },
           ],
         },
@@ -258,8 +239,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Wilhuff',
         lastName: 'Tarkin',
-        bio:
-          "Wilhuff Tarkin was a human male politician, bureaucrat, and military officer whose career spanned the Fall of the Republic and the Age of the Empire. Born on the planet Eriadu in 64 BBY, he was a member of the Tarkin family and the great-nephew of Jova Tarkin. During the Republic Era, Tarkin served in the Galactic Republic's Judicial Department for a time before returning to his homeworld as the Governor of Eriadu. When the Clone Wars began, he renewed his military service, becoming a commissioned officer in the Republic Navy. ",
+        bio: "Wilhuff Tarkin was a human male politician, bureaucrat, and military officer whose career spanned the Fall of the Republic and the Age of the Empire. Born on the planet Eriadu in 64 BBY, he was a member of the Tarkin family and the great-nephew of Jova Tarkin. During the Republic Era, Tarkin served in the Galactic Republic's Judicial Department for a time before returning to his homeworld as the Governor of Eriadu. When the Clone Wars began, he renewed his military service, becoming a commissioned officer in the Republic Navy. ",
         tags: {
           connect: [{ id: characterTags['Imperial Officer'].id }],
         },
@@ -267,8 +247,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                "So there I was, at my wit's end trying to discover the location of the hidden Rebel base ...",
+              body: "So there I was, at my wit's end trying to discover the location of the hidden Rebel base ...",
             },
           ],
         },
@@ -279,8 +258,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Orson',
         lastName: 'Krennic',
-        bio:
-          "Orson Callan Krennic was a human male who served as Director of the Imperial Military Department of Advanced Weapons Research, which belonged to Imperial Intelligence and the Imperial Security Bureau during the Imperial Era. Additionally, he was the commander of the DS-1 Death Star Mobile Battle Station up to the beginning of the Galactic Civil War. Born on Lexrul during the Republic Era, fifty-one years before the Battle of Yavin, Krennic began his career as a Lieutenant Commander in the Galactic Republic. Following the Clone Wars he was promoted to commander and later the fleet equivalent of admiral upon the formation of the Galactic Empire. Persistent and ambitious, Krennic was responsible for the development and construction of the Empire's enormous Death Star superweapon. An old friend of crystallographer Galen Erso, Krennic manipulated the brilliant scientist into researching synthetic kyber crystals under the pretext of researching sustainable energy. In reality, Krennic weaponized Erso's crystal research for the battle station's planet-killing superlaser, hoping this would place him above his long-time rival Grand Moff Wilhuff Tarkin and win the favor of Emperor Palpatine. Krennic was also held accountable for security of the project, quelling rumors of the Empire's secret enterprise for the two decades of its assembly. For these many purposes he commanded a squad of death troopers, serving as both a sword and shield when the Director found himself in battle. ",
+        bio: "Orson Callan Krennic was a human male who served as Director of the Imperial Military Department of Advanced Weapons Research, which belonged to Imperial Intelligence and the Imperial Security Bureau during the Imperial Era. Additionally, he was the commander of the DS-1 Death Star Mobile Battle Station up to the beginning of the Galactic Civil War. Born on Lexrul during the Republic Era, fifty-one years before the Battle of Yavin, Krennic began his career as a Lieutenant Commander in the Galactic Republic. Following the Clone Wars he was promoted to commander and later the fleet equivalent of admiral upon the formation of the Galactic Empire. Persistent and ambitious, Krennic was responsible for the development and construction of the Empire's enormous Death Star superweapon. An old friend of crystallographer Galen Erso, Krennic manipulated the brilliant scientist into researching synthetic kyber crystals under the pretext of researching sustainable energy. In reality, Krennic weaponized Erso's crystal research for the battle station's planet-killing superlaser, hoping this would place him above his long-time rival Grand Moff Wilhuff Tarkin and win the favor of Emperor Palpatine. Krennic was also held accountable for security of the project, quelling rumors of the Empire's secret enterprise for the two decades of its assembly. For these many purposes he commanded a squad of death troopers, serving as both a sword and shield when the Director found himself in battle. ",
         tags: {
           connect: [{ id: characterTags['Imperial Officer'].id }],
         },
@@ -288,8 +266,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, somehow having been forced to explain myself to Tarkin ...',
+              body: 'So there I was, somehow having been forced to explain myself to Tarkin ...',
             },
           ],
         },
@@ -300,8 +277,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Qui-Gon',
         lastName: 'Jinn',
-        bio:
-          'Qui-Gon Jinn, a Force-sensitive human male, was a venerable if maverick Jedi Master who lived during the last years of the Republic Era. He was a wise and well-respected member of the Jedi Order, and was offered a seat on the Jedi Council, but chose to reject and follow his own path. Adhering to a philosophy centered around the Living Force, Jinn strove to follow the will of the Force even when his actions conflicted with the wishes of the High Council. After encountering Anakin Skywalker, Jinn brought him to the Jedi Temple on Coruscant, convinced he had found the Chosen One. His dying wish was for Skywalker to become a Jedi and ultimately restore balance to the Force. ',
+        bio: 'Qui-Gon Jinn, a Force-sensitive human male, was a venerable if maverick Jedi Master who lived during the last years of the Republic Era. He was a wise and well-respected member of the Jedi Order, and was offered a seat on the Jedi Council, but chose to reject and follow his own path. Adhering to a philosophy centered around the Living Force, Jinn strove to follow the will of the Force even when his actions conflicted with the wishes of the High Council. After encountering Anakin Skywalker, Jinn brought him to the Jedi Temple on Coruscant, convinced he had found the Chosen One. His dying wish was for Skywalker to become a Jedi and ultimately restore balance to the Force. ',
         tags: {
           connect: [{ id: characterTags['Jedi'].id }],
         },
@@ -309,8 +285,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, becoming increasingly frustrated with the needless bureaucracy of the Jedi Council ...',
+              body: 'So there I was, becoming increasingly frustrated with the needless bureaucracy of the Jedi Council ...',
             },
           ],
         },
@@ -321,8 +296,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'C-3PO',
         lastName: '',
-        bio:
-          'C-3PO, sometimes spelled See-Threepio and often referred to simply as Threepio, was a 3PO-series protocol droid designed to interact with organics, programmed primarily for etiquette and protocol. He was fluent in over six million forms of communication, and developed a fussy and worry-prone personality throughout his many decades of operation. Along with his counterpart, the astromech droid R2-D2, C-3PO constantly found himself directly involved in pivotal moments of galactic history, and aided in saving the galaxy on many occasions. ',
+        bio: 'C-3PO, sometimes spelled See-Threepio and often referred to simply as Threepio, was a 3PO-series protocol droid designed to interact with organics, programmed primarily for etiquette and protocol. He was fluent in over six million forms of communication, and developed a fussy and worry-prone personality throughout his many decades of operation. Along with his counterpart, the astromech droid R2-D2, C-3PO constantly found himself directly involved in pivotal moments of galactic history, and aided in saving the galaxy on many occasions. ',
         tags: {
           connect: [{ id: characterTags['Droid'].id }],
         },
@@ -341,8 +315,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'R2-D2',
         lastName: '',
-        bio:
-          'R2-D2, pronounced Artoo-Deetoo and often referred to as R2 (Artoo), was an R2-series astromech droid manufactured by Industrial Automaton with masculine programming. A smart, spunky droid who would serve a multitude of masters over his lifetime, R2-D2 was never given a full memory wipe (apart from a partial wipe of select information by Cad Bane during the senate hostage crisis) nor did he ever receive new programming, with these factors resulting in an adventurous and independent attitude. Often finding himself in pivotal moments in galactic history, his bravery and ingenuity saved the galaxy on numerous occasions.',
+        bio: 'R2-D2, pronounced Artoo-Deetoo and often referred to as R2 (Artoo), was an R2-series astromech droid manufactured by Industrial Automaton with masculine programming. A smart, spunky droid who would serve a multitude of masters over his lifetime, R2-D2 was never given a full memory wipe (apart from a partial wipe of select information by Cad Bane during the senate hostage crisis) nor did he ever receive new programming, with these factors resulting in an adventurous and independent attitude. Often finding himself in pivotal moments in galactic history, his bravery and ingenuity saved the galaxy on numerous occasions.',
         tags: {
           connect: [{ id: characterTags['Droid'].id }],
         },
@@ -354,8 +327,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Jyn',
         lastName: 'Erso',
-        bio:
-          'Jyn Erso, known by the aliases Kestrel Dawn, Jyn Dawn, Liana Hallik, Tanith Ponta, Lyra Rallik, and Nari McVee, was a human female soldier and former criminal who became a pivotal member of the Alliance to Restore the Republic when she led Rogue One in stealing the Death Star plans during the Battle of Scarif. She was the daughter of Lyra Erso, a devout member of the Church of the Force, and scientist Galen Erso, who was forced into helping the Galactic Empire build the Death Star. Erso\'s mother was killed when Director Orson Krennic, the commander of the Death Star project, kidnapped her father—who affectionately referred to his daughter as "Stardust." She was raised by resistance fighter Saw Gerrera and became a child soldier in his army.',
+        bio: 'Jyn Erso, known by the aliases Kestrel Dawn, Jyn Dawn, Liana Hallik, Tanith Ponta, Lyra Rallik, and Nari McVee, was a human female soldier and former criminal who became a pivotal member of the Alliance to Restore the Republic when she led Rogue One in stealing the Death Star plans during the Battle of Scarif. She was the daughter of Lyra Erso, a devout member of the Church of the Force, and scientist Galen Erso, who was forced into helping the Galactic Empire build the Death Star. Erso\'s mother was killed when Director Orson Krennic, the commander of the Death Star project, kidnapped her father—who affectionately referred to his daughter as "Stardust." She was raised by resistance fighter Saw Gerrera and became a child soldier in his army.',
         tags: {
           connect: [{ id: characterTags['Rebel Alliance'].id }],
         },
@@ -363,12 +335,10 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, seeing my father for the first time in years ...',
+              body: 'So there I was, seeing my father for the first time in years ...',
             },
             {
-              body:
-                'So there I was, with the Alliance deciding not to do anything ...',
+              body: 'So there I was, with the Alliance deciding not to do anything ...',
             },
           ],
         },
@@ -379,8 +349,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Darth',
         lastName: 'Maul',
-        bio:
-          'Maul, once known as Darth Maul, was a Force-sensitive Dathomirian Zabrak male who established himself as a crime lord during the reign of the Galactic Empire. Once, however, he was the Sith apprentice of Darth Sidious, and therefore, a Dark Lord of the Sith. Having trained in the ways of the Force, Maul was a formidable warrior strong with the dark side and deadly skilled in lightsaber combat. In addition, he was a scheming mastermind who plotted his return to power despite losing his place in the ranks of the Sith.',
+        bio: 'Maul, once known as Darth Maul, was a Force-sensitive Dathomirian Zabrak male who established himself as a crime lord during the reign of the Galactic Empire. Once, however, he was the Sith apprentice of Darth Sidious, and therefore, a Dark Lord of the Sith. Having trained in the ways of the Force, Maul was a formidable warrior strong with the dark side and deadly skilled in lightsaber combat. In addition, he was a scheming mastermind who plotted his return to power despite losing his place in the ranks of the Sith.',
         tags: {
           connect: [{ id: characterTags['Sith'].id }],
         },
@@ -388,8 +357,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, scouting the location of the Naboo ship ...',
+              body: 'So there I was, scouting the location of the Naboo ship ...',
             },
           ],
         },
@@ -400,8 +368,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Yoda',
         lastName: '',
-        bio:
-          'Yoda, a Force-sensitive male being belonging to a mysterious species, was a legendary Jedi Master who witnessed the rise and fall of the Galactic Republic, followed by the rise of the Galactic Empire. Small in stature but revered for his wisdom and power, Yoda trained generations of Jedi, ultimately serving as the Grand Master of the Jedi Order. Having lived through nine centuries of galactic history, he played integral roles in the Clone Wars, the rebirth of the Jedi through Luke Skywalker, and unlocking the path to immortality. ',
+        bio: 'Yoda, a Force-sensitive male being belonging to a mysterious species, was a legendary Jedi Master who witnessed the rise and fall of the Galactic Republic, followed by the rise of the Galactic Empire. Small in stature but revered for his wisdom and power, Yoda trained generations of Jedi, ultimately serving as the Grand Master of the Jedi Order. Having lived through nine centuries of galactic history, he played integral roles in the Clone Wars, the rebirth of the Jedi through Luke Skywalker, and unlocking the path to immortality. ',
         tags: {
           connect: [{ id: characterTags['Jedi'].id }],
         },
@@ -409,8 +376,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'There was I, being tried by young Skywalker my patience was...',
+              body: 'There was I, being tried by young Skywalker my patience was...',
             },
           ],
         },
@@ -421,8 +387,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Darth',
         lastName: 'Sidious',
-        bio:
-          'Darth Sidious, born Sheev Palpatine and also known simply as the Emperor, was a human male Dark Lord of the Sith and Emperor of the Galactic Empire, ruling from 19 BBY to 4 ABY. Rising to power in the Republic Senate as the senator of Naboo, the secretive Sith Lord cultivated two identities, Sidious and Palpatine, using both to further his political career. He orchestrated the fall of the Galactic Republic and the Jedi Order through the Clone Wars, and then established his reign over the galaxy which lasted until his death at the Battle of Endor. However, the dark side of the Force gave rise to powers which allowed the Emperor to return from the grave.',
+        bio: 'Darth Sidious, born Sheev Palpatine and also known simply as the Emperor, was a human male Dark Lord of the Sith and Emperor of the Galactic Empire, ruling from 19 BBY to 4 ABY. Rising to power in the Republic Senate as the senator of Naboo, the secretive Sith Lord cultivated two identities, Sidious and Palpatine, using both to further his political career. He orchestrated the fall of the Galactic Republic and the Jedi Order through the Clone Wars, and then established his reign over the galaxy which lasted until his death at the Battle of Endor. However, the dark side of the Force gave rise to powers which allowed the Emperor to return from the grave.',
         tags: {
           connect: [{ id: characterTags['Sith'].id }],
         },
@@ -430,8 +395,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, imploring young Anakin to allow me to help him ...',
+              body: 'So there I was, imploring young Anakin to allow me to help him ...',
             },
           ],
         },
@@ -442,8 +406,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Qi-ra',
         lastName: '',
-        bio:
-          "Qi'ra was a human female from the planet Corellia who lived during the reign of the Galactic Empire. She grew up on the streets along with Han as part of the White Worms. Though they were at first rivals, the two Scrumrats eventually became lovers. Sometime after Qi'ra was made Head Girl by Lady Proxima, Han and Qi'ra attempted to escape with a vial of coaxium, but were separated at the Coronet Spaceport, with Han getting away, though he promised to return for her.",
+        bio: "Qi'ra was a human female from the planet Corellia who lived during the reign of the Galactic Empire. She grew up on the streets along with Han as part of the White Worms. Though they were at first rivals, the two Scrumrats eventually became lovers. Sometime after Qi'ra was made Head Girl by Lady Proxima, Han and Qi'ra attempted to escape with a vial of coaxium, but were separated at the Coronet Spaceport, with Han getting away, though he promised to return for her.",
         tags: {
           connect: [{ id: characterTags['Crimson Dawn'].id }],
         },
@@ -451,8 +414,7 @@ export class CharactersDataSeeder {
         posts: {
           create: [
             {
-              body:
-                'So there I was, confronted by my naive childhood friend ...',
+              body: 'So there I was, confronted by my naive childhood friend ...',
             },
           ],
         },
@@ -463,8 +425,7 @@ export class CharactersDataSeeder {
       data: {
         firstName: 'Jar Jar',
         lastName: 'Binks',
-        bio:
-          "Jar Jar Binks was a Gungan male military commander and politician who played a key role during the Invasion of Naboo and the Clone Wars that culminated in the fall of the Galactic Republic and the rise of the Galactic Empire. Once an outcast from Gungan society due to his clumsy behavior, he regained favor with his people by helping secure an alliance between the Gungan boss Rugor Nass and Queen Padmé Amidala of Naboo, an alliance vital in ending the Trade Federation's invasion of their shared homeworld. In the years that followed, Binks became a Junior Representative for his people in the Galactic Senate, serving alongside Amidala once she became the planet's senator. ",
+        bio: "Jar Jar Binks was a Gungan male military commander and politician who played a key role during the Invasion of Naboo and the Clone Wars that culminated in the fall of the Galactic Republic and the rise of the Galactic Empire. Once an outcast from Gungan society due to his clumsy behavior, he regained favor with his people by helping secure an alliance between the Gungan boss Rugor Nass and Queen Padmé Amidala of Naboo, an alliance vital in ending the Trade Federation's invasion of their shared homeworld. In the years that followed, Binks became a Junior Representative for his people in the Galactic Senate, serving alongside Amidala once she became the planet's senator. ",
         tags: {
           connect: [{ id: characterTags['Gungan'].id }],
         },

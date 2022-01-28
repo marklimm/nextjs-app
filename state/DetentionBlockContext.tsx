@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  FunctionComponent,
-  useCallback,
-  useContext,
-  useState,
-} from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 
 /**
  * The current situation in the detention block
@@ -75,9 +69,7 @@ interface DetentionBlockWrapperProps {
   children: React.ReactNode
 }
 
-export const DetentionBlockWrapper: FunctionComponent<DetentionBlockWrapperProps> = (
-  props: DetentionBlockWrapperProps
-) => {
+export const DetentionBlockWrapper = (props: DetentionBlockWrapperProps) => {
   //  app-wide shared state that will be stored in React Context
   const [detentionBlockState, setDetentionBlockState] = useState(
     initialDetentionBlockState
