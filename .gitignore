@@ -1,3 +1,6 @@
+#  a macos file that stores metadata about the folder.  https://buildthis.com/ds_store-files-and-why-you-should-know-about-them/
+.DS_Store
+
 # dotenv environment variables file (build for Zeit Now)
 .env
 .env.build
