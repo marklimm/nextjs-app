@@ -1,0 +1,8 @@
+
+.next
+
+data
+pre-build
+
+#  ignore all deprecated files
+**/*.deprecated.*
