@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 
@@ -99,9 +100,13 @@ const TasksResults = (): JSX.Element => {
       }
 
       const data = await response.json()
-      setTasks(data.tasks)
 
-      setLoadingState(LoadingState.DONE_LOADING)
+      //  batch multiple state updates so that these two changes will only result in 1 re-render (https://medium.com/swlh/react-state-batch-update-b1b61bd28cd2)
+      ReactDOM.unstable_batchedUpdates(() => {
+        setTasks(data.tasks)
+
+        setLoadingState(LoadingState.DONE_LOADING)
+      })
     }
 
     getTasks()
@@ -160,4 +165,5 @@ const TasksResults = (): JSX.Element => {
   )
 }
 
-export default TasksResults
+//  use React.memo() to prevent an unnecessary re-render
+export default React.memo(TasksResults)
